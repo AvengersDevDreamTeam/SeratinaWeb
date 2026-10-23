@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://avengersdevdreamteam.github.io/SeratinaWeb/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://avengersdevdreamteam.github.io/SeratinaWeb/privacy.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://avengersdevdreamteam.github.io/SeratinaWeb/terms.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://avengersdevdreamteam.github.io/SeratinaWeb/gestori.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://avengersdevdreamteam.github.io/SeratinaWeb/delete-account.html</loc>
+    <priority>0.5</priority>
+  </url>
+</urlset>

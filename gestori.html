@@ -254,10 +254,9 @@
         <div class="form-group">
           <label for="requestType">Tipo di Richiesta<span class="req">*</span></label>
           <select id="requestType" name="request_type" required>
-            <option value="update_info">Aggiorna informazioni, orari o contatti</option>
-            <option value="new_events">Invia locandine o nuove serate in programma</option>
-            <option value="remove_venue">Richiedi la rimozione della scheda (Opt-out)</option>
-            <option value="other">Altra comunicazione</option>
+            <option value="update">Aggiorna informazioni, orari o contatti</option>
+            <option value="remove">Richiedi la rimozione della scheda (Opt-out)</option>
+            <option value="other">Altra comunicazione o invio eventi</option>
           </select>
         </div>
 
@@ -289,7 +288,7 @@
 
     const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
       ? 'http://localhost:8080'
-      : 'https://seratina-be-0131025154.europe-west1.run.app';
+      : 'https://seratina-be-265028543407.europe-west8.run.app';
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();

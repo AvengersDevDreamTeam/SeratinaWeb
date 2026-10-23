@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancellazione Account e Dati Utente | Seratina</title>
+  <meta name="description" content="Guida e procedura per la cancellazione definitiva dell'account e dei dati personali dall'applicazione Seratina.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <style>
+    :root {
+      /* Palette Seratina: Dark Theme & Brand Sunset Coral */
+      --bg: #0B0F17;
+      --card-bg: #131B2B;
+      --card-alt: #0E1524;
+      --text-main: #FFFFFF;
+      --text-body: #E2E8F0;
+      --text-muted: #94A3B8;
+      --text-subtle: #64748B;
+      --primary: #E86D80;
+      --primary-hover: #D8586C;
+      --primary-active: #C44357;
+      --primary-tint: rgba(232, 109, 128, 0.14);
+      --primary-border: rgba(232, 109, 128, 0.30);
+      --border: #1E293B;
+      --border-strong: #334155;
+      --danger: #EF4444;
+      --danger-bg: rgba(239, 68, 68, 0.12);
+      --danger-text: #FCA5A5;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    ::selection {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-body);
+      line-height: 1.6;
+      padding: 32px 16px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 680px;
+      width: 100%;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-top: 12px;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 20px;
+    }
+    .back-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      margin: 0 auto 16px auto;
+      box-shadow: 0 8px 24px rgba(232, 109, 128, 0.28), 0 2px 10px rgba(0, 0, 0, 0.6);
+      object-fit: cover;
+      display: block;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+      letter-spacing: -0.4px;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    p {
+      margin-bottom: 12px;
+      font-size: 14.5px;
+    }
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    li {
+      margin-bottom: 6px;
+      font-size: 14.5px;
+    }
+    .steps-list {
+      padding-left: 20px;
+    }
+    .steps-list li {
+      margin-bottom: 8px;
+    }
+    .highlight-box {
+      background: var(--danger-bg);
+      border-left: 4px solid var(--danger);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 14px 0;
+    }
+    .highlight-box p {
+      color: var(--danger-text);
+      font-size: 13.5px;
+      margin: 0;
+    }
+    .button {
+      display: inline-block;
+      background: var(--primary);
+      color: #FFFFFF !important;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 8px;
+      transition: background 0.2s ease;
+      box-shadow: 0 4px 12px rgba(232, 109, 128, 0.35);
+    }
+    .button:hover {
+      background: var(--primary-hover);
+    }
+    a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 24px 0 40px;
+      color: var(--text-subtle);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-nav">
+      <a href="index.html" class="back-link">← Torna alla Home di Seratina</a>
+    </div>
+
+    <header>
+      <img src="assets/logo.png" alt="Seratina" class="logo">
+      <h1>Cancellazione Account e Dati</h1>
+      <p class="subtitle">Guida per la cancellazione definitiva dell'account Seratina e di tutti i dati personali associati.</p>
+    </header>
+
+    <div class="card">
+      <h2>1. Come eliminare l'account direttamente dall'App</h2>
+      <p>Puoi eliminare istantaneamente il tuo account in qualsiasi momento dall'interno dell'applicazione Seratina seguendo questi semplici passaggi:</p>
+      <ol class="steps-list">
+        <li>Apri l'app <strong>Seratina</strong> sul tuo dispositivo.</li>
+        <li>Tocca l'icona <strong>Profilo</strong> nella barra di navigazione in basso.</li>
+        <li>Scorri in basso fino alla sezione <strong>Account</strong>.</li>
+        <li>Tocca il pulsante rosso <strong>Elimina account</strong>.</li>
+        <li>Conferma l'operazione nella finestra di avviso.</li>
+      </ol>
+      <div class="highlight-box">
+        <p><strong>Nota:</strong> L'operazione è immediata e irreversibile. Non è possibile recuperare gli eventi salvati o i dati una volta confermata l'eliminazione.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2. Come richiedere la cancellazione senza reinstallare l'App</h2>
+      <p>In conformità alle policy di <strong>Google Play</strong> e <strong>Apple App Store</strong>, se hai disinstallato l'app o non hai accesso al dispositivo, puoi richiedere la cancellazione manuale del tuo account e di tutti i dati personali associati.</p>
+      <p>Invia un'email al nostro indirizzo dedicato indicando l'indirizzo email dell'account Google utilizzato per accedere a Seratina:</p>
+      <p><strong>Email di supporto:</strong> <a href="mailto:seratinaclub@gmail.com?subject=Richiesta%20Cancellazione%20Account%20Seratina">seratinaclub@gmail.com</a></p>
+      <a href="mailto:seratinaclub@gmail.com?subject=Richiesta%20Cancellazione%20Account%20Seratina&body=Gentile%20Team%20Seratina,%0A%0ARichiedo%20la%20cancellazione%20definitiva%20del%20mio%20account%20e%20di%20tutti%20i%20dati%20personali%20associati.%0A%0AIndirizzo%20email%20Google%20registrato:%20" class="button">Invia Richiesta di Cancellazione</a>
+    </div>
+
+    <div class="card">
+      <h2>3. Quali dati vengono eliminati</h2>
+      <p>Quando richiedi la cancellazione dell'account, tutti i seguenti dati vengono rimossi in modo definitivo e permanente dai nostri server:</p>
+      <ul>
+        <li><strong>Identificativo univoco Google</strong>, nome e indirizzo email.</li>
+        <li><strong>Lista degli eventi salvati nei preferiti</strong></li>
+        <li><strong>Suggerimenti di locali inviati</strong></li>
+        <li><strong>Feedback e commenti inviati</strong></li>
+        <li><strong>Token di autenticazione e sessioni attive</strong>.</li>
+      </ul>
+      <p>Nessun dato personale viene trattenuto o archiviato successivamente alla conferma della cancellazione.</p>
+    </div>
+
+    <div class="card">
+      <h2>4. Tempi di elaborazione e conservazione</h2>
+      <ul>
+        <li><strong>Dall'App:</strong> Cancellazione istantanea (in tempo reale).</li>
+        <li><strong>Via Richiesta Email:</strong> La richiesta viene presa in carico ed elaborata entro e non oltre <strong>48 ore lavorative</strong> dalla ricezione. Riceverai un'email di conferma ad avvenuta rimozione.</li>
+      </ul>
+    </div>
+
+    <footer>
+      <p>Seratina &copy; 2026 &bull; <a href="index.html">Home</a> &bull; <a href="privacy.html">Informativa sulla Privacy</a> &bull; <a href="terms.html">Termini di Servizio</a> &bull; <a href="gestori.html">Area Gestori Locali</a> &bull; <a href="mailto:seratinaclub@gmail.com">Supporto Privacy</a></p>
+    </footer>
+  </div>
+</body>
+</html>

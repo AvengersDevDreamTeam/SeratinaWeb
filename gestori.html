@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Area Gestori Locali | Seratina</title>
+  <meta name="description" content="Area riservata ai titolari e gestori dei locali per aggiornare informazioni, orari o richiedere la rimozione della scheda da Seratina.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <style>
+    :root {
+      /* Palette Seratina: Dark Theme & Brand Sunset Coral */
+      --bg: #0B0F17;
+      --card-bg: #131B2B;
+      --card-alt: #0E1524;
+      --text-main: #FFFFFF;
+      --text-body: #E2E8F0;
+      --text-muted: #94A3B8;
+      --text-subtle: #64748B;
+      --primary: #E86D80;
+      --primary-hover: #D8586C;
+      --primary-active: #C44357;
+      --primary-tint: rgba(232, 109, 128, 0.14);
+      --primary-border: rgba(232, 109, 128, 0.30);
+      --border: #1E293B;
+      --border-strong: #334155;
+      --success: #22C55E;
+      --success-bg: rgba(34, 197, 94, 0.12);
+      --success-text: #86EFAC;
+      --danger: #EF4444;
+      --danger-bg: rgba(239, 68, 68, 0.12);
+      --danger-text: #FCA5A5;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    ::selection {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-body);
+      line-height: 1.6;
+      padding: 32px 16px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 680px;
+      width: 100%;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-top: 12px;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 20px;
+    }
+    .back-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      margin: 0 auto 16px auto;
+      box-shadow: 0 8px 24px rgba(232, 109, 128, 0.28), 0 2px 10px rgba(0, 0, 0, 0.6);
+      object-fit: cover;
+      display: block;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--primary-tint);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+      letter-spacing: -0.4px;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    p {
+      margin-bottom: 14px;
+      font-size: 14.5px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+    .req {
+      color: var(--primary);
+      margin-left: 2px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-main);
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-tint);
+    }
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .button {
+      width: 100%;
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 4px 14px rgba(232, 109, 128, 0.35);
+    }
+    .button:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .alert-box {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .alert-box.success {
+      background: var(--success-bg);
+      border: 1px solid var(--success);
+      color: var(--success-text);
+    }
+    .alert-box.error {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger);
+      color: var(--danger-text);
+    }
+    a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 24px 0 40px;
+      color: var(--text-subtle);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-nav">
+      <a href="index.html" class="back-link">← Torna alla Home di Seratina</a>
+    </div>
+
+    <header>
+      <img src="assets/logo.png" alt="Seratina" class="logo">
+      <div class="badge">Gestori & Organizzatori</div>
+      <h1>Area Gestori Locali</h1>
+      <p class="subtitle">Modulo per aggiornare i dati della tua attività o richiedere la rimozione dal catalogo.</p>
+    </header>
+
+    <div class="card">
+      <p>Sei il titolare, gestore o addetto comunicazione di un locale notturno, discoteca o evento? Tramite questo modulo puoi comunicare direttamente con il team di Seratina per:</p>
+      <ul style="padding-left: 20px; margin-bottom: 18px; font-size: 14px;">
+        <li>Aggiornare i recapiti, profili social o orari del tuo locale;</li>
+        <li>Segnalare una nuova programmazione serate o locandina ufficiale;</li>
+        <li>Esercitare il diritto di <strong>Opt-Out</strong> richiedendo l'immediata rimozione della scheda del tuo locale dal catalogo.</li>
+      </ul>
+
+      <div id="statusAlert" class="alert-box"></div>
+
+      <form id="managerForm">
+        <div class="form-group">
+          <label for="clubName">Nome del Locale o dell'Evento<span class="req">*</span></label>
+          <input type="text" id="clubName" name="club_name" placeholder="es. Club Paradiso, Discoteca Skyline..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="socialOrAddress">Indirizzo o Profilo Instagram / Sito Web</label>
+          <input type="text" id="socialOrAddress" name="social_or_address" placeholder="es. Via Roma 10, Milano oppure @club_official">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Tua Email aziendale o referente<span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="gestore@tuolocale.it" required>
+        </div>
+
+        <div class="form-group">
+          <label for="requestType">Tipo di Richiesta<span class="req">*</span></label>
+          <select id="requestType" name="request_type" required>
+            <option value="update_info">Aggiorna informazioni, orari o contatti</option>
+            <option value="new_events">Invia locandine o nuove serate in programma</option>
+            <option value="remove_venue">Richiedi la rimozione della scheda (Opt-out)</option>
+            <option value="other">Altra comunicazione</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Dettagli della Richiesta o Note Aggiuntive</label>
+          <textarea id="notes" name="notes" placeholder="Descrivi qui le modifiche desiderate o le motivazioni della richiesta..."></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn" class="button">Invia Richiesta al Team</button>
+      </form>
+    </div>
+
+    <footer>
+      <p>Seratina &copy; 2026 &bull; <a href="index.html">Home</a> &bull; <a href="privacy.html">Informativa Privacy</a> &bull; <a href="terms.html">Termini di Servizio</a> &bull; <a href="delete-account.html">Cancellazione Account</a> &bull; <a href="mailto:seratinaclub@gmail.com">seratinaclub@gmail.com</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Autofill se presente parametro ?club= nell'URL
+    const params = new URLSearchParams(window.location.search);
+    const clubParam = params.get('club') || params.get('locale');
+    if (clubParam) {
+      document.getElementById('clubName').value = clubParam;
+    }
+
+    const form = document.getElementById('managerForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const alertBox = document.getElementById('statusAlert');
+
+    const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+      ? 'http://localhost:8080'
+      : 'https://seratina-be-0131025154.europe-west1.run.app';
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      alertBox.className = 'alert-box';
+      alertBox.style.display = 'none';
+
+      const payload = {
+        club_name: document.getElementById('clubName').value.trim(),
+        social_or_address: document.getElementById('socialOrAddress').value.trim() || null,
+        email: document.getElementById('email').value.trim(),
+        request_type: document.getElementById('requestType').value,
+        notes: document.getElementById('notes').value.trim() || null
+      };
+
+      if (!payload.club_name || !payload.email) {
+        alertBox.textContent = 'Compila tutti i campi obbligatori contrassegnati da asterisco.';
+        alertBox.className = 'alert-box error';
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Invio in corso...';
+
+      try {
+        const res = await fetch(`${API_BASE}/gestori/richiesta`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          alertBox.textContent = 'Richiesta inviata con successo! Il nostro team la prenderà in carico entro 24-48 ore lavorative.';
+          alertBox.className = 'alert-box success';
+          alertBox.style.display = 'block';
+          form.reset();
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          const errMsg = errData.detail || "Si è verificato un errore durante l'invio. Riprova o scrivici direttamente a seratinaclub@gmail.com.";
+          alertBox.textContent = errMsg;
+          alertBox.className = 'alert-box error';
+          alertBox.style.display = 'block';
+        }
+      } catch (err) {
+        alertBox.textContent = "Impossibile completare l'invio. Verifica la connessione o scrivici direttamente a seratinaclub@gmail.com.";
+        alertBox.className = 'alert-box error';
+        alertBox.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Invia Richiesta al Team';
+      }
+    });
+  </script>
+</body>
+</html>

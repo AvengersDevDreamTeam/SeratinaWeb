@@ -3,142 +3,340 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Informativa sulla Privacy - Seratina</title>
-  <meta name="description" content="Informativa sulla Privacy per l'applicazione Seratina (iOS e Android).">
-  
+  <title>Informativa sulla Privacy & Termini | Seratina</title>
+  <meta name="description" content="Informativa sulla Privacy e Termini d'Uso ufficiale dell'applicazione Seratina conforme a GDPR, Apple App Store e Google Play.">
   <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              pink: '#E86D80',
-              purple: '#6366F1',
-              dark: '#0B0F17',
-              darker: '#06090F',
-              card: '#131B2B',
-              border: '#1F2C44',
-            }
-          }
-        }
-      }
+  <style>
+    :root {
+      /* Palette Seratina: Dark Theme & Brand Sunset Coral */
+      --bg: #0B0F17;              /* dark950 */
+      --card-bg: #131B2B;         /* dark900 */
+      --card-alt: #0E1524;        /* dark alt */
+      --text-main: #FFFFFF;
+      --text-body: #E2E8F0;
+      --text-muted: #94A3B8;
+      --text-subtle: #64748B;
+      --primary: #E86D80;         /* brand pink */
+      --primary-hover: #D8586C;
+      --primary-active: #C44357;
+      --primary-tint: rgba(232, 109, 128, 0.14);
+      --primary-border: rgba(232, 109, 128, 0.30);
+      --border: #1E293B;
+      --border-strong: #334155;
+      --success: #22C55E;
+      --success-bg: rgba(34, 197, 94, 0.12);
+      --success-text: #86EFAC;
+      --danger: #EF4444;
+      --danger-bg: rgba(239, 68, 68, 0.12);
+      --danger-text: #FCA5A5;
     }
-  </script>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    ::selection {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-body);
+      line-height: 1.65;
+      padding: 32px 16px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 740px;
+      width: 100%;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-top: 12px;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 20px;
+    }
+    .back-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      margin: 0 auto 16px auto;
+      box-shadow: 0 8px 24px rgba(232, 109, 128, 0.28), 0 2px 10px rgba(0, 0, 0, 0.6);
+      object-fit: cover;
+      display: block;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--primary-tint);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+      letter-spacing: -0.4px;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14.5px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 22px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+    }
+    h2 {
+      font-size: 18.5px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h3 {
+      font-size: 15.5px;
+      font-weight: 600;
+      margin-top: 16px;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+    p, li {
+      color: var(--text-body);
+      font-size: 14.5px;
+      margin-bottom: 10px;
+    }
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    strong {
+      color: var(--text-main);
+    }
+    .box-info {
+      background: var(--primary-tint);
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 12px 12px 0;
+      margin: 16px 0;
+    }
+    .box-info p {
+      color: #FECDD3;
+      font-size: 13.5px;
+      margin: 0;
+    }
+    .box-disclaimer {
+      background: var(--primary-tint);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 14px 14px 0;
+      margin: 16px 0;
+    }
+    .box-disclaimer p {
+      color: #FECDD3;
+      font-size: 14.5px;
+      font-weight: 600;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .box-alert {
+      background: var(--success-bg);
+      border-left: 4px solid var(--success);
+      padding: 14px 18px;
+      border-radius: 0 12px 12px 0;
+      margin: 16px 0;
+    }
+    .box-alert p {
+      color: var(--success-text);
+      font-size: 13.5px;
+      margin: 0;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: underline;
+      transition: color 0.15s ease;
+    }
+    a:hover {
+      color: #FDA4AF;
+    }
+    .button {
+      display: inline-block;
+      background: var(--primary);
+      color: #FFFFFF !important;
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 10px;
+      transition: background 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 4px 14px rgba(232, 109, 128, 0.35);
+    }
+    .button:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+    .button:active {
+      background: var(--primary-active);
+      transform: translateY(0);
+    }
+    footer {
+      text-align: center;
+      padding: 24px 0 40px;
+      color: var(--text-subtle);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+  </style>
 </head>
-<body class="bg-brand-dark text-slate-200 font-sans antialiased selection:bg-brand-pink selection:text-white">
-
-  <!-- Header -->
-  <header class="border-b border-brand-border/60 bg-brand-dark/90 sticky top-0 z-20 backdrop-blur-md">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="assets/logo.png" alt="Seratina" class="w-8 h-8 rounded-lg">
-        <span class="text-xl font-extrabold text-white">Seratina</span>
-      </a>
-      <a href="index.html" class="text-xs sm:text-sm font-semibold text-brand-pink hover:underline flex items-center gap-1">
-        ← Torna alla Home
-      </a>
-    </div>
-  </header>
-
-  <!-- Content -->
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
-    <div class="mb-10 pb-8 border-b border-brand-border/60">
-      <span class="text-xs font-bold uppercase tracking-widest text-brand-pink">Documento Legale</span>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Informativa sulla Privacy</h1>
-      <p class="text-sm text-slate-400 mt-2">Ultimo aggiornamento: 23 Ottobre 2026</p>
+<body>
+  <div class="container">
+    <div class="top-nav">
+      <a href="index.html" class="back-link">← Torna alla Home di Seratina</a>
     </div>
 
-    <div class="space-y-8 text-sm sm:text-base leading-relaxed text-slate-300">
+    <header>
+      <img src="assets/logo.png" alt="Seratina" class="logo">
+      <div class="badge">Privacy & Termini</div>
+      <h1>Informativa sulla Privacy & Termini d'Uso</h1>
+      <p class="subtitle">Ultimo aggiornamento: Ottobre 2026 &bull; Versione 1.2</p>
+    </header>
+
+    <!-- 1. Titolare -->
+    <div class="card">
+      <h2>1. Titolare del Trattamento</h2>
+      <p>Il Titolare del trattamento dei dati personali per l'applicazione <strong>Seratina</strong> è:</p>
+      <ul>
+        <li><strong>Applicazione:</strong> Seratina (sviluppata dal team AvengersDevDreamTeam)</li>
+        <li><strong>Email di contatto / Supporto Privacy:</strong> <a href="mailto:seratinaclub@gmail.com">seratinaclub@gmail.com</a></li>
+      </ul>
+      <p>La presente informativa si applica all'applicazione mobile Seratina (iOS e Android), alle relative API REST e a qualsiasi servizio digitale connesso.</p>
+    </div>
+
+    <!-- 2. Geolocalizzazione -->
+    <div class="card">
+      <h2>2. Utilizzo della Geolocalizzazione (GPS)</h2>
+      <p>L'app Seratina richiede l'accesso alla geolocalizzazione del dispositivo (permessi <code>ACCESS_FINE_LOCATION</code> e <code>ACCESS_COARSE_LOCATION</code> su Android, e <em>Location When In Use</em> su iOS).</p>
       
-      <section>
-        <h2 class="text-xl font-bold text-white mb-3">1. Titolare del Trattamento dei Dati</h2>
-        <p>
-          Il Titolare del Trattamento dei dati per l'applicazione mobile <strong>Seratina</strong> (disponibile per sistemi operativi iOS e Android con identificativo pacchetto <code class="bg-brand-card px-2 py-0.5 rounded text-brand-pink text-xs">com.giacomodifa.seratina</code>) è il team di sviluppo <strong>AvengersDevDreamTeam</strong>.<br>
-          Per qualsiasi domanda relativa alla presente informativa o all'esercizio dei tuoi diritti, puoi contattarci all'indirizzo email: <a href="mailto:support@seratina.app" class="text-brand-pink underline">support@seratina.app</a>.
-        </p>
-      </section>
+      <div class="box-info">
+        <p><strong>Perché usiamo la tua posizione:</strong> La posizione geografica viene utilizzata in tempo reale unicamente per calcolare la distanza chilometrica tra te e i locali notturni e per mostrarti le serate e gli eventi più vicini a te (filtro per raggio di distanza e visualizzazione su mappa interattiva).</p>
+      </div>
 
-      <section>
-        <h2 class="text-xl font-bold text-white mb-3">2. Dati Raccolti e Finalità</h2>
-        <p class="mb-3">Seratina raccoglie unicamente i dati necessari per erogare i servizi dell'applicazione:</p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Dati di Posizione Geografica (GPS):</strong> Con il tuo esplicito consenso, l'applicazione accede alla tua posizione approssimativa o precisa per mostrare su mappa e in elenco i locali, club ed eventi più vicini a te. La tua posizione geografica viene elaborata in tempo reale per la ricerca e <em>non viene memorizzata in modo permanente per tracciare i tuoi spostamenti</em>.
-          </li>
-          <li>
-            <strong>Dati di Autenticazione (Google Sign-In):</strong> Qualora tu decida di effettuare l'accesso tramite account Google, raccogliamo esclusivamente i dati identificativi di base forniti dal servizio (nome, indirizzo email e identificativo utente) per gestire il tuo profilo personale e le tue preferenze.
-          </li>
-          <li>
-            <strong>Notifiche Push:</strong> Se abiliti le notifiche, raccogliamo il token univoco del tuo dispositivo per inviarti promemoria sugli eventi salvati o comunicazioni essenziali relative al servizio.
-          </li>
-          <li>
-            <strong>Dati di Utilizzo Anonimi:</strong> Eventuali log tecnici diagnostici per prevenire crash e malfunzionamenti dell'app.
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 class="text-xl font-bold text-white mb-3">3. Base Giuridica del Trattamento</h2>
-        <p>
-          Il trattamento dei dati si fonda su:
-        </p>
-        <ul class="list-disc pl-6 space-y-1 mt-2">
-          <li><strong>Consenso dell'utente:</strong> per l'accesso alla geolocalizzazione e la ricezione di notifiche push (revocabile in qualsiasi momento dalle impostazioni del dispositivo).</li>
-          <li><strong>Esecuzione del servizio contrattuale:</strong> per consentire la visualizzazione e il salvataggio degli eventi scelti.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 class="text-xl font-bold text-white mb-3">4. Condivisione dei Dati con Terze Parti</h2>
-        <p>
-          <strong>Non vendiamo né cediamo a terzi per scopi pubblicitari i tuoi dati personali.</strong> I dati possono essere trattati da fornitori di servizi tecnici e infrastrutturali nominati responsabili del trattamento (ad es. Supabase per l'infrastruttura database, Google Cloud per i servizi cloud, Apple/Google per la distribuzione delle notifiche push).
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-xl font-bold text-white mb-3">5. Conservazione e Sicurezza dei Dati</h2>
-        <p>
-          I tuoi dati sono protetti tramite crittografia in transito (protocolli HTTPS/TLS) e a riposo. I dati del tuo account sono conservati finché il profilo rimane attivo. Puoi richiedere in qualsiasi momento la cancellazione totale del tuo account e di tutti i dati associati.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-xl font-bold text-white mb-3">6. I Tuoi Diritti (Regolamento GDPR)</h2>
-        <p class="mb-2">In conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR), hai il diritto di:</p>
-        <ul class="list-disc pl-6 space-y-1">
-          <li>Accedere ai dati personali che ti riguardano;</li>
-          <li>Chiederne la rettifica, l'aggiornamento o la cancellazione definitiva;</li>
-          <li>Revocare in qualsiasi momento il consenso all'accesso alla geolocalizzazione o alle notifiche direttamente dalle impostazioni del tuo smartphone;</li>
-          <li>Opporti al trattamento dei tuoi dati.</li>
-        </ul>
-        <p class="mt-3">
-          Per esercitare uno qualsiasi di questi diritti o richiedere la cancellazione completa del tuo account, scrivi a <a href="mailto:support@seratina.app" class="text-brand-pink underline">support@seratina.app</a>.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-xl font-bold text-white mb-3">7. Modifiche alla presente Informativa</h2>
-        <p>
-          Potremmo aggiornare periodicamente questa Informativa sulla Privacy per adeguarla a nuove funzionalità dell'app o a modifiche normative. Eventuali variazioni significative saranno rese note tramite l'applicazione o su questa pagina.
-        </p>
-      </section>
-
+      <ul>
+        <li><strong>Nessun tracciamento in background:</strong> la posizione viene rilevata solo ed esclusivamente mentre l'app è aperta e visibile a schermo.</li>
+        <li><strong>Nessuna memorizzazione permanente:</strong> le coordinate GPS del tuo dispositivo non vengono memorizzate in modo permanente sui nostri server né condivise con terze parti o broker pubblicitari.</li>
+        <li><strong>Facoltatività:</strong> puoi rifiutare o revocare il permesso di geolocalizzazione in ogni momento dalle impostazioni di sistema del tuo dispositivo; l'app continuerà a funzionare regolarmente permettendoti di selezionare manualmente la città o la zona desiderata.</li>
+      </ul>
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-brand-border/60 py-8 px-4 text-center text-xs text-slate-500">
-    <p>© 2026 Seratina - AvengersDevDreamTeam. Tutti i diritti riservati.</p>
-  </footer>
+    <!-- 3. Dati Utente Raccolti -->
+    <div class="card">
+      <h2>3. Dati Personali Raccolti e Finalità</h2>
+      <h3>a. Utenti Registrati (Accesso con Google)</h3>
+      <p>Quando effettui l'accesso tramite Google Sign-In, raccogliamo le seguenti informazioni essenziali fornite dal tuo provider:</p>
+      <ul>
+        <li>Identificativo univoco Google (sub)</li>
+        <li>Indirizzo email</li>
+        <li>Nome completo e foto profilo</li>
+      </ul>
+      <p><strong>Finalità:</strong> Consentire la creazione della sessione utente, la sincronizzazione cloud dei tuoi eventi salvati nei preferiti e l'invio di proposte o feedback alla community.</p>
 
+      <h3>b. Modalità Ospite (Guest Mode)</h3>
+      <p>Se utilizzi l'applicazione in modalità Ospite, non è richiesta alcuna registrazione o conferimento di dati personali. Gli eventi preferiti vengono salvati esclusivamente nella memoria locale del tuo smartphone.</p>
+
+      <h3>c. Contributi Utente (Segnalazioni di locali e Feedback)</h3>
+      <p>I suggerimenti di locali da aggiungere e i messaggi di miglioramento inviati dagli utenti autenticati vengono salvati per consentire al nostro team di verificare i dati e migliorare il servizio.</p>
+    </div>
+
+    <!-- 4. Aggregazione Eventi Pubblici e Artisti/DJ -->
+    <div class="card">
+      <h2>4. Eventi Pubblici, Locali e Nomi di Artisti / DJ (GDPR)</h2>
+      <p>Seratina è una piattaforma informativa pubblica che aggrega la programmazione delle serate e degli eventi della movida notturna.</p>
+      <ul>
+        <li><strong>Dati dei locali:</strong> i dati relativi a locali, club e discoteche (denominazione, indirizzo, orari, loghi) appartengono a persone giuridiche e attività commerciali, pertanto non costituiscono dati personali ai sensi del GDPR.</li>
+        <li><strong>Nomi di artisti, musicisti e DJ (Persone Fisiche):</strong> i nomi d'arte o i nominativi dei DJ e performer citati nelle serate provengono esclusivamente da locandine e comunicazioni già rese pubblicamente accessibili dagli organizzatori e dai locali sui propri canali ufficiali.</li>
+        <li><strong>Base giuridica:</strong> il trattamento di tali informazioni è fondato sul <strong>Legittimo Interesse del Titolare (Art. 6, par. 1, lett. f, GDPR)</strong> a fornire un servizio di pubblica utilità e promozione culturale per il tempo libero.</li>
+        <li><strong>Richiesta Gestori / Aggiornamento o Rimozione Scheda:</strong> qualsiasi locale, organizzatore o artista che desideri aggiornare, rettificare o rimuovere la propria scheda o i riferimenti dal catalogo di Seratina può compilare il nostro <a href="gestori.html">Modulo Gestori Locali</a> oppure scrivere a <a href="mailto:seratinaclub@gmail.com">seratinaclub@gmail.com</a>. La richiesta viene presa in carico entro 24-48 ore lavorative.</li>
+      </ul>
+    </div>
+
+    <!-- 5. Notifiche Promemoria -->
+    <div class="card">
+      <h2>5. Notifiche Notturne (Promemoria Serate)</h2>
+      <p>L'app offre un promemoria giornaliero facoltativo per ricordarti gli eventi della serata.</p>
+      <ul>
+        <li>Le notifiche vengono gestite a livello locale del dispositivo e richiedono il tuo esplicito consenso.</li>
+        <li>Puoi attivare o disattivare il promemoria in qualsiasi istante dalla scheda <em>Profilo &gt; Notifiche</em>.</li>
+      </ul>
+    </div>
+
+    <!-- 6. Diritti GDPR ed Eliminazione Account -->
+    <div class="card">
+      <h2>6. I Tuoi Diritti (Artt. 15-22 GDPR) & Eliminazione Account</h2>
+      <p>In base al Regolamento Generale sulla Protezione dei Dati (GDPR), hai il pieno diritto di richiedere l'accesso, la rettifica, la portabilità e la <strong>cancellazione definitiva (diritto all'oblio)</strong> di tutti i tuoi dati personali.</p>
+      
+      <div class="box-alert">
+        <p><strong>Eliminazione immediata in-app:</strong> All'interno dell'app Seratina, puoi andare nella sezione <em>Profilo &gt; Account &gt; Elimina account</em> per cancellare istantaneamente il tuo profilo, le credenziali e tutti i dati associati dal server.</p>
+      </div>
+
+      <p>Se non hai più l'app installata sul tuo dispositivo, puoi consultare la nostra procedura di eliminazione web o richiederla via email:</p>
+      <a href="delete-account.html" class="button">Procedura di Cancellazione Account e Dati</a>
+    </div>
+
+    <!-- 7. Termini d'Uso e Disclaimer -->
+    <div class="card">
+      <h2>7. Termini d'Uso & Disclaimer sulle Informazioni</h2>
+      
+      <div class="box-disclaimer">
+        <p>I dati sono raccolti da fonti pubbliche a mero scopo informativo; l'app non è collegata ufficialmente ai locali e non risponde di variazioni di programma o prezzi.</p>
+      </div>
+
+      <ul>
+        <li><strong>Finalità Informativa:</strong> Seratina fornisce le informazioni su serate, prezzi indicativi, orari di apertura e generi musicali a solo scopo informativo. Gli orari e i prezzi di ingresso (in lista o alla cassa) sono stabiliti unicamente dalle direzioni dei singoli locali e possono subire variazioni senza preavviso.</li>
+        <li><strong>Nessuna Vendita di Biglietti:</strong> Seratina non gestisce direttamente la vendita di biglietti né le prenotazioni dei tavoli.</li>
+        <li><strong>Limiti di Età e Normative:</strong> L'accesso ai club e alle serate è subordinato al rispetto delle leggi vigenti (compresi i divieti di somministrazione di bevande alcoliche ai minori di 18 anni) e alle politiche di selezione all'ingresso dei singoli esercizi.</li>
+        <li><strong>Consulta il documento completo:</strong> Per le condizioni d'uso integrali, visita la pagina <a href="terms.html">Termini di Servizio</a>.</li>
+      </ul>
+    </div>
+
+    <footer>
+      <p>Seratina &copy; 2026 &bull; <a href="index.html">Home</a> &bull; <a href="terms.html">Termini di Servizio</a> &bull; <a href="gestori.html">Area Gestori Locali</a> &bull; <a href="delete-account.html">Cancellazione Account</a> &bull; <a href="mailto:seratinaclub@gmail.com">Contatta il supporto privacy</a></p>
+    </footer>
+  </div>
 </body>
 </html>

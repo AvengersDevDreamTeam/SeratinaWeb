@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seratina - Scopri gli eventi e la vita notturna vicino a te</title>
+  <meta name="description" content="Trova discoteche, club, festival e serate vicino a te in tempo reale. Mappa interattiva, dettagli eventi e calendario serate.">
+  
+  <!-- Open Graph / Meta Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Seratina - Vivi la notte, non perderne neanche una">
+  <meta property="og:description" content="L'app definitiva per scoprire serate ed eventi nella tua zona in tempo reale.">
+  <meta property="og:image" content="assets/logo.png">
+  <meta name="theme-color" content="#E86D80">
+  
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN (ponytail: zero build, zero npm, edge ready) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              pink: '#E86D80',
+              pinkHover: '#d8586c',
+              purple: '#6366F1',
+              dark: '#0B0F17',
+              darker: '#06090F',
+              card: '#131B2B',
+              border: '#1F2C44',
+              muted: '#94A3B8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Glow & gradient effects */
+    .glow-pink {
+      box-shadow: 0 0 80px -20px rgba(232, 109, 128, 0.35);
+    }
+    .glow-purple {
+      box-shadow: 0 0 80px -20px rgba(99, 102, 241, 0.35);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #FFFFFF 30%, #E86D80 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-purple {
+      background: linear-gradient(135deg, #E86D80 0%, #A855F7 50%, #6366F1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-brand-pink selection:text-white">
+
+  <!-- Background Ambient Glow -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-pink/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-brand-purple/15 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-brand-pink/15 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-brand-dark/80 border-b border-brand-border/50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <img src="assets/logo.png" alt="Seratina Logo" class="w-10 h-10 rounded-xl shadow-md group-hover:scale-105 transition-transform duration-200">
+        <span class="text-2xl font-extrabold tracking-tight text-white">Seratina</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#funzionalita" class="hover:text-brand-pink transition-colors">Funzionalità</a>
+        <a href="#anteprima" class="hover:text-brand-pink transition-colors">Anteprima App</a>
+        <a href="#perche-seratina" class="hover:text-brand-pink transition-colors">Perché Seratina</a>
+        <a href="privacy.html" class="hover:text-brand-pink transition-colors">Privacy</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#download" class="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-brand-card border border-brand-pink/40 text-brand-pink hover:bg-brand-pink hover:text-white transition-all shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2"></span>
+          In arrivo
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-32 px-4 sm:px-6 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      
+      <!-- Left Column: Copy & Actions -->
+      <div class="lg:col-span-7 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-card/80 border border-brand-border text-xs sm:text-sm font-medium text-slate-300 mb-6">
+          <span class="text-brand-pink">✦</span>
+          <span>La notte a portata di tap</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 text-gradient">
+          Vivi la notte, <br class="hidden sm:inline">
+          <span class="text-gradient-purple">non perderne</span> una.
+        </h1>
+
+        <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto lg:mx-0 mb-8 font-normal leading-relaxed">
+          Basta serate rovinate dal non sapere cosa fare. Seratina riunisce discoteche, club, eventi musicali e serate universitarie vicino a te, in tempo reale con mappa interattiva.
+        </p>
+
+        <!-- Store Badges (Coming Soon State) -->
+        <div id="download" class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8">
+          
+          <!-- App Store Badge -->
+          <div class="relative group w-full sm:w-auto">
+            <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-brand-card border border-brand-border/80 shadow-lg opacity-90 cursor-default">
+              <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.77 1.06-1.84.94-2.91-.91.04-2.02.61-2.67 1.38-.58.67-1.09 1.76-.95 2.81 1.02.08 2.05-.51 2.68-1.28z"/>
+              </svg>
+              <div class="text-left">
+                <div class="text-[10px] uppercase font-semibold text-slate-400">Presto disponibile su</div>
+                <div class="text-sm font-bold text-white leading-tight">App Store</div>
+              </div>
+            </div>
+            <span class="absolute -top-2 -right-2 bg-brand-pink text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">Coming Soon</span>
+          </div>
+
+          <!-- Google Play Badge -->
+          <div class="relative group w-full sm:w-auto">
+            <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-brand-card border border-brand-border/80 shadow-lg opacity-90 cursor-default">
+              <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
+                <path d="M3.609 1.814L13.792 12 3.61 22.186a1.776 1.776 0 01-.61-.926V2.74c0-.348.118-.68.609-.926zm11.236 11.238l2.25 2.25-10.971 6.347 8.721-8.597zm0-2.104L6.124 2.351l10.971 6.347-2.25 2.25zm1.536 1.052l3.414 1.975c1.073.62 1.073 1.636 0 2.256l-3.414 1.975-2.072-2.072 2.072-2.134z"/>
+              </svg>
+              <div class="text-left">
+                <div class="text-[10px] uppercase font-semibold text-slate-400">Presto disponibile su</div>
+                <div class="text-sm font-bold text-white leading-tight">Google Play</div>
+              </div>
+            </div>
+            <span class="absolute -top-2 -right-2 bg-brand-purple text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">Coming Soon</span>
+          </div>
+
+        </div>
+
+        <div class="flex items-center justify-center lg:justify-start gap-6 text-xs text-slate-400">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>100% Gratuita</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Nessuna pubblicità invasiva</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Eventi verificati</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Phone Mockup with Real App Screenshot -->
+      <div class="lg:col-span-5 flex justify-center relative">
+        <div class="relative w-[280px] sm:w-[310px]">
+          
+          <!-- Outer Phone Frame -->
+          <div class="relative rounded-[44px] p-3 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-950 shadow-2xl border-2 border-slate-700/60 glow-pink">
+            
+            <!-- Dynamic Island / Speaker -->
+            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-20 flex items-center justify-end pr-2">
+              <div class="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800"></div>
+            </div>
+
+            <!-- Screen Content -->
+            <div class="relative rounded-[34px] overflow-hidden bg-black aspect-[9/19.5]">
+              <img src="assets/screenshots/screen-1-home.png" alt="Seratina App Home" class="w-full h-full object-cover">
+            </div>
+
+          </div>
+
+          <!-- Decorative Floating Card -->
+          <div class="absolute -bottom-6 -left-8 bg-brand-card/90 backdrop-blur-md border border-brand-border p-3.5 rounded-2xl shadow-xl hidden sm:flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-pink/20 flex items-center justify-center text-brand-pink font-bold text-lg">
+              🔥
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">Eventi del Weekend</div>
+              <div class="text-[11px] text-slate-400">Aggiornati in tempo reale</div>
+            </div>
+          </div>
+
+          <!-- Decorative Floating Badge -->
+          <div class="absolute -top-4 -right-6 bg-brand-card/90 backdrop-blur-md border border-brand-border p-3 rounded-2xl shadow-xl hidden sm:flex items-center gap-2">
+            <span class="text-emerald-400 text-sm">📍</span>
+            <span class="text-xs font-semibold text-slate-200">Locali vicino a te</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section id="funzionalita" class="py-20 border-t border-brand-border/40 bg-brand-darker/60 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-xs sm:text-sm font-bold uppercase tracking-widest text-brand-pink mb-3">Tutto ciò che ti serve</h2>
+        <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Pensata per chi ama vivere la notte</p>
+        <p class="text-slate-400 mt-3 text-base">Dalla ricerca del locale perfetto all'ingresso in pista: semplice, veloce, affidabile.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Feature 1 -->
+        <div class="p-8 rounded-3xl bg-brand-card/60 border border-brand-border/60 hover:border-brand-pink/50 transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-pink/15 flex items-center justify-center text-2xl text-brand-pink mb-6 group-hover:scale-110 transition-transform">
+            🗺️
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Mappa Interattiva</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Visualizza tutti i club, locali e serate geolocalizzati sulla mappa con filtri per raggio chilometrico, genere musicale e data.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-8 rounded-3xl bg-brand-card/60 border border-brand-border/60 hover:border-brand-purple/50 transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-purple/15 flex items-center justify-center text-2xl text-brand-purple mb-6 group-hover:scale-110 transition-transform">
+            🎫
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Schede Dettagliate</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Lineup dei DJ, orari di apertura, prezzi, codici abbigliamento e link diretti ai biglietti ufficiali senza sorprese all'ingresso.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-8 rounded-3xl bg-brand-card/60 border border-brand-border/60 hover:border-brand-pink/50 transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-pink/15 flex items-center justify-center text-2xl text-brand-pink mb-6 group-hover:scale-110 transition-transform">
+            📅
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Calendario & Notifiche</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Salva le serate nel tuo calendario personale e ricevi una notifica prima dell'inizio dell'evento così non dimentichi nulla.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="p-8 rounded-3xl bg-brand-card/60 border border-brand-border/60 hover:border-brand-purple/50 transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-purple/15 flex items-center justify-center text-2xl text-brand-purple mb-6 group-hover:scale-110 transition-transform">
+            🎧
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Filtro per Genere</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Techno, Commerciale, Reggaeton, Hip Hop, Indie o Rock? Trova subito il sound giusto per il tuo umore.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="p-8 rounded-3xl bg-brand-card/60 border border-brand-border/60 hover:border-brand-pink/50 transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-pink/15 flex items-center justify-center text-2xl text-brand-pink mb-6 group-hover:scale-110 transition-transform">
+            ⚡
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Rapida e Fluida</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Sviluppata per aprirsi in un secondo anche con connessione debole all'uscita da un bar o in mezzo alla folla.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="p-8 rounded-3xl bg-brand-card/60 border border-brand-border/60 hover:border-brand-purple/50 transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-purple/15 flex items-center justify-center text-2xl text-brand-purple mb-6 group-hover:scale-110 transition-transform">
+            🔒
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Privacy al Primo Posto</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Nessun tracciamento molesto o vendita dati a terzi. La tua posizione serve solo per mostrarti i locali intorno a te.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- App Screenshots Showcase -->
+  <section id="anteprima" class="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <h2 class="text-xs sm:text-sm font-bold uppercase tracking-widest text-brand-pink mb-3">Uno sguardo all'interno</h2>
+      <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Design moderno, scuro ed essenziale</p>
+      <p class="text-slate-400 mt-3 text-base">Creata appositamente per essere usata di notte senza abbagliare gli occhi.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+      
+      <!-- Screen 1 -->
+      <div class="group flex flex-col items-center">
+        <div class="relative rounded-[28px] overflow-hidden border-2 border-brand-border bg-black shadow-lg group-hover:border-brand-pink transition-all duration-300">
+          <img src="assets/screenshots/screen-1-home.png" alt="Home Eventi" class="w-full h-auto">
+        </div>
+        <span class="text-xs sm:text-sm font-semibold text-slate-300 mt-4">Feed Eventi</span>
+      </div>
+
+      <!-- Screen 2 -->
+      <div class="group flex flex-col items-center">
+        <div class="relative rounded-[28px] overflow-hidden border-2 border-brand-border bg-black shadow-lg group-hover:border-brand-pink transition-all duration-300">
+          <img src="assets/screenshots/screen-2-map.png" alt="Mappa Locali" class="w-full h-auto">
+        </div>
+        <span class="text-xs sm:text-sm font-semibold text-slate-300 mt-4">Mappa Live</span>
+      </div>
+
+      <!-- Screen 3 -->
+      <div class="group flex flex-col items-center">
+        <div class="relative rounded-[28px] overflow-hidden border-2 border-brand-border bg-black shadow-lg group-hover:border-brand-pink transition-all duration-300">
+          <img src="assets/screenshots/screen-3-detail.png" alt="Dettaglio Evento" class="w-full h-auto">
+        </div>
+        <span class="text-xs sm:text-sm font-semibold text-slate-300 mt-4">Dettagli & Ticket</span>
+      </div>
+
+      <!-- Screen 4 -->
+      <div class="group flex flex-col items-center">
+        <div class="relative rounded-[28px] overflow-hidden border-2 border-brand-border bg-black shadow-lg group-hover:border-brand-pink transition-all duration-300">
+          <img src="assets/screenshots/screen-4-calendar.png" alt="Calendario" class="w-full h-auto">
+        </div>
+        <span class="text-xs sm:text-sm font-semibold text-slate-300 mt-4">Calendario</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Box: Stay Updated -->
+  <section class="py-16 px-4 sm:px-6 max-w-4xl mx-auto">
+    <div class="relative rounded-3xl p-8 sm:p-12 bg-gradient-to-br from-brand-card via-brand-card/90 to-slate-900 border border-brand-border overflow-hidden text-center glow-purple">
+      
+      <div class="relative z-10 max-w-xl mx-auto">
+        <div class="w-14 h-14 mx-auto mb-5 rounded-2xl bg-brand-pink/20 flex items-center justify-center">
+          <img src="assets/logo.png" alt="Seratina" class="w-9 h-9 rounded-lg">
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+          Sei un organizzatore o un locale?
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mb-8">
+          Vuoi inserire le tue serate o il tuo locale su Seratina in anteprima per il lancio? Contattaci subito.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="mailto:contatto@seratina.app?subject=Collaborazione%20Seratina" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-pink hover:bg-brand-pinkHover text-white font-bold text-sm transition-colors shadow-lg">
+            Scrivici un'email
+          </a>
+          <a href="#download" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-sm transition-colors">
+            Scopri lo stato dell'app
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-brand-border/60 py-12 px-4 sm:px-6 bg-brand-darker">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-slate-400">
+      
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Logo Seratina" class="w-7 h-7 rounded-lg">
+        <span class="font-bold text-white text-base">Seratina</span>
+        <span class="text-slate-600">|</span>
+        <span>© 2026 AvengersDevDreamTeam</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="privacy.html" class="hover:text-brand-pink transition-colors">Informativa Privacy</a>
+        <a href="mailto:support@seratina.app" class="hover:text-brand-pink transition-colors">Assistenza</a>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

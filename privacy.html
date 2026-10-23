@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informativa sulla Privacy - Seratina</title>
+  <meta name="description" content="Informativa sulla Privacy per l'applicazione Seratina (iOS e Android).">
+  
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              pink: '#E86D80',
+              purple: '#6366F1',
+              dark: '#0B0F17',
+              darker: '#06090F',
+              card: '#131B2B',
+              border: '#1F2C44',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brand-dark text-slate-200 font-sans antialiased selection:bg-brand-pink selection:text-white">
+
+  <!-- Header -->
+  <header class="border-b border-brand-border/60 bg-brand-dark/90 sticky top-0 z-20 backdrop-blur-md">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Seratina" class="w-8 h-8 rounded-lg">
+        <span class="text-xl font-extrabold text-white">Seratina</span>
+      </a>
+      <a href="index.html" class="text-xs sm:text-sm font-semibold text-brand-pink hover:underline flex items-center gap-1">
+        ← Torna alla Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+    <div class="mb-10 pb-8 border-b border-brand-border/60">
+      <span class="text-xs font-bold uppercase tracking-widest text-brand-pink">Documento Legale</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Informativa sulla Privacy</h1>
+      <p class="text-sm text-slate-400 mt-2">Ultimo aggiornamento: 23 Ottobre 2026</p>
+    </div>
+
+    <div class="space-y-8 text-sm sm:text-base leading-relaxed text-slate-300">
+      
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">1. Titolare del Trattamento dei Dati</h2>
+        <p>
+          Il Titolare del Trattamento dei dati per l'applicazione mobile <strong>Seratina</strong> (disponibile per sistemi operativi iOS e Android con identificativo pacchetto <code class="bg-brand-card px-2 py-0.5 rounded text-brand-pink text-xs">com.giacomodifa.seratina</code>) è il team di sviluppo <strong>AvengersDevDreamTeam</strong>.<br>
+          Per qualsiasi domanda relativa alla presente informativa o all'esercizio dei tuoi diritti, puoi contattarci all'indirizzo email: <a href="mailto:support@seratina.app" class="text-brand-pink underline">support@seratina.app</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">2. Dati Raccolti e Finalità</h2>
+        <p class="mb-3">Seratina raccoglie unicamente i dati necessari per erogare i servizi dell'applicazione:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>
+            <strong>Dati di Posizione Geografica (GPS):</strong> Con il tuo esplicito consenso, l'applicazione accede alla tua posizione approssimativa o precisa per mostrare su mappa e in elenco i locali, club ed eventi più vicini a te. La tua posizione geografica viene elaborata in tempo reale per la ricerca e <em>non viene memorizzata in modo permanente per tracciare i tuoi spostamenti</em>.
+          </li>
+          <li>
+            <strong>Dati di Autenticazione (Google Sign-In):</strong> Qualora tu decida di effettuare l'accesso tramite account Google, raccogliamo esclusivamente i dati identificativi di base forniti dal servizio (nome, indirizzo email e identificativo utente) per gestire il tuo profilo personale e le tue preferenze.
+          </li>
+          <li>
+            <strong>Notifiche Push:</strong> Se abiliti le notifiche, raccogliamo il token univoco del tuo dispositivo per inviarti promemoria sugli eventi salvati o comunicazioni essenziali relative al servizio.
+          </li>
+          <li>
+            <strong>Dati di Utilizzo Anonimi:</strong> Eventuali log tecnici diagnostici per prevenire crash e malfunzionamenti dell'app.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">3. Base Giuridica del Trattamento</h2>
+        <p>
+          Il trattamento dei dati si fonda su:
+        </p>
+        <ul class="list-disc pl-6 space-y-1 mt-2">
+          <li><strong>Consenso dell'utente:</strong> per l'accesso alla geolocalizzazione e la ricezione di notifiche push (revocabile in qualsiasi momento dalle impostazioni del dispositivo).</li>
+          <li><strong>Esecuzione del servizio contrattuale:</strong> per consentire la visualizzazione e il salvataggio degli eventi scelti.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">4. Condivisione dei Dati con Terze Parti</h2>
+        <p>
+          <strong>Non vendiamo né cediamo a terzi per scopi pubblicitari i tuoi dati personali.</strong> I dati possono essere trattati da fornitori di servizi tecnici e infrastrutturali nominati responsabili del trattamento (ad es. Supabase per l'infrastruttura database, Google Cloud per i servizi cloud, Apple/Google per la distribuzione delle notifiche push).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">5. Conservazione e Sicurezza dei Dati</h2>
+        <p>
+          I tuoi dati sono protetti tramite crittografia in transito (protocolli HTTPS/TLS) e a riposo. I dati del tuo account sono conservati finché il profilo rimane attivo. Puoi richiedere in qualsiasi momento la cancellazione totale del tuo account e di tutti i dati associati.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">6. I Tuoi Diritti (Regolamento GDPR)</h2>
+        <p class="mb-2">In conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR), hai il diritto di:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Accedere ai dati personali che ti riguardano;</li>
+          <li>Chiederne la rettifica, l'aggiornamento o la cancellazione definitiva;</li>
+          <li>Revocare in qualsiasi momento il consenso all'accesso alla geolocalizzazione o alle notifiche direttamente dalle impostazioni del tuo smartphone;</li>
+          <li>Opporti al trattamento dei tuoi dati.</li>
+        </ul>
+        <p class="mt-3">
+          Per esercitare uno qualsiasi di questi diritti o richiedere la cancellazione completa del tuo account, scrivi a <a href="mailto:support@seratina.app" class="text-brand-pink underline">support@seratina.app</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">7. Modifiche alla presente Informativa</h2>
+        <p>
+          Potremmo aggiornare periodicamente questa Informativa sulla Privacy per adeguarla a nuove funzionalità dell'app o a modifiche normative. Eventuali variazioni significative saranno rese note tramite l'applicazione o su questa pagina.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-brand-border/60 py-8 px-4 text-center text-xs text-slate-500">
+    <p>© 2026 Seratina - AvengersDevDreamTeam. Tutti i diritti riservati.</p>
+  </footer>
+
+</body>
+</html>

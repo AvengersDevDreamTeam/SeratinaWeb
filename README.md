@@ -1,19 +1,32 @@
 # SeratinaWeb 🌐
 
-Landing page ufficiale e documentazione privacy per l'app mobile **Seratina** (iOS & Android).
+Landing page ufficiale, portale legale e area gestori per l'applicazione mobile **Seratina** (iOS & Android).
 
 ## 🚀 Caratteristiche
-- **Zero build step, zero dipendenze npm**: Singolo file HTML responsive con Tailwind CSS via CDN.
-- **Caricamento istantaneo**: <50ms su Edge CDN globale.
-- **Privacy Policy inclusa**: Conforme a GDPR e linee guida Apple App Store / Google Play Console (`privacy.html`).
-- **Dark Mode**: Grafica allineata all'app Seratina (`#E86D80`, `#6366F1`, neon dark theme).
+- **Zero build step, zero dipendenze npm**: Pagine HTML5 responsive stilizzate con Tailwind CSS via CDN.
+- **Caricamento istantaneo**: <50ms su Edge CDN globale (GitHub Pages).
+- **SEO & Indicizzazione**: Include `robots.txt` e `sitemap.xml` per i motori di ricerca.
+- **Dark Mode Notturna**: Palette coerente con l'app mobile (`#E86D80`, `#6366F1`, `#0B0F17`).
 
 ---
 
-## 💻 Come visualizzare in locale
-Basta fare doppio click su `index.html` per aprirlo nel browser, oppure avviare un server locale leggero:
+## 📄 Pagine Incluse
+
+| File | Descrizione | Scopo |
+|---|---|---|
+| **`index.html`** | Landing page ufficiale | Presentazione dell'app con mockup smartphone, screenshot reali e badge Store. |
+| **`privacy.html`** | Informativa sulla Privacy | Conforme a GDPR (Art. 6.1.f, 17, 21), Apple App Store (5.1.1) e Google Play. |
+| **`terms.html`** | Termini di Servizio | Condizioni di utilizzo e clausola di non responsabilità sui dati aggregati. |
+| **`delete-account.html`** | Cancellazione Account | Guida e form mailto richiesta obbligatoriamente da Google Play Data Safety. |
+| **`gestori.html`** | Area Gestori Locali | Modulo asincrono per i titolari di locali (aggiornamento scheda o opt-out) con invio a `POST /gestori/richiesta`. |
+
+---
+
+## 💻 Visualizzazione in Locale
+
+Basta fare doppio click su `index.html` per aprirlo in qualsiasi browser, oppure:
 ```bash
-# Con Python (se installato)
+# Con Python
 python -m http.server 8080
 
 # Oppure con npx
@@ -22,9 +35,9 @@ npx serve .
 
 ---
 
-## 🚢 Come pubblicare su GitHub Pages (1 Click)
+## 🚢 Pubblicazione su GitHub Pages
 
-1. Crea la repository su GitHub: `AvengersDevDreamTeam/SeratinaWeb` (o `seratina-landing`).
+1. Crea la repository su GitHub: `AvengersDevDreamTeam/SeratinaWeb` (o `seratina-web`).
 2. Collega il remote e pusha il codice:
    ```bash
    git remote add origin https://github.com/AvengersDevDreamTeam/SeratinaWeb.git
@@ -35,7 +48,7 @@ npx serve .
    - **Source**: `Deploy from a branch`
    - **Branch**: `main` / `/(root)`
    - Clicca **Save**.
-4. In ~60 secondi il sito sarà live all'indirizzo:
+4. In pochi secondi il sito sarà accessibile all'indirizzo:
    `https://avengersdevdreamteam.github.io/SeratinaWeb/`
 
-*(Opzionale: se in futuro acquisterete un dominio personalizzato come `seratina.it`, basterà inserirlo nella sezione "Custom domain" nella stessa pagina delle impostazioni di GitHub).*
+*(Opzionale: se in futuro collegherete un dominio custom come `seratina.it`, basterà inserirlo in "Custom domain" nella stessa schermata).*

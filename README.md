@@ -7,6 +7,7 @@ Landing page ufficiale, portale legale e area gestori per l'applicazione mobile 
 - **Caricamento istantaneo**: <50ms su Edge CDN globale (GitHub Pages).
 - **SEO & Indicizzazione**: Include `robots.txt` e `sitemap.xml` per i motori di ricerca.
 - **Dark Mode Notturna**: Palette coerente con l'app mobile (`#E86D80`, `#6366F1`, `#0B0F17`).
+- **Event Spotlight Modal (Deep Linking)**: Supporto a `?event=ID` per visualizzare un'anteprima interattiva popup della serata (locandina intera `object-contain` + ambient blur, orari, locale, prezzi) con pulsante per aprire l'app nativa (`seratina://event/{id}`) o scaricarla dagli store.
 
 ---
 
@@ -14,7 +15,7 @@ Landing page ufficiale, portale legale e area gestori per l'applicazione mobile 
 
 | File | Descrizione | Scopo |
 |---|---|---|
-| **`index.html`** | Landing page ufficiale | Presentazione dell'app con mockup smartphone, screenshot reali e badge Store. |
+| **`index.html`** | Landing page ufficiale & Anteprima Eventi | Presentazione dell'app con mockup, badge Store e modal popup dinamico per anteprime eventi condivisi (`?event=ID`). |
 | **`privacy.html`** | Informativa sulla Privacy | Conforme a GDPR (Art. 6.1.f, 17, 21), Apple App Store (5.1.1) e Google Play. |
 | **`terms.html`** | Termini di Servizio | Condizioni di utilizzo e clausola di non responsabilità sui dati aggregati. |
 | **`delete-account.html`** | Cancellazione Account | Guida e form mailto richiesta obbligatoriamente da Google Play Data Safety. |

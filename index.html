@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" class="scroll-smooth">
+<html lang="it" class="scroll-smooth overflow-x-hidden">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -205,7 +205,7 @@
             <!-- App Store Badge -->
             <div class="relative group w-full sm:w-auto">
               <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-slate-900/90 border border-brand-border/80 shadow-md cursor-default transition-all group-hover:border-brand-pink/50">
-                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
+                <svg class="w-7 h-7 text-white fill-current shrink-0" viewBox="0 0 24 24">
                   <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.77 1.06-1.84.94-2.91-.91.04-2.02.61-2.67 1.38-.58.67-1.09 1.76-.95 2.81 1.02.08 2.05-.51 2.68-1.28z"/>
                 </svg>
                 <div class="text-left">
@@ -219,8 +219,8 @@
             <!-- Google Play Badge -->
             <div class="relative group w-full sm:w-auto">
               <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-slate-900/90 border border-brand-border/80 shadow-md cursor-default transition-all group-hover:border-brand-purple/50">
-                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
-                  <path d="M3.609 1.814L13.792 12 3.61 22.186a1.776 1.776 0 01-.61-.926V2.74c0-.348.118-.68.609-.926zm11.236 11.238l2.25 2.25-10.971 6.347 8.721-8.597zm0-2.104L6.124 2.351l10.971 6.347-2.25 2.25zm1.536 1.052l3.414 1.975c1.073.62 1.073 1.636 0 2.256l-3.414 1.975-2.072-2.072 2.072-2.134z"/>
+                <svg class="w-7 h-7 text-white fill-current shrink-0" viewBox="0 0 24 24">
+                  <path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/>
                 </svg>
                 <div class="text-left">
                   <div class="text-[10px] uppercase font-semibold text-slate-400">Presto disponibile su</div>
@@ -488,6 +488,258 @@
 
     </div>
   </footer>
+  <!-- Event Spotlight Modal Popup (Displayed dynamically when ?event=ID is present) -->
+  <div id="eventSpotlightModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md overflow-x-hidden overflow-y-auto transition-opacity duration-300" role="dialog" aria-modal="true" aria-labelledby="spotlightTitle">
+    <!-- Clickable backdrop overlay to dismiss -->
+    <div id="modalBackdrop" class="absolute inset-0 bg-transparent cursor-pointer"></div>
 
+    <!-- Modal Card Container -->
+    <div class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-brand-card via-brand-card/95 to-slate-900 border-2 border-brand-pink/50 shadow-2xl glow-pink z-10">
+      <!-- Ambient decorative glow (clipped to prevent horizontal scrollbars) -->
+      <div class="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
+        <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-pink/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <!-- Top Invitation Badge & Close Button -->
+      <div class="flex items-center justify-between gap-3 mb-5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-pink/15 border border-brand-pink/40 text-xs sm:text-sm font-bold text-brand-pink">
+          <svg class="w-4 h-4 text-brand-pink animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+          </svg>
+          <span>Invito Serata</span>
+        </div>
+        <button id="closeSpotlightBtn" type="button" aria-label="Chiudi popup" class="p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Loading State -->
+      <div id="spotlightLoading" class="py-12 text-center">
+        <div class="inline-block w-8 h-8 border-2 border-brand-pink border-t-transparent rounded-full animate-spin"></div>
+        <p class="text-sm text-slate-400 mt-3 font-medium">Caricamento dettagli serata in corso...</p>
+      </div>
+
+      <!-- Event Content Container -->
+      <div id="spotlightContent" class="hidden grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-center">
+        <!-- Event Poster Image -->
+        <div class="md:col-span-5 relative">
+          <div class="relative aspect-square md:aspect-[4/5] w-full rounded-2xl overflow-hidden border border-brand-border bg-slate-950/80 shadow-xl flex items-center justify-center">
+            <!-- Blurred ambient background of the poster to fill letterbox areas elegantly -->
+            <img id="spotlightImageBlur" src="" alt="" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-35 scale-125 pointer-events-none" aria-hidden="true">
+            <!-- Crisp full poster without any cropping -->
+            <img id="spotlightImage" src="" alt="Locandina Evento" class="relative z-10 w-full h-full object-contain p-1">
+          </div>
+          <span id="spotlightCategoryBadge" class="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-md text-[11px] font-bold text-brand-pink border border-brand-pink/30 uppercase tracking-wider shadow">
+            Club
+          </span>
+        </div>
+
+        <!-- Event Details -->
+        <div class="md:col-span-7 flex flex-col justify-center">
+          <h2 id="spotlightTitle" class="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-tight mb-2">
+            Titolo Serata
+          </h2>
+
+          <div class="space-y-2 text-xs sm:text-sm text-slate-300 mb-4">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-brand-pink shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <span id="spotlightDate" class="font-semibold text-white">Data Evento</span>
+              <span id="spotlightTime" class="text-slate-400"></span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-brand-purple shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span id="spotlightVenue" class="font-semibold text-white">Nome Locale</span>
+              <span class="text-slate-500">•</span>
+              <span id="spotlightAddress" class="text-slate-400 truncate">Indirizzo</span>
+            </div>
+
+            <div class="flex items-center gap-2 pt-1">
+              <span class="text-xs uppercase font-bold text-slate-400">Ingresso:</span>
+              <span id="spotlightPriceBadge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-xs font-bold text-emerald-400">
+                Omaggio
+              </span>
+            </div>
+          </div>
+
+          <p id="spotlightDescription" class="text-xs text-slate-400 line-clamp-3 mb-5">
+            Descrizione serata...
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+            <button id="openAppBtn" class="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-pink to-brand-purple text-white font-bold text-sm shadow-lg hover:shadow-brand-pink/30 hover:scale-[1.02] active:scale-95 transition-all text-center flex items-center justify-center gap-2 cursor-pointer">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="6.5" y="2" width="11" height="20" rx="2.5" />
+                <circle cx="12" cy="18" r="0.8" fill="currentColor" />
+              </svg>
+              <span>Apri nell'App Seratina</span>
+            </button>
+            <a id="modalDownloadBtn" href="#download" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs sm:text-sm transition-all text-center">
+              Scarica l'App
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="spotlightError" class="hidden py-8 text-center">
+        <p class="text-base font-bold text-white mb-1">Evento non trovato o concluso</p>
+        <p class="text-xs text-slate-400 mb-4">Questa serata potrebbe essere terminata. Scopri tutte le altre serate disponibili nell'app Seratina!</p>
+        <a id="modalErrorDownloadBtn" href="#download" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-pink text-white text-xs font-bold">
+          Scopri Seratina
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Event Spotlight Script (ponytail: native vanilla JS, zero build step) -->
+  <script>
+    (function initEventSpotlight() {
+      const params = new URLSearchParams(window.location.search);
+      const eventId = params.get('event');
+      if (!eventId) return;
+
+      const modal = document.getElementById('eventSpotlightModal');
+      const backdrop = document.getElementById('modalBackdrop');
+      const loading = document.getElementById('spotlightLoading');
+      const content = document.getElementById('spotlightContent');
+      const errorBox = document.getElementById('spotlightError');
+      const closeBtn = document.getElementById('closeSpotlightBtn');
+      const openAppBtn = document.getElementById('openAppBtn');
+      const downloadBtn = document.getElementById('modalDownloadBtn');
+      const errorDownloadBtn = document.getElementById('modalErrorDownloadBtn');
+
+      if (!modal) return;
+
+      function openModal() {
+        modal.classList.remove('hidden');
+        document.documentElement.classList.add('overflow-hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        document.documentElement.classList.remove('overflow-hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+
+      if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+          closeModal();
+        });
+      }
+      if (errorDownloadBtn) {
+        errorDownloadBtn.addEventListener('click', () => {
+          closeModal();
+        });
+      }
+
+      openModal();
+
+      const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? 'http://localhost:8080'
+        : 'https://seratina-be-265028543407.europe-west8.run.app';
+
+      fetch(`${API_BASE}/events/${encodeURIComponent(eventId)}`)
+        .then((res) => {
+          if (!res.ok) throw new Error('Event not found');
+          return res.json();
+        })
+        .then((data) => {
+          const event = data.data || data.event || data;
+          if (!event || !event.title) throw new Error('Dati evento non validi o mancanti');
+
+          // Update text and fields
+          document.getElementById('spotlightTitle').textContent = event.title;
+          document.getElementById('spotlightVenue').textContent = event.venue || 'Locale Seratina';
+          document.getElementById('spotlightAddress').textContent = event.address || (event.city || 'Milano');
+          document.getElementById('spotlightDescription').textContent = event.description || '';
+
+          // Date formatting (it-IT)
+          try {
+            const d = new Date(event.date);
+            const formatted = !isNaN(d.getTime())
+              ? d.toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'short' })
+              : event.date;
+            document.getElementById('spotlightDate').textContent = formatted;
+          } catch {
+            document.getElementById('spotlightDate').textContent = event.date;
+          }
+
+          if (event.startTime) {
+            document.getElementById('spotlightTime').textContent = `• ore ${event.startTime}`;
+          }
+
+          // Category
+          if (event.category) {
+            document.getElementById('spotlightCategoryBadge').textContent = event.category;
+          }
+
+          // Price badge
+          const priceBadge = document.getElementById('spotlightPriceBadge');
+          if (event.price === 0) {
+            priceBadge.textContent = 'Ingresso Libero';
+            priceBadge.className = 'px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-xs font-bold text-emerald-400';
+          } else if (event.price && event.price > 0) {
+            priceBadge.textContent = `€${event.price}`;
+          } else if (event.priceDetails && event.priceDetails.length > 0) {
+            priceBadge.textContent = `Da €${event.priceDetails[0].price}`;
+          } else {
+            priceBadge.textContent = 'Ingresso Serata';
+          }
+
+          // Poster Image
+          const img = document.getElementById('spotlightImage');
+          const posterUrl = event.imageUrl || 'assets/screenshots/screen-1-home.png';
+          img.src = posterUrl;
+          const blurImg = document.getElementById('spotlightImageBlur');
+          if (blurImg) blurImg.src = posterUrl;
+
+          // Update page title and meta
+          document.title = `${event.title} presso ${event.venue} • Seratina`;
+          const metaDesc = document.querySelector('meta[name="description"]');
+          if (metaDesc) metaDesc.setAttribute('content', `${event.title} - ${event.venue}, ${event.address}. Scopri tutti i dettagli su Seratina.`);
+
+          // Open in app handler with fallback
+          openAppBtn.addEventListener('click', () => {
+            const appUrl = `seratina://event/${encodeURIComponent(eventId)}`;
+            const start = Date.now();
+            window.location.href = appUrl;
+            setTimeout(() => {
+              if (Date.now() - start < 2000 && !document.hidden) {
+                closeModal();
+                const dl = document.getElementById('download');
+                if (dl) dl.scrollIntoView({ behavior: 'smooth' });
+              }
+            }, 1200);
+          });
+
+          loading.classList.add('hidden');
+          content.classList.remove('hidden');
+        })
+        .catch((err) => {
+          console.error('[SeratinaWeb] Errore caricamento evento:', err);
+          loading.classList.add('hidden');
+          errorBox.classList.remove('hidden');
+        });
+    })();
+  </script>
 </body>
 </html>

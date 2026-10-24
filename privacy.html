@@ -234,7 +234,7 @@
       <img src="assets/logo.png" alt="Seratina" class="logo">
       <div class="badge">Privacy & Termini</div>
       <h1>Informativa sulla Privacy & Termini d'Uso</h1>
-      <p class="subtitle">Ultimo aggiornamento: Ottobre 2026 &bull; Versione 1.4</p>
+      <p class="subtitle">Ultimo aggiornamento: Ottobre 2026 &bull; Versione 1.5</p>
     </header>
 
     <!-- 1. Titolare -->
@@ -284,6 +284,14 @@
 
       <h3>d. Condivisione Eventi e Anteprima Web (Deep Linking)</h3>
       <p>Quando un utente condivide una serata tramite il link web ufficiale, l'anteprima web pubblica interroga le nostre API in tempo reale per mostrare la locandina e i dettagli dell'evento. Tale consultazione è interamente anonima: non richiede registrazione, non raccoglie dati personali del visitatore e non installa cookie di profilazione o tracciamento.</p>
+
+      <h3>e. Integrazione Calendario del Telefono (Permessi Calendario)</h3>
+      <p>L'applicazione offre la funzionalità facoltativa di aggiungere le serate al calendario del dispositivo (Apple Calendar su iOS, Google Calendar su Android):</p>
+      <ul>
+        <li><strong>Permessi di scrittura:</strong> Per salvare l'evento sul calendario di sistema, l'app può richiedere l'accesso in scrittura al calendario (permesso <code>WRITE_CALENDAR</code> / <code>READ_CALENDAR</code> su Android, <code>NSCalendarsUsageDescription</code> su iOS).</li>
+        <li><strong>Nessun accesso o profilazione:</strong> L'accesso è limitato esclusivamente alla creazione locale del promemoria relativo alla serata scelta (titolo, orario, locale, indirizzo). Seratina <strong>non legge, non analizza, non raccoglie e non trasmette a server esterni o terze parti i tuoi eventi personali già presenti nel calendario</strong>.</li>
+        <li><strong>Fallback web senza permessi:</strong> In alternativa, o qualora i permessi siano rifiutati, l'evento può essere salvato tramite template web di Google Calendar senza richiedere alcun accesso al dispositivo.</li>
+      </ul>
     </div>
 
     <!-- 4. Aggregazione Eventi Pubblici e Artisti/DJ -->

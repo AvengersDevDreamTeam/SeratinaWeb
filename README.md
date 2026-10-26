@@ -1,17 +1,18 @@
-# SeratinaWeb 🌐
+# SeratinaWeb
 
 Landing page ufficiale, portale legale e area gestori per l'applicazione mobile **Seratina** (iOS & Android).
 
-## 🚀 Caratteristiche
+## Caratteristiche
 - **Zero build step, zero dipendenze npm**: Pagine HTML5 responsive stilizzate con Tailwind CSS via CDN.
 - **Caricamento istantaneo**: <50ms su Edge CDN globale (GitHub Pages).
 - **SEO & Indicizzazione**: Include `robots.txt` e `sitemap.xml` per i motori di ricerca.
 - **Dark Mode Notturna**: Palette coerente con l'app mobile (`#E86D80`, `#6366F1`, `#0B0F17`).
+- **Sezione Newsletter Settimanale**: Box macrosezione in `index.html` con geocoding autocompletamento città italiane (OpenStreetMap Nominatim), rilevamento coordinate GPS e integrazione diretta con il backend Seratina.
 - **Event Spotlight Modal (Deep Linking)**: Supporto a `?event=ID` per visualizzare un'anteprima interattiva popup della serata (locandina intera `object-contain` + ambient blur, orari, locale, prezzi) con pulsante per aprire l'app nativa (`seratina://event/{id}`) o scaricarla dagli store.
 
 ---
 
-## 📄 Pagine Incluse
+## Pagine Incluse
 
 | File | Descrizione | Scopo |
 |---|---|---|
@@ -20,10 +21,11 @@ Landing page ufficiale, portale legale e area gestori per l'applicazione mobile 
 | **`terms.html`** | Termini di Servizio | Condizioni di utilizzo e clausola di non responsabilità sui dati aggregati. |
 | **`delete-account.html`** | Cancellazione Account | Guida e form mailto richiesta obbligatoriamente da Google Play Data Safety. |
 | **`gestori.html`** | Area Gestori Locali | Modulo asincrono per i titolari di locali (aggiornamento scheda o opt-out) con invio a `POST /gestori/richiesta`. |
+| **`unsubscribe.html`** | Disiscrizione Newsletter | Pagina statica di disiscrizione 1-click conforme a GDPR con chiamata `POST /newsletter/unsubscribe`. |
 
 ---
 
-## 💻 Visualizzazione in Locale
+## Visualizzazione in Locale
 
 Basta fare doppio click su `index.html` per aprirlo in qualsiasi browser, oppure:
 ```bash
@@ -36,7 +38,7 @@ npx serve .
 
 ---
 
-## 🚢 Pubblicazione su GitHub Pages
+## Pubblicazione su GitHub Pages
 
 1. Crea la repository su GitHub: `AvengersDevDreamTeam/SeratinaWeb` (o `seratina-web`).
 2. Collega il remote e pusha il codice:

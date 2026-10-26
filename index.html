@@ -151,6 +151,7 @@
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
         <a href="#funzionalita" class="hover:text-brand-pink transition-colors">Funzionalità</a>
         <a href="#anteprima" class="hover:text-brand-pink transition-colors">Anteprima App</a>
+        <a href="#newsletter" class="hover:text-brand-pink transition-colors">Newsletter</a>
         <a href="privacy.html" class="hover:text-brand-pink transition-colors">Privacy</a>
         <a href="terms.html" class="hover:text-brand-pink transition-colors">Termini</a>
         <a href="gestori.html" class="hover:text-brand-pink transition-colors">Area Gestori</a>
@@ -439,6 +440,176 @@
     </div>
   </section>
 
+<!-- Newsletter Macro Section -->
+  <section id="newsletter" class="scroll-mt-24 py-20 sm:py-28 px-4 sm:px-6 border-t border-brand-border/60 relative overflow-visible bg-gradient-to-b from-brand-darker via-brand-dark to-brand-darker">
+    
+    <!-- Ambient Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-brand-pink/10 rounded-full blur-[130px] pointer-events-none -z-10"></div>
+    <div class="absolute top-1/2 right-1/4 -translate-y-1/2 w-[450px] h-[250px] bg-brand-purple/10 rounded-full blur-[110px] pointer-events-none -z-10"></div>
+
+    <div class="max-w-5xl mx-auto relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-pink/15 border border-brand-pink/30 text-xs sm:text-sm font-bold text-brand-pink mb-4 uppercase tracking-wider">
+          <svg class="w-4 h-4 text-brand-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span>Newsletter Settimanale</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+          Cosa fare questo weekend?
+        </h2>
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+          Ogni giovedì alle 18:00 ti inviamo una selezione esclusiva con le migliori serate ed eventi del fine settimana, ordinati per vicinanza.
+        </p>
+
+        <!-- Feature Pillars -->
+        <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs sm:text-sm font-semibold text-slate-300 mt-6">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span>Top serate selezionate</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span>In base alla tua posizione</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span>Zero spam, disiscrizione in 1 click</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Container directly inside macrosection -->
+      <form id="newsletterForm" class="max-w-2xl mx-auto space-y-4" novalidate>
+        
+        <!-- Inputs Row -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-start">
+          
+          <!-- Email Input (7 cols) -->
+          <div class="md:col-span-7 relative">
+            <label for="newsletterEmail" class="block text-xs font-semibold text-slate-300 mb-1.5 text-left">
+              La tua email
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                </svg>
+              </span>
+              <input 
+                type="email" 
+                id="newsletterEmail" 
+                placeholder="nome@esempio.it" 
+                required 
+                class="w-full pl-10 pr-4 py-3.5 rounded-xl bg-slate-900/90 border border-brand-border text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all shadow-inner"
+              />
+            </div>
+          </div>
+
+          <!-- City Autocomplete Input (5 cols) -->
+          <div class="md:col-span-5 relative">
+            <label for="newsletterCityInput" class="block text-xs font-semibold text-slate-300 mb-1.5 text-left flex justify-between items-center">
+              <span>Città di riferimento</span>
+              <span id="cityStatusBadge" class="text-[10px] text-emerald-400 font-bold hidden">Città verificata</span>
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-brand-pink">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </span>
+              <input 
+                type="text" 
+                id="newsletterCityInput" 
+                autocomplete="off" 
+                placeholder="Scrivi città (es. Roma, Monza, Napoli)..." 
+                value="Milano" 
+                required 
+                class="w-full pl-10 pr-8 py-3.5 rounded-xl bg-slate-900/90 border border-brand-border text-white text-sm focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition-all cursor-pointer shadow-inner"
+              />
+              <span class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-500">
+                <svg class="w-3.5 h-3.5 transition-transform" id="cityChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </span>
+              <input type="hidden" id="selectedCityValue" value="Milano" />
+            </div>
+
+            <!-- Autocomplete Floating Dropdown List -->
+            <div 
+              id="cityDropdown" 
+              class="absolute left-0 right-0 top-full mt-1.5 max-h-56 overflow-y-auto rounded-xl bg-slate-900/98 border border-brand-border shadow-2xl backdrop-blur-xl z-50 hidden divide-y divide-slate-800/60"
+            >
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Geolocation GPS Assistant Card -->
+        <div class="rounded-xl bg-slate-900/80 border border-brand-border p-3.5 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-left transition-all" id="gpsContainer">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl bg-brand-pink/15 flex items-center justify-center shrink-0 text-brand-pink mt-0.5">
+              <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" stroke-width="2"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v4m0 12v4M2 12h4m12 0h4m-8-4a4 4 0 100 8 4 4 0 000-8z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs sm:text-sm font-bold text-white flex items-center gap-2" id="gpsTitle">
+                <span>Precisione GPS (Opzionale)</span>
+                <span id="gpsActivePill" class="hidden px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Attivo</span>
+              </p>
+              <p class="text-xs text-slate-400 leading-tight mt-0.5" id="gpsDescription">
+                Attiva la posizione per ordinare gli eventi partendo da quelli a pochi minuti da te.
+              </p>
+            </div>
+          </div>
+
+          <!-- GPS Button -->
+          <button 
+            type="button" 
+            id="newsletterGpsBtn" 
+            class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-slate-600 text-xs font-semibold flex items-center justify-center gap-2 transition-all active:scale-95 shrink-0 cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-brand-pink" id="gpsBtnIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            </svg>
+            <span id="gpsBtnText">Usa posizione attuale</span>
+          </button>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-2">
+          <button 
+            type="submit" 
+            id="newsletterSubmitBtn"
+            class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-brand-pink to-brand-purple hover:from-brand-pinkHover hover:to-indigo-500 text-white font-extrabold text-sm sm:text-base shadow-xl shadow-brand-pink/25 hover:shadow-brand-pink/40 hover:scale-[1.01] active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Iscriviti alla Newsletter</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Inline Feedback Message -->
+        <div id="newsletterFeedback" class="hidden p-4 rounded-xl text-xs sm:text-sm font-medium text-center"></div>
+
+      </form>
+
+    </div>
+  </section>
+
   <!-- CTA Box: Stay Updated -->
   <section class="py-16 px-4 sm:px-6 max-w-4xl mx-auto">
     <div class="relative rounded-3xl p-8 sm:p-12 bg-gradient-to-br from-brand-card via-brand-card/90 to-slate-900 border border-brand-border overflow-hidden text-center glow-purple">
@@ -466,6 +637,7 @@
 
     </div>
   </section>
+
 
   <!-- Footer -->
   <footer class="border-t border-brand-border/60 py-12 px-4 sm:px-6 bg-brand-darker">
@@ -608,6 +780,25 @@
       const eventId = params.get('event');
       if (!eventId) return;
 
+      // Deep link verso l'app Seratina (tentativo automatico immediato all'atterraggio se installata)
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const isMobileDevice = isAndroid || isIOS;
+      const appUrl = isAndroid
+        ? `intent://event/${encodeURIComponent(eventId)}#Intent;scheme=seratina;package=com.seratinaclub.seratina;end;`
+        : `seratina://event/${encodeURIComponent(eventId)}`;
+
+      function openNativeApp() {
+        try {
+          window.location.href = appUrl;
+        } catch (_) {}
+      }
+
+      // Se atterra da dispositivo mobile, tenta subito di aprire l'app nativa senza attendere il fetch API
+      if (isMobileDevice) {
+        setTimeout(openNativeApp, 100);
+      }
+
       const modal = document.getElementById('eventSpotlightModal');
       const backdrop = document.getElementById('modalBackdrop');
       const loading = document.getElementById('spotlightLoading');
@@ -717,19 +908,8 @@
           const metaDesc = document.querySelector('meta[name="description"]');
           if (metaDesc) metaDesc.setAttribute('content', `${event.title} - ${event.venue}, ${event.address}. Scopri tutti i dettagli su Seratina.`);
 
-          // Open in app handler with fallback
-          openAppBtn.addEventListener('click', () => {
-            const appUrl = `seratina://event/${encodeURIComponent(eventId)}`;
-            const start = Date.now();
-            window.location.href = appUrl;
-            setTimeout(() => {
-              if (Date.now() - start < 2000 && !document.hidden) {
-                closeModal();
-                const dl = document.getElementById('download');
-                if (dl) dl.scrollIntoView({ behavior: 'smooth' });
-              }
-            }, 1200);
-          });
+          // Pulsante manuale per aprire nell'app nativa
+          openAppBtn.addEventListener('click', openNativeApp);
 
           loading.classList.add('hidden');
           content.classList.remove('hidden');
@@ -741,5 +921,383 @@
         });
     })();
   </script>
+
+  <!-- Newsletter Script (ponytail: OpenStreetMap Nominatim live autocomplete, Italian cities only, GPS lock) -->
+  <script>
+    (function initNewsletter() {
+      const form = document.getElementById('newsletterForm');
+      if (!form) return;
+
+      const emailInput = document.getElementById('newsletterEmail');
+      const cityInput = document.getElementById('newsletterCityInput');
+      const cityHidden = document.getElementById('selectedCityValue');
+      const cityDropdown = document.getElementById('cityDropdown');
+      const cityStatusBadge = document.getElementById('cityStatusBadge');
+      const cityChevron = document.getElementById('cityChevron');
+
+      const gpsBtn = document.getElementById('newsletterGpsBtn');
+      const gpsBtnText = document.getElementById('gpsBtnText');
+      const gpsActivePill = document.getElementById('gpsActivePill');
+      const gpsDescription = document.getElementById('gpsDescription');
+      const gpsContainer = document.getElementById('gpsContainer');
+
+      const feedback = document.getElementById('newsletterFeedback');
+      const submitBtn = document.getElementById('newsletterSubmitBtn');
+
+      let userCoords = null;
+      let cityCoords = { latitude: 45.4642, longitude: 9.1896 }; // Coordinate città (default Milano)
+      let validSelectedCity = 'Milano';
+      let debounceTimer = null;
+      let abortController = null;
+
+      // Filtro rigoroso: solo città, comuni e frazioni italiane (NO regioni, NO nazioni, NO province/confini)
+      const CITY_TYPES = new Set(['city', 'town', 'village', 'municipality', 'hamlet', 'suburb']);
+      const REJECTED_TYPES = new Set(['country', 'state', 'region', 'county', 'continent', 'sea', 'ocean', 'water', 'island']);
+
+      function isOnlyItalianCity(item) {
+        const addr = item.address || {};
+        const addresstype = (item.addresstype || '').toLowerCase();
+        const type = (item.type || '').toLowerCase();
+
+        if (REJECTED_TYPES.has(addresstype) || REJECTED_TYPES.has(type)) {
+          return false;
+        }
+
+        const cityName = addr.city || addr.town || addr.village || addr.municipality;
+        if (!cityName && !CITY_TYPES.has(addresstype) && !CITY_TYPES.has(type)) {
+          return false;
+        }
+
+        return true;
+      }
+
+      function hideDropdown() {
+        cityDropdown.classList.add('hidden');
+        if (cityChevron) cityChevron.style.transform = 'rotate(0deg)';
+      }
+
+      function showLoadingDropdown() {
+        cityDropdown.innerHTML = `
+          <div class="px-4 py-3 text-xs text-slate-400 flex items-center justify-center gap-2">
+            <svg class="w-3.5 h-3.5 animate-spin text-brand-pink" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span>Ricerca città in corso...</span>
+          </div>
+        `;
+        cityDropdown.classList.remove('hidden');
+        if (cityChevron) cityChevron.style.transform = 'rotate(180deg)';
+      }
+
+      async function searchOpenStreetMap(query) {
+        if (cityInput.disabled) return;
+
+        const cleanQuery = query.trim();
+        if (cleanQuery.length < 2) {
+          hideDropdown();
+          return;
+        }
+
+        if (abortController) {
+          abortController.abort();
+        }
+        abortController = new AbortController();
+
+        showLoadingDropdown();
+
+        try {
+          const url = `https://nominatim.openstreetmap.org/search?format=json&countrycodes=it&limit=10&addressdetails=1&q=${encodeURIComponent(cleanQuery)}`;
+          const res = await fetch(url, {
+            signal: abortController.signal,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (!res.ok) throw new Error('Errore risposta OpenStreetMap');
+          const data = await res.json();
+
+          const cityOnlyResults = (data || []).filter(isOnlyItalianCity);
+          renderDropdownResults(cityOnlyResults);
+        } catch (err) {
+          if (err.name === 'AbortError') return;
+          console.warn('[SeratinaWeb] Errore Nominatim OpenStreetMap:', err);
+          cityDropdown.innerHTML = `
+            <div class="px-4 py-3 text-xs text-rose-400 text-center">
+              Impossibile caricare le città al momento. Riprova tra poco.
+            </div>
+          `;
+        }
+      }
+
+      function renderDropdownResults(items) {
+        if (cityInput.disabled) return;
+        cityDropdown.innerHTML = '';
+
+        if (!items || items.length === 0) {
+          const noMatch = document.createElement('div');
+          noMatch.className = 'px-4 py-3 text-xs text-slate-400 italic text-center';
+          noMatch.textContent = 'Nessuna città trovata. Inserisci il nome di un comune o città italiana (es. Milano, Roma, Monza).';
+          cityDropdown.appendChild(noMatch);
+          cityDropdown.classList.remove('hidden');
+          return;
+        }
+
+        const header = document.createElement('div');
+        header.className = 'px-3.5 py-2 text-[10px] uppercase font-extrabold tracking-wider text-slate-400 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between';
+        header.innerHTML = `<span>Città trovate</span><span class="text-[9px] text-brand-pink lowercase">seleziona dall'elenco</span>`;
+        cityDropdown.appendChild(header);
+
+        const seen = new Set();
+
+        items.forEach(item => {
+          const addr = item.address || {};
+          const cityName = addr.city || addr.town || addr.village || addr.municipality || item.name;
+          const province = addr.county || addr['ISO3166-2-lvl6'] || '';
+          const region = addr.state || '';
+          const subInfo = [province, region].filter(Boolean).join(', ');
+
+          const key = `${cityName.toLowerCase()}|${province.toLowerCase()}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+
+          const opt = document.createElement('button');
+          opt.type = 'button';
+          opt.className = 'w-full px-4 py-2.5 text-left text-xs font-semibold text-slate-200 hover:bg-brand-pink/20 hover:text-white flex items-center justify-between transition-colors cursor-pointer group';
+          opt.innerHTML = `
+            <div class="flex items-center gap-2 truncate">
+              <svg class="w-3.5 h-3.5 text-brand-pink shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span class="font-bold text-white group-hover:text-brand-pink transition-colors truncate">${cityName}</span>
+              ${subInfo ? `<span class="text-[10px] text-slate-400 font-normal truncate">(${subInfo})</span>` : ''}
+            </div>
+            <span class="text-[10px] text-emerald-400 font-medium shrink-0 ml-2">Seleziona</span>
+          `;
+
+          opt.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            selectCity(cityName, parseFloat(item.lat), parseFloat(item.lon));
+          });
+
+          cityDropdown.appendChild(opt);
+        });
+
+        cityDropdown.classList.remove('hidden');
+        if (cityChevron) cityChevron.style.transform = 'rotate(180deg)';
+      }
+
+      function selectCity(cityName, lat, lon) {
+        validSelectedCity = cityName;
+        cityInput.value = cityName;
+        cityHidden.value = cityName;
+
+        if (!isNaN(lat) && !isNaN(lon)) {
+          cityCoords = { latitude: lat, longitude: lon };
+        }
+
+        hideDropdown();
+
+        if (cityStatusBadge) {
+          cityStatusBadge.textContent = 'Città verificata';
+          cityStatusBadge.className = 'text-[10px] text-emerald-400 font-bold';
+          cityStatusBadge.classList.remove('hidden');
+        }
+        cityInput.classList.remove('border-rose-500');
+        cityInput.classList.add('border-emerald-500/50');
+      }
+
+      // --- Funzioni di Blocco/Sblocco Selezione Città se GPS attivo ---
+      function disableCitySelection(detectedCityName) {
+        cityInput.disabled = true;
+        cityInput.classList.add('opacity-50', 'cursor-not-allowed', 'bg-slate-950/80', 'border-brand-pink/40');
+        cityInput.classList.remove('cursor-pointer');
+        cityInput.value = detectedCityName ? `Posizione GPS (${detectedCityName})` : 'Posizione GPS rilevata';
+        hideDropdown();
+
+        if (cityStatusBadge) {
+          cityStatusBadge.textContent = 'Coordinate GPS attive';
+          cityStatusBadge.className = 'text-[10px] text-brand-pink font-bold';
+          cityStatusBadge.classList.remove('hidden');
+        }
+        if (cityChevron) cityChevron.classList.add('hidden');
+      }
+
+      function enableCitySelection() {
+        cityInput.disabled = false;
+        cityInput.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-slate-950/80', 'border-brand-pink/40');
+        cityInput.classList.add('cursor-pointer');
+        cityInput.value = validSelectedCity;
+        cityHidden.value = validSelectedCity;
+
+        if (cityStatusBadge) {
+          cityStatusBadge.textContent = 'Città verificata';
+          cityStatusBadge.className = 'text-[10px] text-emerald-400 font-bold';
+          cityStatusBadge.classList.remove('hidden');
+        }
+        if (cityChevron) cityChevron.classList.remove('hidden');
+      }
+
+      cityInput.addEventListener('input', () => {
+        if (cityInput.disabled) return;
+        if (cityStatusBadge) cityStatusBadge.classList.add('hidden');
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          searchOpenStreetMap(cityInput.value);
+        }, 280);
+      });
+
+      cityInput.addEventListener('focus', () => {
+        if (cityInput.disabled) return;
+        if (cityInput.value.trim().length >= 2) {
+          searchOpenStreetMap(cityInput.value);
+        }
+      });
+
+      cityInput.addEventListener('blur', () => {
+        if (cityInput.disabled) return;
+        setTimeout(() => {
+          hideDropdown();
+          if (cityInput.value.trim().toLowerCase() !== validSelectedCity.toLowerCase()) {
+            cityInput.value = validSelectedCity;
+            cityHidden.value = validSelectedCity;
+          }
+          if (cityStatusBadge) cityStatusBadge.classList.remove('hidden');
+        }, 200);
+      });
+
+      // Inizializza città default (Milano)
+      selectCity('Milano', 45.4642, 9.1896);
+
+      // --- 2. Gestione Chiara della Posizione Attuale (GPS) ---
+      if (gpsBtn && navigator.geolocation) {
+        gpsBtn.addEventListener('click', () => {
+          // Se era già attivo, rimuove GPS e riabilita la selezione città
+          if (userCoords) {
+            userCoords = null;
+            enableCitySelection();
+            gpsActivePill.classList.add('hidden');
+            gpsBtnText.textContent = 'Usa posizione attuale';
+            gpsBtn.className = 'w-full sm:w-auto px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700/90 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer';
+            gpsDescription.textContent = 'Attiva la posizione per ordinare gli eventi partendo da quelli a pochi minuti da te.';
+            gpsContainer.classList.remove('border-emerald-500/40', 'bg-emerald-950/20');
+            return;
+          }
+
+          gpsBtnText.textContent = 'Rilevamento in corso...';
+          gpsBtn.disabled = true;
+
+          navigator.geolocation.getCurrentPosition(
+            async (pos) => {
+              userCoords = {
+                latitude: pos.coords.latitude,
+                longitude: pos.coords.longitude
+              };
+
+              gpsBtn.disabled = false;
+              gpsBtnText.textContent = 'Rimuovi GPS';
+              gpsBtn.className = 'w-full sm:w-auto px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-rose-500/20 text-emerald-300 hover:text-rose-300 border border-emerald-500/40 hover:border-rose-500/40 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer';
+
+              gpsActivePill.classList.remove('hidden');
+              gpsDescription.innerHTML = `Coordinate GPS attive (<strong class="text-white">${pos.coords.latitude.toFixed(3)}, ${pos.coords.longitude.toFixed(3)}</strong>). Selezione città disattivata: gli eventi ti verranno mostrati direttamente per vicinanza.`;
+              gpsContainer.classList.add('border-emerald-500/40', 'bg-emerald-950/20');
+
+              // Tenta di ricavare il comune dalle coordinate per valorizzare cityHidden
+              let detectedTown = null;
+              try {
+                const revRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`);
+                if (revRes.ok) {
+                  const revData = await revRes.json();
+                  const rAddr = revData.address || {};
+                  detectedTown = rAddr.city || rAddr.town || rAddr.village || rAddr.municipality;
+                }
+              } catch (_) {}
+
+              if (detectedTown) {
+                cityHidden.value = detectedTown;
+              }
+
+              // Disattiva e blocca la selezione della città
+              disableCitySelection(detectedTown);
+            },
+            (err) => {
+              gpsBtn.disabled = false;
+              gpsBtnText.textContent = 'Usa posizione attuale';
+              console.warn('[SeratinaWeb] Errore GPS:', err);
+              let msg = 'Permesso non concesso. Continua selezionando la tua città.';
+              if (err.code === 1) msg = 'Permesso di geolocalizzazione negato dal browser.';
+              else if (err.code === 2) msg = 'Posizione GPS non disponibile al momento.';
+              gpsDescription.textContent = msg;
+            },
+            { timeout: 10000, enableHighAccuracy: false }
+          );
+        });
+      }
+
+      // --- 3. Invio del Form Newsletter ---
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        const city = cityHidden.value || validSelectedCity || 'Milano';
+
+        if (!email) {
+          feedback.className = 'p-3.5 rounded-xl text-xs sm:text-sm font-medium text-center bg-rose-500/15 border border-rose-500/30 text-rose-300';
+          feedback.textContent = 'Inserisci un indirizzo email valido.';
+          feedback.classList.remove('hidden');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <svg class="w-4 h-4 animate-spin inline mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          Iscrizione in corso...
+        `;
+
+        feedback.className = 'p-3.5 rounded-xl text-xs sm:text-sm font-medium text-center bg-slate-800 text-slate-300 border border-slate-700';
+        feedback.textContent = 'Registrazione su Seratina...';
+        feedback.classList.remove('hidden');
+
+        const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? 'http://localhost:8080'
+          : 'https://seratina-be-265028543407.europe-west8.run.app';
+
+        try {
+          const payload = { email, city };
+          const coords = userCoords || cityCoords;
+          if (coords) {
+            payload.latitude = coords.latitude;
+            payload.longitude = coords.longitude;
+          }
+
+          const res = await fetch(`${API_BASE}/newsletter/subscribe`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+          if (res.ok && data.success) {
+            feedback.className = 'p-3.5 rounded-xl text-xs sm:text-sm font-medium text-center bg-emerald-500/15 border border-emerald-500/35 text-emerald-300';
+            const locationInfo = userCoords ? 'posizione GPS rilevata' : city;
+            feedback.innerHTML = `<strong>Iscrizione completata con successo!</strong> Riceverai la prima selezione giovedì alle 18:00 basata su <strong>${locationInfo}</strong>.`;
+            form.reset();
+            enableCitySelection();
+            selectCity(city, coords ? coords.latitude : 45.4642, coords ? coords.longitude : 9.1896);
+          } else {
+            throw new Error(data.detail || data.message || "Errore durante l'iscrizione");
+          }
+        } catch (err) {
+          feedback.className = 'p-3.5 rounded-xl text-xs sm:text-sm font-medium text-center bg-rose-500/15 border border-rose-500/30 text-rose-300';
+          feedback.textContent = err.message || 'Si è verificato un errore di rete. Riprova più tardi.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `
+            <span>Iscriviti alla Newsletter</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          `;
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>

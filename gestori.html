@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Area Gestori Locali | Seratina</title>
   <meta name="description" content="Area riservata ai titolari e gestori dei locali per aggiornare informazioni, orari o richiedere la rimozione della scheda da Seratina.">
+  <link rel="canonical" href="https://seratina.org/gestori.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://seratina.org/gestori.html">
+  <meta property="og:title" content="Area Gestori Locali | Seratina">
+  <meta property="og:description" content="Area riservata ai titolari e gestori dei locali per aggiornare informazioni, orari o richiedere la rimozione della scheda da Seratina.">
+  <meta property="og:image" content="https://seratina.org/assets/logo.png">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <style>
     :root {
@@ -270,7 +276,7 @@
     </div>
 
     <footer>
-      <p>Seratina &copy; 2026 &bull; <a href="index.html">Home</a> &bull; <a href="privacy.html">Informativa Privacy</a> &bull; <a href="terms.html">Termini di Servizio</a> &bull; <a href="delete-account.html">Cancellazione Account</a> &bull; <a href="mailto:seratinaclub@gmail.com">seratinaclub@gmail.com</a></p>
+      <p>Seratina &copy; 2026 &bull; <a href="index.html">Home</a> &bull; <a href="privacy.html">Informativa Privacy</a> &bull; <a href="terms.html">Termini di Servizio</a> &bull; <a href="delete-account.html">Cancellazione Account</a> &bull; <a href="mailto:info@seratina.org">info@seratina.org</a></p>
     </footer>
   </div>
 
@@ -329,13 +335,13 @@
           form.reset();
         } else {
           const errData = await res.json().catch(() => ({}));
-          const errMsg = errData.detail || "Si è verificato un errore durante l'invio. Riprova o scrivici direttamente a seratinaclub@gmail.com.";
+          const errMsg = errData.detail || "Si è verificato un errore durante l'invio. Riprova o scrivici direttamente a info@seratina.org.";
           alertBox.textContent = errMsg;
           alertBox.className = 'alert-box error';
           alertBox.style.display = 'block';
         }
       } catch (err) {
-        alertBox.textContent = "Impossibile completare l'invio. Verifica la connessione o scrivici direttamente a seratinaclub@gmail.com.";
+        alertBox.textContent = "Impossibile completare l'invio. Verifica la connessione o scrivici direttamente a info@seratina.org.";
         alertBox.className = 'alert-box error';
         alertBox.style.display = 'block';
       } finally {

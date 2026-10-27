@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://avengersdevdreamteam.github.io/SeratinaWeb/sitemap.xml
+Sitemap: https://seratina.org/sitemap.xml

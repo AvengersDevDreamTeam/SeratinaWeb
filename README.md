@@ -52,6 +52,9 @@ npx serve .
    - **Branch**: `main` / `/(root)`
    - Clicca **Save**.
 4. In pochi secondi il sito sarà accessibile all'indirizzo:
-   `https://avengersdevdreamteam.github.io/SeratinaWeb/`
+   - Sotto **Custom domain**, inserisci `seratina.org` e clicca **Save**.
+   - Spunta **Enforce HTTPS** non appena il certificato TLS viene rilasciato.
+4. Il sito è accessibile ufficialmente all'indirizzo:
+   `https://seratina.org/`
 
-*(Opzionale: se in futuro collegherete un dominio custom come `seratina.it`, basterà inserirlo in "Custom domain" nella stessa schermata).*
+

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diventa Tester di Seratina 🚀 | Android Closed Beta</title>
+  <meta name="description" content="Diventa tester di Seratina su Google Play in 3 semplici passaggi e scopri le serate vicino a te in anteprima.">
+  
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              pink: '#E86D80',
+              pinkHover: '#d8586c',
+              purple: '#6366F1',
+              dark: '#070512',
+              card: '#0F172A',
+              border: '#1E293B',
+              muted: '#94A3B8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #070512;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 60%, rgba(232, 109, 128, 0.16) 0%, transparent 45%);
+      min-height: 100vh;
+    }
+    .step-card {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(11, 15, 23, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #FFFFFF 20%, #E86D80 60%, #A855F7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="font-sans text-slate-100 flex flex-col justify-between p-4 sm:p-6 antialiased">
+
+  <!-- Header -->
+  <header class="max-w-md mx-auto w-full pt-6 pb-4 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-pink/10 border border-brand-pink/30 text-brand-pink text-xs font-bold uppercase tracking-wider mb-4">
+      <span class="w-2 h-2 rounded-full bg-brand-pink animate-pulse"></span>
+      Google Play • Closed Beta
+    </div>
+    
+    <div class="flex items-center justify-center gap-3 mb-2">
+      <img src="assets/logo.png" alt="Seratina Logo" class="w-10 h-10 object-contain drop-shadow-[0_0_15px_rgba(232,109,128,0.5)]">
+      <h1 class="font-display font-extrabold text-3xl tracking-tight text-white">Seratina</h1>
+    </div>
+
+    <p class="text-sm text-slate-400 max-w-xs mx-auto leading-relaxed">
+      Aiutaci a testare l'app della notte prima del lancio ufficiale. Completa i 3 passaggi qui sotto:
+    </p>
+  </header>
+
+  <!-- Main Steps Section -->
+  <main class="max-w-md mx-auto w-full space-y-4 my-auto py-2">
+
+    <!-- Step 1 -->
+    <div class="step-card rounded-2xl p-5 shadow-xl transition-all border-l-4 border-l-blue-500 hover:border-l-blue-400">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-display font-black text-lg shrink-0">
+          1
+        </div>
+        <div class="flex-1">
+          <h2 class="font-display font-bold text-base text-white mb-1">Entra nel Gruppo Google</h2>
+          <p class="text-xs text-slate-400 leading-normal mb-3">
+            Necessario per autorizzare il tuo account Google all'accesso speciale su Google Play.
+          </p>
+          <a href="https://groups.google.com/g/testseratina" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-blue-600/30 active:scale-[0.98]">
+            <span>Iscriviti al Gruppo</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-card rounded-2xl p-5 shadow-xl transition-all border-l-4 border-l-purple-500 hover:border-l-purple-400">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-display font-black text-lg shrink-0">
+          2
+        </div>
+        <div class="flex-1">
+          <h2 class="font-display font-bold text-base text-white mb-1">Diventa Tester Google Play</h2>
+          <p class="text-xs text-slate-400 leading-normal mb-3">
+            Clicca sul link e premi il pulsante <b>"Diventa un tester"</b> (Become a tester).
+          </p>
+          <a href="https://play.google.com/apps/testing/com.seratinaclub.seratina" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-purple-600/30 active:scale-[0.98]">
+            <span>Accetta Invito Test</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-card rounded-2xl p-5 shadow-xl transition-all border-l-4 border-l-brand-pink hover:border-l-pink-400">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-brand-pink/20 text-brand-pink flex items-center justify-center font-display font-black text-lg shrink-0">
+          3
+        </div>
+        <div class="flex-1">
+          <h2 class="font-display font-bold text-base text-white mb-1">Scarica l'App dal Play Store</h2>
+          <p class="text-xs text-slate-400 leading-normal mb-3">
+            Installa l'app ufficiale e scopri tutte le migliori serate ed eventi vicino a te!
+          </p>
+          <a href="https://play.google.com/store/apps/details?id=com.seratinaclub.seratina" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-brand-pink to-rose-500 hover:from-brand-pinkHover hover:to-rose-600 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-brand-pink/30 active:scale-[0.98]">
+            <span>Scarica Seratina</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-md mx-auto w-full text-center py-4 text-xs text-slate-500">
+    <p>Hai problemi con il test? Scrivici su Instagram <a href="https://instagram.com/seratinaclub" class="text-brand-pink hover:underline font-medium">@seratinaclub</a></p>
+    <p class="mt-1 text-[11px] text-slate-600">© 2026 Seratina • 100% Gratuito</p>
+  </footer>
+
+</body>
+</html>

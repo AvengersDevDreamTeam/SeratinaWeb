@@ -25,6 +25,7 @@ Per l'architettura complessiva dell'ecosistema, consultare:
 | **`delete-account.html`** | Pagina obbligatoria per le policy di Google Play e Apple per la richiesta di cancellazione dell'account da web per utenti privi dell'app installata. | `DELETE /users/me` (oppure invio modulo assistito) |
 | **`gestori.html`** | Area dedicata ai titolari e gestori dei locali per la verifica o correzione dei dati, rivendicazione della scheda o esercizio del diritto di opposizione (Opt-Out GDPR Art. 21). | `POST /gestori/richiesta` (con audit log su Supabase e notifica Telegram) |
 | **`unsubscribe.html`** | Pagina di disiscrizione 1-click dalla newsletter settimanale per utenti che cliccano sul link in calce alle email di Brevo (`?token=...`). | `POST /newsletter/unsubscribe` |
+| **`test.html`** | Pagina di onboarding per i beta tester: istruzioni in 3 passaggi (Gruppo Google, opt-in Google Play Closed Beta, download da Play Store). | Link esterni e deep link store (nessun endpoint backend) |
 
 ---
 

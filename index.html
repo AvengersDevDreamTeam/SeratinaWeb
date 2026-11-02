@@ -160,9 +160,10 @@
       </nav>
 
       <div class="flex items-center gap-3">
-        <a href="#download" class="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-brand-card border border-brand-pink/40 text-brand-pink hover:bg-brand-pink hover:text-white transition-all shadow-sm hover:shadow-brand-pink/20 hover:shadow-md hover:scale-105 active:scale-95">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2"></span>
-          In arrivo
+        <a href="test.html" class="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-brand-pink/15 border border-brand-pink/50 text-white hover:bg-brand-pink transition-all shadow-sm hover:shadow-brand-pink/20 hover:shadow-md hover:scale-105 active:scale-95 group">
+          <span class="w-2 h-2 rounded-full bg-brand-pink animate-pulse mr-2"></span>
+          <span>Accedi al Test</span>
+          <span class="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-brand-pink group-hover:bg-white group-hover:text-brand-pink text-white font-bold uppercase tracking-wider transition-colors">Beta</span>
         </a>
       </div>
     </div>
@@ -219,19 +220,24 @@
               <span class="absolute -top-2 -right-2 bg-brand-pink text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">Coming Soon</span>
             </div>
 
-            <!-- Google Play Badge -->
-            <div class="relative group w-full sm:w-auto">
-              <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-slate-900/90 border border-brand-border/80 shadow-md cursor-default transition-all group-hover:border-brand-purple/50">
+            <!-- Google Play Badge (Links directly to closed beta test) -->
+            <a href="test.html" class="relative group w-full sm:w-auto block transition-transform hover:scale-[1.02] active:scale-95" title="Accedi alla closed beta su Google Play">
+              <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-slate-900/90 border border-brand-purple/70 shadow-md transition-all group-hover:border-brand-pink group-hover:bg-slate-900">
                 <svg class="w-7 h-7 text-white fill-current shrink-0" viewBox="0 0 24 24">
                   <path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/>
                 </svg>
                 <div class="text-left">
-                  <div class="text-[10px] uppercase font-semibold text-slate-400">Presto disponibile su</div>
-                  <div class="text-sm font-bold text-white leading-tight">Google Play</div>
+                  <div class="text-[10px] uppercase font-semibold text-brand-pink flex items-center gap-1">
+                    <span>Partecipa al Test</span>
+                  </div>
+                  <div class="text-sm font-bold text-white leading-tight flex items-center gap-1.5">
+                    <span>Google Play</span>
+                    <svg class="w-3.5 h-3.5 text-brand-pink group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </div>
                 </div>
               </div>
-              <span class="absolute -top-2 -right-2 bg-brand-purple text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">Coming Soon</span>
-            </div>
+              <span class="absolute -top-2 -right-2 bg-gradient-to-r from-brand-pink to-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow animate-pulse">Test Attivo</span>
+            </a>
 
           </div>
         </div>
@@ -631,8 +637,9 @@
           <a href="mailto:info@seratina.org?subject=Collaborazione%20Seratina" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-pink hover:bg-brand-pinkHover text-white font-bold text-sm transition-all duration-200 shadow-lg hover:shadow-brand-pink/30 hover:scale-105 active:scale-95">
             Scrivici un'email
           </a>
-          <a href="#download" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-sm transition-all duration-200 hover:scale-105 active:scale-95">
-            Scopri lo stato dell'app
+          <a href="test.html" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 inline-flex items-center justify-center gap-2 border border-slate-700 hover:border-brand-pink/50">
+            <span>Accedi alla fase di test</span>
+            <svg class="w-4 h-4 text-brand-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
         </div>
       </div>
@@ -653,6 +660,9 @@
       </div>
 
       <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm">
+        <a href="test.html" class="text-brand-pink hover:underline font-semibold flex items-center gap-1">
+          <span>🚀</span> Diventa Tester (Beta)
+        </a>
         <a href="privacy.html" class="hover:text-brand-pink transition-colors">Privacy</a>
         <a href="terms.html" class="hover:text-brand-pink transition-colors">Termini di Servizio</a>
         <a href="gestori.html" class="hover:text-brand-pink transition-colors">Area Gestori</a>

@@ -35,6 +35,7 @@ Landing page ufficiale (`https://seratina.org`), portale legale e area gestori p
 | **`delete-account.html`** | Cancellazione Account | Guida e modulo obbligatorio per le policy Google Play e Apple. |
 | **`gestori.html`** | Area Gestori Locali | Modulo asincrono per i titolari di locali (aggiornamento scheda o opt-out) con invio a `POST /gestori/richiesta`. |
 | **`unsubscribe.html`** | Disiscrizione Newsletter | Pagina statica di disiscrizione 1-click a norma GDPR con chiamata `POST /newsletter/unsubscribe`. |
+| **`test.html`** | Closed Beta & Testing Android | Guida in 3 passaggi per iscriversi al Gruppo Google, accettare l'invito su Google Play e scaricare la Closed Beta. |
 
 ---
 

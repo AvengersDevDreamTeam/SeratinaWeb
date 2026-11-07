@@ -15,4 +15,4 @@ I file WebP conservano il primo viewport della cattura, senza ricostruire l'inte
 
 `event-cover.webp` è il ritaglio della locandina nella cattura del dettaglio e viene usato solo come fallback per il popup evento.
 
-`../../videos/seratina-ui.mp4`: anteprima silenziosa H.264 di 8 secondi, 1280 × 800, circa 440 KiB. Alterna le schermate desktop Eventi e Mappa con dissolvenze. Non è una registrazione di interazioni. Font Outfit 400/500/600 copiati dai file locali dell'app, con licenza OFL conservata in `assets/fonts`.
+`../../videos/seratina-ui.mp4` contiene un montaggio silenzioso di 8 secondi in H.264, a 390 × 844 e circa 238 KiB. Alterna `events-mobile.webp` e `map-mobile.webp` con dissolvenze. I font Outfit 400/500/600 provengono dai file locali dell’app, con licenza OFL in `assets/fonts`.

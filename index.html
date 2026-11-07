@@ -154,19 +154,20 @@
                 >
               </div>
             </div>
-            <div class="hero__art showcase frame span-6 start-7">
-              <div class="showcase__window">
+            <div class="hero__art showcase span-6 start-7">
+              <div class="showcase__phone">
                 <video
                   id="app-video"
-                  width="1280" height="800"
-                  poster="assets/screenshots/current/events-desktop.webp"
+                  width="390" height="844"
+                  poster="assets/screenshots/current/events-mobile.webp"
                   muted loop playsinline controls preload="metadata"
-                  aria-label="Anteprima della nuova interfaccia Seratina: eventi e mappa"
+                  aria-label="Anteprima di Seratina su smartphone: eventi e mappa"
                   aria-describedby="video-description"
                 >
                   <source src="assets/videos/seratina-ui.mp4" type="video/mp4" />
                   Il browser non supporta il video. Puoi esplorare le schermate qui sotto.
                 </video>
+              </div>
               <div class="showcase__controls" role="group" aria-label="Controlli del video">
                 <span id="video-time" class="showcase__time" aria-hidden="true">0:00 / 0:08</span>
                 <button id="video-toggle" class="video-toggle" type="button" aria-controls="app-video" hidden>
@@ -176,8 +177,7 @@
                   </svg>
                   <span>Riproduci anteprima</span>
                 </button>
-              </div>
-              <progress id="video-progress" max="1" value="0" aria-hidden="true"></progress>
+                <progress id="video-progress" max="1" value="0" aria-hidden="true"></progress>
               </div>
               <p id="video-description" class="sr-only">Breve anteprima senza audio delle schermate attuali. Esplora eventi e mappa anche nelle immagini della sezione successiva.</p>
               <p id="video-status" class="sr-only" role="status"></p>
@@ -226,7 +226,6 @@
       <section
         class="section ground-inverse"
         id="funzionalita"
-        style="--hm: 2"
         aria-labelledby="features-h"
       >
         <div class="wrap">
@@ -244,49 +243,41 @@
               calendario restano nello stesso posto.
             </p>
           </div>
-          <div class="grid feature-pair fill">
-            <article class="feature-item span-6">
-              <div class="feature-copy">
-                <span class="mono t-label">01 / L’evento</span>
-                <h3>Gli orari, il locale, l’ingresso.</h3>
-                <p>Apri la scheda e trova le informazioni prima di partire.</p>
-              </div>
-              <a
-                href="test.html"
-                class="feature-screen frame m-zoom"
-                aria-label="Prova Seratina e consulta i dettagli degli eventi"
-                ><img
-                  src="assets/screenshots/current/detail-mobile.webp"
-                  width="390"
-                  height="844"
-                  alt="Nuova scheda evento Seratina, con copertina, locale e informazioni della serata"
-                  loading="lazy"
-                  decoding="async"
-                  data-source="client"
-                  data-subject="Seratina event detail"
-              /></a>
-            </article>
-            <article class="feature-item span-6">
-              <div class="feature-copy">
-                <span class="mono t-label">02 / Il calendario</span>
-                <h3>Il weekend, organizzato.</h3>
-                <p>Salva le serate e aggiungi un promemoria al calendario.</p>
-              </div>
-              <a
-                href="test.html"
-                class="feature-screen frame m-zoom"
-                aria-label="Prova Seratina e organizza le serate nel calendario"
-                ><img
-                  src="assets/screenshots/current/calendar-mobile.webp"
-                  width="390"
-                  height="844"
-                  alt="Calendario delle serate nell’app Seratina"
-                  loading="lazy"
-                  decoding="async"
-                  data-source="client"
-                  data-subject="Seratina calendar"
-              /></a>
-            </article>
+          <div class="feature-screens fill">
+            <img
+              src="assets/screenshots/current/map-mobile.webp"
+              width="390"
+              height="844"
+              alt="Mappa mobile di Seratina con gli eventi nelle vicinanze"
+              loading="lazy"
+              decoding="async"
+              data-source="client"
+              data-subject="Seratina event map"
+            />
+            <a href="test.html" class="m-zoom" aria-label="Prova Seratina e consulta i dettagli degli eventi">
+              <img
+                src="assets/screenshots/current/detail-mobile.webp"
+                width="390"
+                height="844"
+                alt="Scheda evento con copertina, orari, luogo e prezzo d’ingresso"
+                loading="lazy"
+                decoding="async"
+                data-source="client"
+                data-subject="Seratina event detail"
+              />
+            </a>
+            <a href="test.html" class="m-zoom" aria-label="Prova Seratina e organizza le serate nel calendario">
+              <img
+                src="assets/screenshots/current/calendar-mobile.webp"
+                width="390"
+                height="844"
+                alt="Calendario delle serate nell’app Seratina"
+                loading="lazy"
+                decoding="async"
+                data-source="client"
+                data-subject="Seratina calendar"
+              />
+            </a>
           </div>
         </div>
       </section>

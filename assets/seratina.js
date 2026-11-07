@@ -22,6 +22,77 @@
   });
 })();
 
+// The control reflects HTMLMediaElement events, including a rejected autoplay.
+(() => {
+  const video = document.getElementById('app-video');
+  const button = document.getElementById('video-toggle');
+  if (!video || !button) return;
+  const progress = document.getElementById('video-progress');
+  const time = document.getElementById('video-time');
+  const status = document.getElementById('video-status');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let userPaused = false;
+  let inView = false;
+  let manualPlay = false;
+  let request = 0;
+  const canRun = () => inView && !document.hidden && !userPaused && (!reduced.matches || manualPlay);
+  function sync() {
+    const playing = !video.paused && !video.ended;
+    button.dataset.playing = String(playing);
+    const label = playing ? 'Metti in pausa' : 'Riproduci anteprima';
+    button.querySelector('span').textContent = label;
+    button.setAttribute('aria-label', label);
+  }
+  async function play() {
+    const current = ++request;
+    try {
+      await video.play();
+      if (current !== request || !canRun()) video.pause();
+    } catch (error) {
+      // Autoplay may require a click. The poster and play button remain usable.
+      if (error.name !== 'AbortError') sync();
+    }
+  }
+  function reconcile() {
+    if (canRun()) void play();
+    else { request++; video.pause(); }
+  }
+  button.hidden = false;
+  video.controls = false;
+  button.addEventListener('click', () => {
+    if (video.paused) {
+      userPaused = false;
+      manualPlay = true;
+      void play();
+    } else {
+      userPaused = true;
+      request++;
+      video.pause();
+    }
+  });
+  ['playing', 'pause', 'ended', 'emptied'].forEach(name => video.addEventListener(name, sync));
+  const formatTime = seconds => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+  function updateTime() {
+    progress.value = Number.isFinite(video.duration) && video.duration > 0 ? video.currentTime / video.duration : 0;
+    time.textContent = `${formatTime(video.currentTime)} / ${formatTime(Number.isFinite(video.duration) ? video.duration : 8)}`;
+  }
+  video.addEventListener('timeupdate', updateTime);
+  video.addEventListener('loadedmetadata', updateTime);
+  video.addEventListener('error', () => {
+    button.hidden = true;
+    video.controls = true;
+    status.classList.remove('sr-only');
+    status.textContent = 'Video non disponibile. Le schermate dell’app sono nella sezione successiva.';
+  });
+  new IntersectionObserver(entries => {
+    inView = entries[0].isIntersecting;
+    reconcile();
+  }, { threshold: 0.1 }).observe(video);
+  document.addEventListener('visibilitychange', reconcile);
+  reduced.addEventListener('change', () => { manualPlay = false; reconcile(); });
+  sync();
+})();
+
 (() => {
   const root = document.documentElement;
   const toggle = document.getElementById("theme-toggle");

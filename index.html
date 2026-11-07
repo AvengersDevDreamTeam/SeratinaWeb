@@ -53,7 +53,7 @@
   </head>
   <body>
     <!-- software; collage / Outfit / client ink-bone-magenta-mint / nav-centre /
-     close-word / footer-columns / space / solid / round; current app captures in hero; liquid-type on the details headline.
+     close-word / footer-columns / space / solid / round; native video from current app captures in hero; liquid-type on the details headline.
      Product visuals captured from the redesigned Seratina app, 6 November 2026. Existing API flows retained. -->
     <header class="nav nav--centre">
       <div class="wrap nav__bar">
@@ -156,14 +156,31 @@
             </div>
             <div class="hero__art showcase frame span-6 start-7">
               <div class="showcase__window">
-                <img
-                  src="assets/screenshots/current/events-desktop.webp"
-                  width="1440" height="900"
-                  alt="La nuova interfaccia Seratina con gli eventi in primo piano"
-                  fetchpriority="high"
-                  data-source="client" data-subject="Seratina events"
-                />
+                <video
+                  id="app-video"
+                  width="1280" height="800"
+                  poster="assets/screenshots/current/events-desktop.webp"
+                  muted loop playsinline controls preload="metadata"
+                  aria-label="Anteprima della nuova interfaccia Seratina: eventi e mappa"
+                  aria-describedby="video-description"
+                >
+                  <source src="assets/videos/seratina-ui.mp4" type="video/mp4" />
+                  Il browser non supporta il video. Puoi esplorare le schermate qui sotto.
+                </video>
+              <div class="showcase__controls" role="group" aria-label="Controlli del video">
+                <span id="video-time" class="showcase__time" aria-hidden="true">0:00 / 0:08</span>
+                <button id="video-toggle" class="video-toggle" type="button" aria-controls="app-video" hidden>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <path class="video-toggle__play" d="m8 5 11 7-11 7z" fill="currentColor" />
+                    <path class="video-toggle__pause" d="M7 5h3v14H7zm7 0h3v14h-3z" fill="currentColor" />
+                  </svg>
+                  <span>Riproduci anteprima</span>
+                </button>
               </div>
+              <progress id="video-progress" max="1" value="0" aria-hidden="true"></progress>
+              </div>
+              <p id="video-description" class="sr-only">Breve anteprima senza audio delle schermate attuali. Esplora eventi e mappa anche nelle immagini della sezione successiva.</p>
+              <p id="video-status" class="sr-only" role="status"></p>
             </div>
           </div>
         </div>

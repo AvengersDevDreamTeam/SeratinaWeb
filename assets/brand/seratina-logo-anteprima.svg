@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Seratina — simbolo</title>
+  <desc id="desc">Calice da cocktail magenta con bordo ellittico, coppa curva e piede raccordato. Una luna crescente, ruotata leggermente a sinistra, è centrata sullo stecchino continuo, visibile nella sua apertura. La punta sporge in alto e il tratto nella coppa è attenuato dal vetro.</desc>
+  <rect width="256" height="256" rx="28" fill="#0F0F14"/>
+  <g id="symbol" transform="translate(8 4)">
+    <!-- Coppa, stelo e piede: un unico contorno curvo; apertura del bordo trasparente. -->
+    <path id="glass" fill="#FF3D8B" fill-rule="evenodd" d="M28 104C28 96 70 91 120 91C170 91 212 96 212 104C212 113 199 131 181 146C167 158 151 167 137 173C129 177 125 182 125 191V210C125 219 133 223 146 226C156 228 163 230 163 233C163 237 144 240 120 240C96 240 77 237 77 233C77 230 84 228 94 226C107 223 115 219 115 210V191C115 182 111 177 103 173C89 167 73 158 59 146C41 131 28 113 28 104ZM39 103C39 99 75 97 120 97C165 97 201 99 201 103C201 107 165 111 120 111C75 111 39 107 39 103Z"/>
+    <g id="moon-pick" fill="#F2EFE9">
+      <!-- Il tratto nella coppa resta visibile attraverso il vetro. -->
+      <path id="pick-inside" fill-opacity=".42" d="M134.0469 110.0H141.5065L115.8319 155.5947A3.25 3.25 0 0 1 110.1681 152.4053Z"/>
+      <!-- Stecchino continuo: visibile nell'apertura della luna e sopra lo spicchio. -->
+      <path id="pick-outside" d="M134.0469 110L191.7199 7.5806A3.25 3.25 0 0 1 197.3837 10.7699L141.5065 110Z"/>
+      <path id="moon" d="M183.0917 25.7455A28 28 0 1 0 196.4960 62.5737A22 22 0 1 1 183.0917 25.7455Z"/>
+    </g>
+  </g>
+</svg>

@@ -3,3 +3,6 @@ Thumbs.db
 *.log
 .vscode/
 .idea/
+
+# Local design checks, screenshots and deal history
+.taste-skill/

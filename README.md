@@ -16,12 +16,12 @@ Landing page ufficiale (`https://seratina.org`), portale legale e area gestori p
 
 ## Caratteristiche Principali
 
-- **Zero Build Step, Zero Dipendenze npm**: Pagine HTML5 native e responsive stilizzate con Tailwind CSS tramite CDN compilato.
+- **Zero Build Step, Zero Dipendenze npm**: Pagine HTML5 native e responsive con fogli di stile e moduli vanilla in `assets/` (`system.*`, `layout/layout.*`, `motion/motion.*`, `backgrounds/backgrounds.css`, `ui/ui.js`, `moments/pinned-chapters/`) e tipografia **Outfit** / **DM Mono**.
 - **Caricamento Istantaneo (<50ms TTFB)**: Erogazione globale tramite GitHub Pages Edge CDN su dominio personalizzato `seratina.org` con HTTPS forzato.
 - **SEO & Indicizzazione**: Include `robots.txt` e `sitemap.xml` per i motori di ricerca.
-- **Dark Mode Notturna**: Palette coerente con l'app mobile (`#E86D80`, `#6366F1`, `#0B0F17`).
-- **Sezione Newsletter Settimanale**: Box macrosezione in `index.html` con autocompletamento città (OpenStreetMap Nominatim), rilevamento coordinate GPS e integrazione diretta con `SeratinaBE`.
-- **Event Spotlight Modal (Deep Linking)**: Supporto a `?event=ID` per visualizzare un'anteprima interattiva popup della serata (locandina, orari, prezzi, locale) con pulsante per aprire l'app nativa (`seratina://event/{id}`) o scaricarla dagli store.
+- **Dark Mode Notturna**: Palette **Ink / Bone / Magenta / Mint** coerente con l'app mobile (`#0F0F14`, `#F2EFE9`, `#FF3D8B`, `#3DDC97`).
+- **Struttura Essenziale (`index.html`)**: Hero triptych animato (`Prova la Beta` -> `test.html`), griglia delle 4 schermate dell'app (`#anteprima`), chiusura integrata con iscrizione alla newsletter del giovedì (`#newsletter`, autocompletamento OpenStreetMap Nominatim + GPS) e link legali/piattaforma nel footer.
+- **Event Spotlight Modal (Deep Linking)**: Supporto a `?event=ID` per visualizzare un'anteprima interattiva popup della serata (locandina, orari, prezzi, locale) con pulsante per aprire l'app nativa (`seratina://event/{id}`) o passare alla beta (`test.html`).
 
 ---
 
@@ -29,7 +29,7 @@ Landing page ufficiale (`https://seratina.org`), portale legale e area gestori p
 
 | File | Scopo | Note |
 |---|---|---|
-| **`index.html`** | Landing page ufficiale & Anteprima Eventi | Presentazione app, mockup, badge Store e modal popup dinamico per anteprime eventi condivisi (`?event=ID`). |
+| **`index.html`** | Landing page ufficiale & Anteprima Eventi | Hero triptych, 4 schermate dell'app (`#anteprima`), iscrizione newsletter + footer (`#newsletter`) e modal popup per eventi condivisi (`?event=ID`). |
 | **`privacy.html`** | Informativa sulla Privacy | Conforme a GDPR (Art. 6.1.f, 17, 21), Apple App Store (5.1.1) e Google Play Data Safety. |
 | **`terms.html`** | Termini di Servizio | Condizioni di utilizzo e clausola di non responsabilità sui dati aggregati. |
 | **`delete-account.html`** | Cancellazione Account | Guida e modulo obbligatorio per le policy Google Play e Apple. |

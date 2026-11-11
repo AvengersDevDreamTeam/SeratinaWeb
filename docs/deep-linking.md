@@ -33,15 +33,15 @@ sequenceDiagram
     Web->>Web: Rileva parametro query ?event=...
     Web->>BE: fetch(GET /events/C7wKl81_1)
     BE-->>Web: JSON con titolo, data, venue, prezzo, immagine WebP
-    Web->>Web: Apre "Event Spotlight Modal" (overlay dark neon)
+    Web->>Web: Apre "Event Spotlight Modal" (overlay Ink/Bone/Magenta)
     
     alt Utente è su smartphone
         Web->>App: Tenta apertura protocollo seratina://event/C7wKl81_1
         opt App Non Installata
-            User->>Web: Clicca su "Scarica dall'App Store / Google Play"
+            User->>Web: Clicca su "Prova la Beta" (test.html)
         end
     else Utente è su Desktop
-        Web->>User: Mostra anteprima evento completa e QR Code per download
+        Web->>User: Mostra anteprima evento completa
     end
 ```
 
@@ -52,10 +52,10 @@ sequenceDiagram
 All'apertura della landing page con il parametro `?event=ID`:
 1. **Fetch dei Dati in Tempo Reale**: il client invoca in modo trasparente `GET /events/{id}` su `SeratinaBE`.
 2. **Presentazione Grafica Notturna**:
-   - Locandina evento a tutta altezza con effetto *ambient blur* sullo sfondo (`backdrop-blur-xl`).
-   - Badge neon di categoria (`Club`, `Musica`, `Aperitivo`, `Festival`, `Arte`).
+   - Locandina evento con bordi coerenti con il sistema **Ink / Bone / Magenta / Mint**.
+   - Badge di categoria (`Club`, `Musica`, `Aperitivo`, `Festival`, `Arte`).
    - Data formattata in italiano, orario di inizio, nome del locale e indirizzo.
    - Badge del prezzo (`Da €X` o `Omaggio`).
 3. **Pulsante Primario Call-to-Action**:
-   - Su dispositivi mobili: *"Apri nell'App Seratina"* (con link a `seratina://event/{id}`).
-   - Fallback secondario: badge ufficiali di download da Apple App Store e Google Play Store.
+   - *"Apri nell'App Seratina"* (tentativo deep link `seratina://event/{id}` / `intent://` su Android).
+   - Fallback secondario: pulsante *"Prova la Beta"* verso `test.html` (Apple TestFlight e Google Play Closed Beta).

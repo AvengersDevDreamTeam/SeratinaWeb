@@ -13,10 +13,60 @@
   <meta property="og:description" content="Mappa dal vivo, calendario mensile e schede con orari e ingressi in tutta Italia.">
   <meta property="og:image" content="https://seratina.org/assets/share.jpg">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Seratina: eventi, club e locali vicino a te">
+  <meta name="twitter:description" content="Mappa dal vivo, calendario mensile e schede con orari e ingressi in tutta Italia.">
+  <meta name="twitter:image" content="https://seratina.org/assets/share.jpg">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <meta name="theme-color" content="#0f0f14">
   <meta name="site-kind" content="software">
   <meta name="page-type" content="software">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://seratina.org/#organization",
+        "name": "Seratina",
+        "url": "https://seratina.org/",
+        "logo": "https://seratina.org/assets/logo.png",
+        "description": "Piattaforma e applicazione mobile per scoprire eventi, club, discoteche e serate in tutta Italia.",
+        "sameAs": [
+          "https://www.tiktok.com/@seratina.org"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://seratina.org/#website",
+        "url": "https://seratina.org/",
+        "name": "Seratina",
+        "publisher": { "@id": "https://seratina.org/#organization" },
+        "inLanguage": "it-IT"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://seratina.org/#app",
+        "name": "Seratina",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "EntertainmentApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR"
+        },
+        "description": "Mappa live, calendario serate e schede con orari e ingressi di club e discoteche in tutta Italia.",
+        "image": "https://seratina.org/assets/share.jpg",
+        "screenshot": [
+          "https://seratina.org/assets/screenshots/web-1-home-760.webp",
+          "https://seratina.org/assets/screenshots/web-2-map-760.webp",
+          "https://seratina.org/assets/screenshots/web-3-detail-760.webp",
+          "https://seratina.org/assets/screenshots/web-4-calendar-760.webp"
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -702,6 +752,7 @@
       <span>seratina<span class="dot-accent">.</span></span>
     </a>
     <nav class="nav__links" aria-label="Principale">
+      <div class="nav__item"><a class="nav__link" href="eventi.html">Eventi</a></div>
       <div class="nav__item"><a class="nav__link" href="#anteprima">Schermate</a></div>
       <div class="nav__item"><a class="nav__link" href="#newsletter">Newsletter</a></div>
       <div class="nav__item"><a class="nav__link" href="gestori.html">Gestori</a></div>
@@ -914,6 +965,59 @@
       <div class="mo-pc__visuals frame"></div>
     </div>
   </section>
+
+  <!-- 2.5 Guida Seratina & Vita Notturna in Italia -->
+  <section class="section seo-guide" id="scopri" aria-labelledby="scopri-h" style="padding-block: clamp(64px, 8vw, 110px); border-top: 1px solid rgba(242, 239, 233, 0.08);">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom: var(--s-7); max-width: 760px;">
+        <h2 id="scopri-h" style="font-size: clamp(26px, 3.8vw, 42px); line-height: 1.15; letter-spacing: -0.03em;">Tutta la vita notturna a portata di mappa<span class="dot-accent">.</span></h2>
+        <p style="color: var(--p-muted); font-size: clamp(15px, 1.8vw, 18px); margin-top: 12px; line-height: 1.5;">Seratina raccoglie serate, club, discoteche, concerti ed eventi speciali in tutta Italia. Dalla musica elettronica ai format commerciali, scopri cosa succede stasera vicino a te con orari, prezzi e indicazioni stradali in tempo reale.</p>
+      </div>
+
+      <div class="grid" style="row-gap: var(--s-6); margin-bottom: var(--s-8);">
+        <div class="span-4 card" style="background: var(--p-surface); border: 1px solid rgba(242, 239, 233, 0.1); border-radius: var(--r-md); padding: var(--s-5);">
+          <div style="color: var(--p-accent); font-size: 20px; font-weight: 600; margin-bottom: 8px;">Mappa e Distanza Reale</div>
+          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Ogni serata e locale è posizionato sulla mappa interattiva con la distanza chilometrica reale calcolata automaticamente dalla tua posizione.</p>
+        </div>
+
+        <div class="span-4 card" style="background: var(--p-surface); border: 1px solid rgba(242, 239, 233, 0.1); border-radius: var(--r-md); padding: var(--s-5);">
+          <div style="color: var(--seratina-mint); font-size: 20px; font-weight: 600; margin-bottom: 8px;">Tutti i Generi Musicali</div>
+          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Dalla Techno, House ed Elettronica a Reggaeton, Commerciale, Hip-Hop, Indie, Rock e serate con musica dal vivo: filtra rapidamente in base ai tuoi gusti.</p>
+        </div>
+
+        <div class="span-4 card" style="background: var(--p-surface); border: 1px solid rgba(242, 239, 233, 0.1); border-radius: var(--r-md); padding: var(--s-5);">
+          <div style="color: var(--p-ink); font-size: 20px; font-weight: 600; margin-bottom: 8px;">Orari, Prezzi e Liste</div>
+          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Consulta le schede dettagliate con costi d'ingresso, orari di apertura e chiusura, canali ufficiali e link rapidi per aggiungere le serate al calendario.</p>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top: var(--s-8); margin-bottom: var(--s-6);">
+        <h3 style="font-size: clamp(20px, 2.6vw, 28px); letter-spacing: -0.02em;">Domande Frequenti su Seratina<span class="dot-accent">.</span></h3>
+      </div>
+
+      <div class="grid" style="row-gap: var(--s-5);">
+        <div class="span-6 stack-2">
+          <strong style="color: var(--p-ink); font-size: 16px; display: block;">Come funziona Seratina per trovare serate oggi o nel weekend?</strong>
+          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Apri l'app o il sito, attiva la geolocalizzazione o seleziona la tua città. La mappa e il feed mostrano istantaneamente tutti gli eventi in programma con orari, distanze e scheda del locale.</p>
+        </div>
+
+        <div class="span-6 stack-2">
+          <strong style="color: var(--p-ink); font-size: 16px; display: block;">L'app Seratina è gratuita?</strong>
+          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Sì, Seratina è 100% gratuita sia su iOS che su Android. Non è richiesta alcuna carta di credito e puoi esplorare gli eventi anche come ospite senza registrarti.</p>
+        </div>
+
+        <div class="span-6 stack-2">
+          <strong style="color: var(--p-ink); font-size: 16px; display: block;">In quali città è attiva Seratina?</strong>
+          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Seratina copre tutta Italia da Nord a Sud su tutte le 20 regioni: dalle grandi città alle mete della nightlife costiera e provinciale, con club e serate sempre aggiornati sulla mappa dal vivo.</p>
+        </div>
+
+        <div class="span-6 stack-2">
+          <strong style="color: var(--p-ink); font-size: 16px; display: block;">Come posso aggiornare o inserire un locale se sono un gestore?</strong>
+          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">I titolari possono accedere all'<a href="gestori.html" class="link" style="color: var(--p-accent); text-decoration: underline;">Area Gestori</a> per verificare o modificare le informazioni della propria scheda o per esercitare il diritto di opposizione conforme a GDPR.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- 3. Newsletter & Footer (closing, 1 screen) -->
@@ -1006,6 +1110,7 @@
         <div class="span-3 start-7 footer__col">
           <h3>Piattaforma</h3>
           <ul>
+            <li><a href="eventi.html">Cerca Eventi</a></li>
             <li><a href="test.html">Prova la Beta</a></li>
             <li><a href="gestori.html">Area Gestori</a></li>
           </ul>
@@ -1026,6 +1131,7 @@
         <div class="footer__legal-links" style="display:flex;flex-wrap:wrap;gap:0 16px;align-items:center;">
           <a href="privacy.html">Privacy</a>
           <a href="terms.html">Termini</a>
+          <a href="https://www.tiktok.com/@seratina.org" target="_blank" rel="noopener noreferrer">TikTok</a>
           <a href="mailto:info@seratina.org">info@seratina.org</a>
         </div>
       </div>

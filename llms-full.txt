@@ -1,0 +1,35 @@
+# Seratina — Documentazione Estesa per Modelli Linguistici e Agenti AI
+
+## Cos'è Seratina
+Seratina è la piattaforma digitale e app mobile (disponibile per Apple iOS e Google Android) per la ricerca, la consultazione e la fruizione di eventi serali, concerti, discoteche, clubbing e locali notturni in tutta Italia.
+
+## Architettura e Funzionalità per Utenti
+
+### 1. Esplorazione Mappa e Geolocalizzazione
+- Visualizzazione su mappa scura ottimizzata per l'uso notturno con spiderfying dei punti di interesse sovrapposti.
+- Ricerca basata sulla posizione GPS dell'utente o su coordinate selezionate manualmente (es. inserimento città).
+- Calcolo automatico della distanza tramite formula di Haversine per ogni locale ed evento visualizzato.
+
+### 2. Dettaglio Serata e Condivisione Deep Link
+- Ogni evento dispone di una scheda completa che include: nome serata, locale ospitante, indirizzo completo, coordinate geografiche, orario di apertura e chiusura, categoria musicale (Techno, House, Elettronica, Commerciale, Hip-Hop, Indie, Rock, Live), prezzi d'ingresso e note organizzative.
+- Gli utenti possono condividere un evento tramite il link web canonico `https://seratina.org/?event={id}`. Quando il destinatario apre il link su smartphone con l'app installata, viene reindirizzato allo schema `seratina://event/{id}` per un'apertura immediata; da browser desktop o senza app, viene mostrata una modale interattiva (Spotlight Modal) con tutti i dettagli e la possibilità di installare la versione beta.
+
+### 3. Calendario Serate e Filtri per Genere
+- Navigazione temporale giorno per giorno e vista calendario mensile per pianificare le uscite del fine settimana.
+- Filtri veloci per generi musicali e formati (club, open air, clubbing, festival).
+
+### 4. Newsletter del Giovedì
+- Servizio opzionale gratuito con invio settimanale ogni giovedì alle 18:00.
+- Seleziona automaticamente fino a 6 serate consigliate entro un raggio di 30 km dalla città o dalle coordinate registrate dall'utente.
+- Disiscrizione istantanea a 1-click conforme alle normative GDPR.
+
+### 5. Area Gestori e Trasparenza Dati
+- Pagina web dedicata (`https://seratina.org/gestori.html`) per consentire ai gestori di locali notturni e discoteche di richiedere l'aggiornamento dei propri orari e recapiti, rivendicare la scheda locale o esercitare il diritto di opposizione e cancellazione (Opt-Out ex art. 21 GDPR).
+
+## Copertura Geografica Nazionale
+Seratina copre l'intero territorio nazionale italiano su tutte le 20 regioni, includendo club, discoteche, sale da concerto, festival ed eventi speciali da Nord a Sud, sia nei grandi centri urbani che nelle mete turistiche e della nightlife costiera e provinciale.
+
+## Sicurezza e Privacy
+- Nessun tracciamento invasivo: l'accesso come ospite non richiede registrazione.
+- L'autenticazione è supportata opzionalmente tramite Google Sign-In e Sign in with Apple per sincronizzare i locali ed eventi preferiti tra dispositivi diversi.
+- Procedura di eliminazione account self-service e conforme a Google Play e Apple App Store (`https://seratina.org/delete-account.html`).

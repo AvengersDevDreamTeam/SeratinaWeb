@@ -1,0 +1,26 @@
+# Seratina
+
+> Seratina è la piattaforma e applicazione mobile (iOS e Android) dedicata alla scoperta della vita notturna, dei club, delle discoteche e degli eventi musicali e culturali in Italia.
+
+## Panoramica del Servizio
+
+Seratina offre un'esperienza fluida per esplorare la scena notturna italiana:
+- **Mappa Interattiva dal Vivo**: visualizzazione geolocalizzata dei club, festival e locali con filtri per genere musicale e data.
+- **Feed Eventi e Calendario Mensile**: programmazione delle serate ordinate per distanza chilometrica reale calcolata tramite geolocalizzazione GPS.
+- **Schede Complete di Ogni Serata**: orari ufficiali, tariffe d'ingresso, genere musicale, indicazioni stradali e aggiunta al calendario personale.
+- **Event Spotlight & Deep Linking**: condivisione universale di singoli eventi tramite URL web (`https://seratina.org/?event={id}`) con visualizzazione anteprima e apertura istantanea nell'app nativa (`seratina://event/{id}`).
+- **Newsletter Settimanale del Giovedì**: selezione personalizzata dei migliori eventi del fine settimana entro 30 km dall'utente.
+- **Area Gestori**: portale dedicato ai titolari di locali per la verifica o l'aggiornamento della propria scheda o per esercitare il diritto di opposizione (Opt-Out GDPR Art. 21).
+
+## Copertura Geografica
+
+Seratina copre l'intero territorio nazionale italiano su tutte le 20 regioni: club, discoteche, sale da concerto, festival ed eventi speciali in tutte le città e zone della nightlife italiana.
+
+## Link Principali
+
+- [Home Page Ufficiale](https://seratina.org/)
+- [Canale Ufficiale TikTok](https://www.tiktok.com/@seratina.org)
+- [Area Gestori Locali](https://seratina.org/gestori.html)
+- [Informativa sulla Privacy](https://seratina.org/privacy.html)
+- [Termini di Servizio](https://seratina.org/terms.html)
+- [Documentazione Estesa](https://seratina.org/llms-full.txt)

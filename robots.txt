@@ -1,4 +1,24 @@
 User-agent: *
 Allow: /
+Disallow: /test.html
+Disallow: /delete-account.html
+Disallow: /unsubscribe.html
+
+# AI Search & Assistive Crawlers (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
 
 Sitemap: https://seratina.org/sitemap.xml
+Sitemap: https://seratina-be-265028543407.europe-west8.run.app/events/sitemap.xml

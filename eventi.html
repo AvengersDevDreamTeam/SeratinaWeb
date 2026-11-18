@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it" data-type="software" data-theme="dark">
+<html lang="it" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -24,10 +24,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/system.css">
-  <link rel="stylesheet" href="assets/layout/layout.css">
 
   <script type="application/ld+json">
   {
@@ -50,125 +48,290 @@
 
   <style>
     :root {
-      --p-bg: #0f0f14;
-      --p-surface: #17161c;
-      --p-card: #1d1c21;
-      --p-card-hover: #232228;
-      --p-ink: #f2efe9;
-      --p-muted: #a3a0a8;
-      --p-accent: #ff3d8b;
-      --p-accent-hover: #e62e78;
-      --seratina-mint: #3ddc97;
-      --p-border: rgba(242, 239, 233, 0.12);
-      --font-display: "Outfit", system-ui, sans-serif;
-      --font-mono: "DM Mono", ui-monospace, monospace;
+      --p-bg: #0f0f14; --p-surface: #1d1c21; --p-ink: #f2efe9; --p-muted: #a3a0a8;
+      --p-accent: #ff3d8b; --p-accent-ink: #0f0f14; --p-action: #ff3d8b; --p-action-ink: #0f0f14;
+      --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+      --font-text: "Outfit", system-ui, -apple-system, sans-serif;
+      --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+      --display-weight: 400;
+      --display-tracking: -0.03em;
+      
+      --bg: #0f0f14;
+      --surface: #17161c;
+      --surface-card: #1c1b22;
+      --surface-elevated: #24232c;
+      --border: rgba(242, 239, 233, 0.08);
+      --border-focus: rgba(255, 61, 139, 0.5);
+      --ink: #f2efe9;
+      --muted: #a3a0a8;
+      --dim: #64606f;
+      --magenta: #ff3d8b;
+      --magenta-hover: #e62e78;
+      --mint: #3ddc97;
+
+      --nav-h: 72px;
+      --gut: 80px;
+      --dur: 180ms;
+      --ease: cubic-bezier(.2, .8, .2, 1);
     }
+    @media (max-width: 1023px) { :root { --nav-h: 64px; --gut: 32px; } }
+    @media (max-width: 639px) { :root { --nav-h: 56px; --gut: 16px; } }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--p-bg);
-      color: var(--p-ink);
-      font-family: var(--font-display);
+    html, body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-text);
       line-height: 1.5;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
 
     .wrap {
-      width: min(100% - 32px, 1160px);
+      width: min(100% - 2 * var(--gut), 1280px);
       margin-inline: auto;
     }
 
-    /* Header Nav */
-    header.site-header {
-      padding: 18px 0;
-      border-bottom: 1px solid var(--p-border);
-      position: sticky;
-      top: 0;
-      background: rgba(15, 15, 20, 0.94);
-      backdrop-filter: blur(12px);
-      z-index: 40;
+    /* Fixed navbar offset and flow resets */
+    body {
+      padding-top: var(--nav-h);
     }
+    main {
+      padding-top: 24px;
+      padding-bottom: 48px;
+    }
+    main,
+    main > section,
+    section.events-hero,
+    section.filter-panel {
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 0 !important;
+      display: block !important;
+    }
+
+    /* Site Header (Identical 1:1 match with index.html) */
+    header.site-header,
+    header.nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      height: var(--nav-h);
+      background: rgba(15, 15, 20, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__bar,
     .nav-inner {
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 32px;
     }
+    .nav__logo,
     .nav-logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 20px;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
       letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+      flex: none;
     }
+    .nav__logo img,
     .nav-logo img {
       width: 28px;
       height: 28px;
       border-radius: 7px;
+      flex: none;
     }
-    .dot-accent { color: var(--p-accent); }
+    .dot-accent { color: var(--magenta); }
+
+    .nav__links,
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 22px;
-      font-size: 14px;
-      color: var(--p-muted);
+      gap: 4px;
+      flex: 1;
+      justify-content: center;
     }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--p-ink);
+    .nav__item {
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
-    .btn-nav-app {
-      padding: 8px 18px;
+    .nav__link,
+    .nav-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 8px;
+      font-family: var(--font-text);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color var(--dur) var(--ease);
+    }
+    .nav__link:hover,
+    .nav__link:focus-visible,
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: #ffffff;
+    }
+    .nav__link::before,
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: -2px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform var(--dur) var(--ease);
+      pointer-events: none;
+    }
+    .nav__link:hover::before,
+    .nav__link:focus-visible::before,
+    .nav-link:hover::before,
+    .nav-link:focus-visible::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .nav__link[aria-current="page"]::after,
+    .nav-link[aria-current="page"]::after,
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: -2px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+    }
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: none;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       border-radius: 999px;
-      background: var(--p-accent);
-      color: #0f0f14;
-      font-size: 14px;
-      font-weight: 600;
-      transition: background 0.2s, transform 0.15s;
+      font-family: var(--font-text);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s, transform 0.15s;
     }
-    .btn-nav-app:hover {
-      background: var(--p-accent-hover);
+    .btn--primary {
+      background: var(--magenta);
+      color: #0f0f14;
+      height: 44px;
+      padding-inline: 24px;
+    }
+    .btn--primary:hover {
+      background: var(--magenta-hover);
       transform: translateY(-1px);
     }
+    .nav__toggle {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .nav__links,
+      .nav-links {
+        display: none;
+      }
+      .nav__actions .btn {
+        height: 38px;
+        padding-inline: 16px;
+        font-size: 13px;
+      }
+      .nav__logo,
+      .nav-logo {
+        font-size: 20px;
+      }
+    }
 
-    /* Hero / Search Section */
+    /* Hero compact */
     .events-hero {
-      padding: 36px 0 24px;
+      margin-top: 32px;
+      margin-bottom: 24px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--mint);
+      background: rgba(61, 220, 151, 0.1);
+      border: 1px solid rgba(61, 220, 151, 0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--mint);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--mint);
     }
     .events-hero h1 {
-      font-size: clamp(30px, 4.2vw, 48px);
+      font-size: clamp(28px, 4vw, 42px);
       letter-spacing: -0.03em;
       line-height: 1.15;
       margin-bottom: 8px;
+      font-weight: 700;
     }
     .events-hero p {
-      color: var(--p-muted);
-      font-size: clamp(15px, 1.8vw, 17px);
-      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(14px, 1.6vw, 16px);
+      max-width: 620px;
     }
 
-    /* Filter Controls Card */
+    /* Filter Controls Section (Fluid / Unboxed) */
     .filter-panel {
-      background: var(--p-surface);
-      border: 1px solid var(--p-border);
-      border-radius: 18px;
-      padding: 22px;
-      margin: 24px 0 32px;
-      display: grid;
-      gap: 18px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      margin-bottom: 28px;
+      box-shadow: none;
     }
     .filter-row-top {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 14px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
-    @media (max-width: 720px) {
+    @media (max-width: 680px) {
       .filter-row-top {
         grid-template-columns: 1fr;
       }
@@ -182,84 +345,93 @@
     .search-input-wrap svg {
       position: absolute;
       left: 14px;
-      color: var(--p-muted);
+      color: var(--muted);
       pointer-events: none;
     }
     .search-input {
       width: 100%;
-      height: 46px;
-      background: var(--p-card);
-      border: 1px solid var(--p-border);
+      height: 48px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 0 42px 0 42px;
-      color: var(--p-ink);
+      padding: 0 42px 0 44px;
+      color: var(--ink);
       font-size: 15px;
-      font-family: inherit;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
     }
     .search-input:focus {
-      border-color: var(--p-accent);
+      border-color: var(--magenta);
+      background: #201f27;
     }
     .search-clear-btn {
       position: absolute;
       right: 12px;
       background: none;
       border: none;
-      color: var(--p-muted);
+      color: var(--muted);
       cursor: pointer;
-      padding: 6px;
+      font-size: 20px;
+      padding: 4px;
       display: none;
     }
-    .search-clear-btn:hover { color: var(--p-ink); }
+    .search-clear-btn:hover { color: var(--ink); }
 
     .city-select-wrap {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
     .select-dropdown {
-      height: 46px;
-      background: var(--p-card);
-      border: 1px solid var(--p-border);
+      height: 48px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
       border-radius: 12px;
       padding: 0 16px;
-      color: var(--p-ink);
+      color: var(--ink);
       font-size: 14px;
-      font-family: inherit;
       outline: none;
       cursor: pointer;
-      min-width: 170px;
+      min-width: 160px;
+      transition: border-color 0.2s;
     }
     .select-dropdown:focus {
-      border-color: var(--p-accent);
+      border-color: var(--magenta);
     }
     .btn-gps {
-      height: 46px;
-      padding: 0 14px;
-      background: var(--p-card);
-      border: 1px solid var(--p-border);
+      height: 48px;
+      padding: 0 16px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      color: var(--p-ink);
+      color: var(--ink);
       font-size: 13px;
+      font-weight: 500;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       cursor: pointer;
       white-space: nowrap;
-      transition: border-color 0.2s, color 0.2s;
+      transition: all 0.2s;
     }
     .btn-gps:hover {
-      border-color: var(--seratina-mint);
-      color: var(--seratina-mint);
+      border-color: var(--mint);
+      color: var(--mint);
     }
     .btn-gps.is-active {
-      border-color: var(--seratina-mint);
+      border-color: var(--mint);
       background: rgba(61, 220, 151, 0.12);
-      color: var(--seratina-mint);
+      color: var(--mint);
     }
 
     /* Filter Chips Rows */
+    .filter-chips-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 0;
+      border-top: none;
+    }
     .filter-group {
       display: flex;
       flex-wrap: wrap;
@@ -267,37 +439,38 @@
       gap: 8px;
     }
     .filter-group-label {
-      font-size: 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--p-muted);
-      margin-right: 4px;
-      min-width: 65px;
+      letter-spacing: 0.06em;
+      color: var(--dim);
+      margin-right: 6px;
+      min-width: 58px;
     }
     .chip {
-      padding: 7px 15px;
-      background: var(--p-card);
-      border: 1px solid var(--p-border);
+      padding: 6px 14px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
       border-radius: 999px;
-      color: var(--p-muted);
+      color: var(--muted);
       font-size: 13px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.15s ease;
       user-select: none;
-      min-height: 34px;
       display: inline-flex;
       align-items: center;
+      gap: 5px;
     }
     .chip:hover {
-      color: var(--p-ink);
-      border-color: rgba(242, 239, 233, 0.25);
+      color: var(--ink);
+      border-color: rgba(242, 239, 233, 0.2);
     }
     .chip.is-active {
-      background: var(--p-accent);
+      background: var(--magenta);
       color: #0f0f14;
-      border-color: var(--p-accent);
+      border-color: var(--magenta);
       font-weight: 600;
     }
 
@@ -307,18 +480,18 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       font-size: 14px;
-      color: var(--p-muted);
+      color: var(--muted);
     }
     .results-count {
-      color: var(--p-ink);
+      color: var(--ink);
       font-weight: 600;
     }
     .btn-reset-filters {
       background: none;
       border: none;
-      color: var(--p-accent);
+      color: var(--magenta);
       font-size: 13px;
       cursor: pointer;
       text-decoration: underline;
@@ -326,38 +499,46 @@
 
     /* Events Grid */
     .events-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-      margin-bottom: 48px;
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 22px !important;
+      margin-bottom: 40px !important;
     }
-    @media (max-width: 420px) {
+    @media (max-width: 980px) {
       .events-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .events-grid {
+        grid-template-columns: 1fr !important;
       }
     }
 
+    /* Event Card (Faithful to App EventCard Component) */
     .event-card {
-      background: var(--p-card);
-      border: 1px solid var(--p-border);
-      border-radius: 16px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
       cursor: pointer;
+      text-align: left;
+      position: relative;
     }
     .event-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       border-color: rgba(255, 61, 139, 0.45);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
     }
 
     .event-poster-frame {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 10;
-      background: #100f14;
+      aspect-ratio: 1.94;
+      background: #14131a;
       overflow: hidden;
     }
     .event-poster-img {
@@ -366,158 +547,385 @@
       object-fit: cover;
       object-position: center;
       display: block;
-      transition: transform 0.3s ease;
+      transition: transform 0.35s ease;
     }
     .event-card:hover .event-poster-img {
-      transform: scale(1.03);
+      transform: scale(1.04);
+    }
+    .event-poster-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28, 27, 34, 0.95) 0%, rgba(28, 27, 34, 0.25) 45%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Fallback image when poster is not available */
+    .event-poster-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1c1b24 0%, #121118 100%);
+      color: var(--muted);
+      gap: 6px;
+    }
+    .event-poster-fallback svg {
+      color: var(--magenta);
     }
 
     .event-category-pill {
       position: absolute;
       top: 12px;
-      left: 12px;
+      right: 12px;
       background: rgba(15, 15, 20, 0.85);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(242, 239, 233, 0.15);
-      padding: 4px 10px;
+      padding: 3px 9px;
       border-radius: 999px;
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--p-ink);
+      color: var(--ink);
+      z-index: 2;
     }
     .event-price-pill {
       position: absolute;
-      bottom: 12px;
+      bottom: 10px;
       right: 12px;
       background: rgba(15, 15, 20, 0.88);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(61, 220, 151, 0.4);
-      color: var(--seratina-mint);
+      border: 1px solid rgba(242, 239, 233, 0.15);
       font-family: var(--font-mono);
       font-size: 12px;
       font-weight: 500;
-      padding: 4px 10px;
-      border-radius: 8px;
+      padding: 3px 9px;
+      border-radius: 7px;
+      color: var(--ink);
+      z-index: 2;
+    }
+    .event-price-pill.is-free {
+      color: var(--mint);
+      border-color: rgba(61, 220, 151, 0.35);
+      background: rgba(61, 220, 151, 0.12);
     }
 
+    /* Card Body with App Date Column */
     .event-card-body {
-      padding: 20px;
+      padding: 16px 18px 18px;
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    /* Left Date Column */
+    .event-date-col {
       display: flex;
       flex-direction: column;
-      flex: 1 1 auto;
-      justify-content: space-between;
-      gap: 14px;
-    }
-    .event-timing-row {
-      display: flex;
       align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--p-accent);
-      font-weight: 500;
+      justify-content: center;
+      padding-right: 12px;
+      border-right: 1px solid var(--border);
+      text-align: center;
     }
-    .event-timing-row i {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--seratina-mint);
+    .event-date-day {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .event-date-month {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--magenta);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Right Info Column */
+    .event-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
     }
     .event-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
-      line-height: 1.25;
-      color: var(--p-ink);
-      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .event-venue-meta {
       display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      color: var(--p-muted);
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
       font-size: 13px;
-      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .event-venue-meta svg {
       flex: none;
-      margin-top: 2px;
-      color: var(--p-accent);
+      color: var(--magenta);
+    }
+    .event-distance-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--magenta);
+      font-weight: 500;
     }
 
-    .event-card-footer {
-      padding-top: 14px;
-      border-top: 1px solid var(--p-border);
+    .event-bottom-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
+      margin-top: 4px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(242, 239, 233, 0.05);
+      font-size: 12px;
+      color: var(--muted);
     }
-    .btn-detail {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--p-ink);
+    .event-bottom-row .time-tag {
+      font-family: var(--font-mono);
+      color: var(--muted);
+    }
+    .event-bottom-row .action-arrow {
+      color: var(--magenta);
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      transition: transform 0.15s;
     }
-    .btn-detail:hover {
-      color: var(--p-accent);
-    }
-    .btn-detail svg {
-      transition: transform 0.2s ease;
-    }
-    .event-card:hover .btn-detail svg {
+    .event-card:hover .action-arrow {
       transform: translateX(3px);
     }
 
-    /* Empty State */
+    /* Empty state */
     .empty-state {
-      padding: 64px 20px;
-      text-align: center;
-      background: var(--p-surface);
-      border: 1px solid var(--p-border);
-      border-radius: 18px;
       grid-column: 1 / -1;
+      text-align: center;
+      padding: 64px 20px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
-    .empty-state h3 {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-    .empty-state p {
-      color: var(--p-muted);
-      font-size: 14px;
-      max-width: 440px;
-      margin-inline: auto;
-      margin-bottom: 20px;
-    }
+    .empty-state h3 { font-size: 18px; }
+    .empty-state p { color: var(--muted); max-width: 440px; font-size: 14px; }
 
-    /* Load More Button */
+    /* Pagination */
     .pagination-wrap {
       text-align: center;
-      margin: 12px 0 64px;
+      margin: 20px 0 48px;
     }
     .btn-load-more {
       padding: 12px 28px;
-      border-radius: 999px;
-      background: var(--p-surface);
-      border: 1px solid var(--p-border);
-      color: var(--p-ink);
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--ink);
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
     }
     .btn-load-more:hover {
-      border-color: var(--p-accent);
-      background: var(--p-card);
-    }
-    .btn-load-more:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+      background: var(--surface-elevated);
+      border-color: var(--magenta);
+      color: var(--magenta);
     }
 
-    /* Modal Event Spotlight */
+
+    /* ==========================================================================
+       Site Footer (Exact 1:1 match with Home index.html)
+       ========================================================================== */
+    footer.footer.closing {
+      position: relative;
+      box-sizing: border-box;
+      background: #1d1c21;
+      color: var(--ink);
+      padding-top: 56px;
+      padding-bottom: 40px;
+      margin-top: 64px;
+      border-top: 1px solid var(--border);
+      height: auto !important;
+      min-height: 0 !important;
+    }
+    footer.footer.closing > .wrap {
+      height: auto !important;
+      min-height: 0 !important;
+      display: block !important;
+    }
+    .closing__links {
+      display: grid;
+      gap: 48px;
+      padding-top: 0;
+    }
+    .closing__links .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: 24px;
+      row-gap: 48px;
+    }
+    .span-4 { grid-column: auto / span 4; }
+    .span-3 { grid-column: auto / span 3; }
+    .start-7 { grid-column-start: 7; }
+    .start-10 { grid-column-start: 10; }
+
+    .stack-4 > * + * { margin-top: 16px; }
+
+    .closing__links .nav__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .closing__links .nav__logo img {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      flex: none;
+    }
+    .footer__lede {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 25px;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      max-width: 30ch;
+      margin: 16px 0 0;
+    }
+    .footer__col {
+      min-width: 0;
+    }
+    .footer__col h3 {
+      font-family: var(--font-text);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0;
+      color: var(--muted);
+      margin: 0 0 16px;
+      text-transform: none;
+    }
+    .footer__col ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+    }
+    .footer__col li {
+      font-family: var(--font-text);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .footer__col a {
+      font-family: var(--font-text);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.55;
+      letter-spacing: normal;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+    .footer__col a:hover {
+      color: var(--magenta);
+    }
+    .footer__legal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 32px;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-text);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0;
+    }
+    .footer__legal span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer__legal-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 16px;
+      align-items: center;
+    }
+    .footer__legal a {
+      font-family: var(--font-text);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+    .footer__legal a:hover {
+      color: var(--ink);
+    }
+
+    @media (max-width: 1023px) {
+      .closing__links .grid > .span-4 { grid-column: 1 / -1; }
+      .closing__links .footer__col { grid-column: auto / span 6; }
+      .start-7 { grid-column-start: auto; }
+      .start-10 { grid-column-start: auto; }
+    }
+    @media (max-width: 768px) {
+      footer.footer.closing {
+        padding-top: 40px;
+        padding-bottom: 32px;
+        margin-top: 40px;
+      }
+      .closing__links {
+        gap: 24px;
+      }
+      .closing__links .grid {
+        row-gap: 32px;
+      }
+    }
+    @media (max-width: 639px) {
+      .closing__links .footer__col { grid-column: 1 / -1; }
+      .footer__legal {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    /* Event Spotlight Modal */
+    .spotlight-modal[hidden] { display: none; }
     .spotlight-modal {
       position: fixed;
       inset: 0;
@@ -527,135 +935,291 @@
       justify-content: center;
       padding: 16px;
     }
-    .spotlight-modal[hidden] { display: none; }
     .spotlight-backdrop {
       position: absolute;
       inset: 0;
-      background: rgba(8, 7, 10, 0.82);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .spotlight-card {
       position: relative;
       z-index: 2;
-      width: min(100%, 540px);
-      max-height: calc(100vh - 40px);
-      background: #141318;
-      border: 1px solid rgba(242, 239, 233, 0.16);
-      border-radius: 20px;
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+      width: 100%;
+      max-width: 480px;
+      max-height: 92vh;
       overflow-y: auto;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
+      background: var(--surface);
+      border: 1px solid rgba(242, 239, 233, 0.12);
+      border-radius: 24px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 61, 139, 0.1);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(242, 239, 233, 0.15) transparent;
     }
-    .spotlight-close-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--p-card);
-      border: 1px solid var(--p-border);
-      color: var(--p-ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10;
+    .spotlight-card::-webkit-scrollbar {
+      width: 5px;
+    }
+    .spotlight-card::-webkit-scrollbar-thumb {
+      background: rgba(242, 239, 233, 0.2);
+      border-radius: 999px;
+    }
+    .spotlight-poster-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.94;
+      background: #14131a;
+      overflow: hidden;
+      border-radius: 23px 23px 0 0;
     }
     .spotlight-poster {
       width: 100%;
-      aspect-ratio: 16 / 10;
-      border-radius: 12px;
+      height: 100%;
       object-fit: cover;
-      background: #0b0a0e;
+      display: block;
     }
+    .spotlight-poster-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(23, 22, 28, 0.95) 0%, rgba(23, 22, 28, 0.3) 40%, transparent 100%);
+      pointer-events: none;
+    }
+    .spotlight-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 5;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(15, 15, 20, 0.75);
+      border: 1px solid rgba(242, 239, 233, 0.2);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background 0.15s, transform 0.15s;
+    }
+    .spotlight-close-btn:hover {
+      background: rgba(255, 61, 139, 0.2);
+      border-color: var(--magenta);
+      transform: scale(1.05);
+    }
+    .spotlight-content {
+      padding: 18px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .spotlight-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .spotlight-title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .spotlight-venue-sub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+    .spotlight-venue-sub svg {
+      color: var(--magenta);
+      flex-shrink: 0;
+    }
+
+    /* Facts Card */
+    .spotlight-facts-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .spotlight-fact-row {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+    .spotlight-fact-row:not(:last-child) {
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(242, 239, 233, 0.06);
+    }
+    .spotlight-fact-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(255, 61, 139, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--magenta);
+    }
+    .spotlight-fact-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .spotlight-fact-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--dim);
+      font-weight: 600;
+    }
+    .spotlight-fact-val {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .spotlight-fact-sub {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .spotlight-fact-btn {
+      padding: 5px 11px;
+      border-radius: 8px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .spotlight-fact-btn:hover {
+      border-color: var(--magenta);
+      color: var(--magenta);
+    }
+
+    .spotlight-desc-wrap {
+      padding-top: 0;
+    }
+    .spotlight-desc {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+      max-height: 95px;
+      overflow-y: auto;
+    }
+
     .spotlight-actions {
       display: grid;
+      grid-template-columns: 1fr auto;
       gap: 10px;
-      margin-top: 6px;
+      margin-top: 2px;
     }
-    .btn-action-primary {
-      padding: 14px;
+    @media (max-width: 440px) {
+      .spotlight-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+    .btn-spotlight-primary {
+      height: 44px;
       border-radius: 12px;
-      background: var(--p-accent);
+      background: var(--magenta);
       color: #0f0f14;
-      font-weight: 600;
-      font-size: 15px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn-action-primary:hover { background: var(--p-accent-hover); }
-    .btn-action-secondary {
-      padding: 12px;
-      border-radius: 12px;
-      background: rgba(242, 239, 233, 0.08);
-      border: 1px solid var(--p-border);
-      color: var(--p-ink);
       font-size: 14px;
-      font-weight: 500;
-      text-align: center;
+      font-weight: 700;
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
       cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+      box-shadow: 0 4px 14px rgba(255, 61, 139, 0.25);
     }
-    .btn-action-secondary:hover { background: rgba(242, 239, 233, 0.12); }
-
-    /* Footer */
-    footer.site-footer {
-      margin-top: auto;
-      padding: 36px 0;
-      border-top: 1px solid var(--p-border);
-      font-size: 13px;
-      color: var(--p-muted);
+    .btn-spotlight-primary:hover {
+      background: var(--magenta-hover);
+      transform: translateY(-1px);
     }
-    .footer-inner {
+    .btn-spotlight-secondary {
+      height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 13.5px;
+      font-weight: 500;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      justify-content: center;
+      gap: 7px;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: border-color 0.15s, background 0.15s;
     }
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
+    .btn-spotlight-secondary:hover {
+      border-color: rgba(242, 239, 233, 0.3);
+      background: var(--surface-elevated);
     }
-    .footer-links a:hover { color: var(--p-ink); text-decoration: underline; }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap nav-inner">
-      <a href="index.html" class="nav-logo">
+
+  <!-- Site Header -->
+  <header class="nav nav--centre site-header">
+    <div class="wrap nav__bar">
+      <a class="skip-link" href="#main-content">Vai al contenuto</a>
+      <a class="nav__logo" href="index.html" aria-label="Seratina Home">
         <img src="assets/logo.png" alt="Seratina Logo" width="28" height="28">
         <span>seratina<span class="dot-accent">.</span></span>
       </a>
 
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="eventi.html" class="active">Eventi</a>
-        <a href="gestori.html">Gestori</a>
+      <nav class="nav__links" aria-label="Principale">
+        <div class="nav__item"><a href="index.html" class="nav__link">Home</a></div>
+        <div class="nav__item"><a href="eventi.html" class="nav__link" aria-current="page">Eventi</a></div>
+        <div class="nav__item"><a href="gestori.html" class="nav__link">Gestori</a></div>
       </nav>
 
-      <a href="test.html" class="btn-nav-app">Scarica l'App</a>
+      <div class="nav__actions">
+        <a class="btn btn--primary" href="test.html">Prova la Beta</a>
+      </div>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+          <path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="main-content">
+    <!-- Hero compact -->
     <section class="events-hero">
       <h1>Eventi e Serate nei Club<span class="dot-accent">.</span></h1>
-      <p>Esplora gli eventi in programma in Italia. Cerca per artista o locale, filtra per città e seleziona il fine settimana.</p>
+      <p>Esplora la programmazione settimanale in tutta Italia. Cerca per artista o locale, filtra per città e seleziona il fine settimana.</p>
     </section>
 
-    <!-- Filters Control Panel -->
+    <!-- Filter Control Panel -->
     <section class="filter-panel" aria-label="Filtri di ricerca">
       <div class="filter-row-top">
         <div class="search-input-wrap">
@@ -691,24 +1255,26 @@
         </div>
       </div>
 
-      <!-- Date Presets -->
-      <div class="filter-group" id="dateChipsGroup">
-        <span class="filter-group-label">Data</span>
-        <button type="button" class="chip is-active" data-date="tutte">Tutte le date</button>
-        <button type="button" class="chip" data-date="oggi">Stasera</button>
-        <button type="button" class="chip" data-date="domani">Domani</button>
-        <button type="button" class="chip" data-date="weekend">Questo Weekend ★</button>
-      </div>
+      <div class="filter-chips-container">
+        <!-- Date Presets -->
+        <div class="filter-group" id="dateChipsGroup">
+          <span class="filter-group-label">Data</span>
+          <button type="button" class="chip is-active" data-date="tutte">Tutte le date</button>
+          <button type="button" class="chip" data-date="oggi">Stasera</button>
+          <button type="button" class="chip" data-date="domani">Domani</button>
+          <button type="button" class="chip" data-date="weekend">Questo Weekend ★</button>
+        </div>
 
-      <!-- Category Presets -->
-      <div class="filter-group" id="categoryChipsGroup">
-        <span class="filter-group-label">Genere</span>
-        <button type="button" class="chip is-active" data-category="Tutti">Tutti</button>
-        <button type="button" class="chip" data-category="Club">Club</button>
-        <button type="button" class="chip" data-category="Musica">Musica</button>
-        <button type="button" class="chip" data-category="Festival">Festival</button>
-        <button type="button" class="chip" data-category="Aperitivo">Aperitivo</button>
-        <button type="button" class="chip" data-category="Arte">Arte & Spettacolo</button>
+        <!-- Category Presets -->
+        <div class="filter-group" id="categoryChipsGroup">
+          <span class="filter-group-label">Genere</span>
+          <button type="button" class="chip is-active" data-category="Tutti">Tutti</button>
+          <button type="button" class="chip" data-category="Club">Club</button>
+          <button type="button" class="chip" data-category="Musica">Musica</button>
+          <button type="button" class="chip" data-category="Festival">Festival</button>
+          <button type="button" class="chip" data-category="Aperitivo">Aperitivo</button>
+          <button type="button" class="chip" data-category="Arte">Arte & Spettacolo</button>
+        </div>
       </div>
     </section>
 
@@ -723,7 +1289,9 @@
 
     <!-- Events Grid -->
     <section class="events-grid" id="eventsGrid">
-      <!-- Cards rendered dynamically via JS -->
+      <div style="grid-column: 1/-1; text-align: center; padding: 48px 0; color: var(--muted);">
+        Caricamento serate ed eventi...
+      </div>
     </section>
 
     <!-- Pagination -->
@@ -731,76 +1299,149 @@
       <button type="button" id="loadMoreBtn" class="btn-load-more">Carica altre serate</button>
     </div>
 
-    <!-- Guida Ricerca & SEO Context -->
-    <section class="events-guide-seo" style="padding: 36px 0 48px; border-top: 1px solid var(--p-border); margin-top: 24px;">
-      <h2 style="font-size: 20px; margin-bottom: 12px; letter-spacing: -0.02em;">Come trovare la tua serata ideale nei club italiani con Seratina</h2>
-      <p style="color: var(--p-muted); font-size: 14px; line-height: 1.6; margin-bottom: 12px;">Il motore di ricerca di Seratina raccoglie la programmazione settimanale di club, discoteche, sale da concerto, festival ed eventi speciali in tutta Italia. Puoi filtrare istantaneamente per città o zona geografica, genere musicale (dalla Techno e Minimal alla House, Reggaeton, Commerciale, Hip-Hop, Indie e serate con musica dal vivo) o selezionare direttamente gli appuntamenti in programma stasera, domani e per tutto il fine settimana.</p>
-      <p style="color: var(--p-muted); font-size: 14px; line-height: 1.6;">Tutti gli orari, le modalità di accesso, le fasce di prezzo e le locandine originali vengono verificati e geolocalizzati. Cliccando su ogni serata potrai consultare la scheda dettagliata, ottenere le indicazioni stradali su Google Maps o aprire l'evento direttamente nell'app mobile Seratina per visualizzarlo su mappa dal vivo e calcolare la distanza chilometrica reale dalla tua posizione.</p>
-    </section>
   </main>
+
+  <!-- Site Footer (stile Seratina come Home, senza newsletter) -->
+  <footer class="footer closing" id="footer" aria-label="Piè di pagina">
+    <div class="wrap">
+      <div class="closing__links">
+        <div class="grid">
+          <div class="span-4 stack-4">
+            <a class="nav__logo" href="index.html">
+              <img src="assets/logo.png" alt="Seratina Logo" width="28" height="28" loading="lazy">
+              <span>seratina<span class="dot-accent">.</span></span>
+            </a>
+            <p class="footer__lede">Mappa, calendario e schede serata in Italia.</p>
+          </div>
+
+          <div class="span-3 start-7 footer__col">
+            <h3>Piattaforma</h3>
+            <ul>
+              <li><a href="eventi.html">Cerca Eventi</a></li>
+              <li><a href="test.html">Prova la Beta</a></li>
+              <li><a href="gestori.html">Area Gestori</a></li>
+            </ul>
+          </div>
+
+          <div class="span-3 start-10 footer__col">
+            <h3>Legale</h3>
+            <ul>
+              <li><a href="privacy.html">Privacy</a></li>
+              <li><a href="terms.html">Termini</a></li>
+              <li><a href="delete-account.html">Elimina Account</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__legal">
+          <span>&copy; 2026 Seratina</span>
+          <div class="footer__legal-links" style="display:flex;flex-wrap:wrap;gap:0 16px;align-items:center;">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Termini</a>
+            <a href="https://www.tiktok.com/@seratina.org" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <a href="mailto:info@seratina.org">info@seratina.org</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <!-- Event Detail Modal (Spotlight) -->
   <div id="eventModal" class="spotlight-modal" role="dialog" aria-modal="true" aria-labelledby="modalEventTitle" hidden>
     <div id="modalBackdrop" class="spotlight-backdrop"></div>
     <div class="spotlight-card">
-      <button type="button" id="modalCloseBtn" class="spotlight-close-btn" aria-label="Chiudi dettaglio">&times;</button>
+      <button type="button" id="modalCloseBtn" class="spotlight-close-btn" aria-label="Chiudi dettaglio">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
 
-      <img id="modalImg" class="spotlight-poster" src="" alt="">
-
-      <div>
-        <div id="modalTiming" style="font-family: var(--font-mono); font-size: 13px; color: var(--p-accent); font-weight: 500; margin-bottom: 6px;"></div>
-        <h2 id="modalEventTitle" style="font-size: 22px; line-height: 1.2; margin-bottom: 8px;"></h2>
-        <div id="modalVenue" style="color: var(--p-muted); font-size: 14px; margin-bottom: 12px;"></div>
+      <div class="spotlight-poster-frame">
+        <img id="modalImg" class="spotlight-poster" src="" alt="">
+        <div class="spotlight-poster-gradient" aria-hidden="true"></div>
+        <span id="modalCategoryBadge" class="event-category-pill" style="top: 14px; left: 14px;"></span>
+        <span id="modalPriceBadge" class="event-price-pill" style="bottom: 12px; right: 14px;"></span>
       </div>
 
-      <div id="modalPriceBox" style="background: var(--p-surface); border: 1px solid var(--p-border); border-radius: 10px; padding: 12px; font-size: 13px;">
-        <strong id="modalPriceMain" style="color: var(--seratina-mint); font-size: 15px; font-family: var(--font-mono); display: block; margin-bottom: 4px;"></strong>
-        <p id="modalPriceDesc" style="color: var(--p-muted); font-size: 12px;"></p>
-      </div>
+      <div class="spotlight-content">
+        <div class="spotlight-header">
+          <h2 id="modalEventTitle" class="spotlight-title"></h2>
+          <div class="spotlight-venue-sub">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span id="modalVenueSub"></span>
+          </div>
+        </div>
 
-      <p id="modalDescription" style="color: rgba(242, 239, 233, 0.85); font-size: 14px; line-height: 1.55; max-height: 160px; overflow-y: auto;"></p>
+        <!-- Facts Box (Matching Seratina App EventDetailScreen) -->
+        <div class="spotlight-facts-card">
+          <!-- Row 1: Quando -->
+          <div class="spotlight-fact-row">
+            <div class="spotlight-fact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+            <div class="spotlight-fact-text">
+              <span class="spotlight-fact-label">Data e Orario</span>
+              <strong id="modalFactDate" class="spotlight-fact-val"></strong>
+              <span id="modalFactTime" class="spotlight-fact-sub"></span>
+            </div>
+          </div>
 
-      <div class="spotlight-actions">
-        <a id="modalOpenAppBtn" href="test.html" class="btn-action-primary">
-          <span>Apri nell'App Seratina</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
+          <!-- Row 2: Location -->
+          <div class="spotlight-fact-row">
+            <div class="spotlight-fact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="spotlight-fact-text">
+              <span class="spotlight-fact-label">Location</span>
+              <strong id="modalFactVenue" class="spotlight-fact-val"></strong>
+              <span id="modalFactAddress" class="spotlight-fact-sub"></span>
+            </div>
+            <a id="modalDirectionsLink" href="#" target="_blank" rel="noopener" class="spotlight-fact-btn" title="Apri su Google Maps">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              <span>Mappe</span>
+            </a>
+          </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-          <a id="modalMapsBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-action-secondary">
-            <span>Mappa & Indicazioni</span>
+          <!-- Row 3: Ingresso -->
+          <div class="spotlight-fact-row">
+            <div class="spotlight-fact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>
+            </div>
+            <div class="spotlight-fact-text">
+              <span class="spotlight-fact-label">Ingresso</span>
+              <strong id="modalFactPrice" class="spotlight-fact-val"></strong>
+              <span id="modalFactPriceDetails" class="spotlight-fact-sub"></span>
+            </div>
+            <a id="modalTicketLink" href="#" target="_blank" rel="noopener" class="spotlight-fact-btn" style="display: none;">
+              <span>Prevendita ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div id="modalDescWrap" class="spotlight-desc-wrap">
+          <p id="modalDesc" class="spotlight-desc"></p>
+        </div>
+
+        <div class="spotlight-actions">
+          <a id="modalOpenAppBtn" href="seratina://" class="btn-spotlight-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+            <span>Apri nell'app Seratina</span>
           </a>
-          <button type="button" id="modalShareBtn" class="btn-action-secondary">
-            <span>Condividi</span>
+          <button type="button" id="modalShareBtn" class="btn-spotlight-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+            <span id="shareBtnText">Condividi serata</span>
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <span>&copy; 2026 Seratina &bull; Vita notturna e club in tutta Italia</span>
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="eventi.html">Eventi</a>
-        <a href="gestori.html">Gestori</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Termini</a>
-        <a href="https://www.tiktok.com/@seratina.org" target="_blank" rel="noopener noreferrer">TikTok</a>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    (function initSeratinaEvents() {
+    (function () {
       const API_BASE = 'https://seratina-be-265028543407.europe-west8.run.app';
 
-      // State
       const state = {
         category: 'Tutti',
-        date: 'tutte',
         city: 'Tutte',
+        date: 'tutte',
         search: '',
         lat: null,
         lng: null,
@@ -811,7 +1452,7 @@
         events: []
       };
 
-      // Elements
+      // DOM Elements
       const searchInput = document.getElementById('searchInput');
       const searchClearBtn = document.getElementById('searchClearBtn');
       const citySelect = document.getElementById('citySelect');
@@ -826,77 +1467,107 @@
       const loadMoreBtn = document.getElementById('loadMoreBtn');
 
       // Modal Elements
-      const modal = document.getElementById('eventModal');
+      const eventModal = document.getElementById('eventModal');
       const modalBackdrop = document.getElementById('modalBackdrop');
       const modalCloseBtn = document.getElementById('modalCloseBtn');
       const modalImg = document.getElementById('modalImg');
-      const modalTiming = document.getElementById('modalTiming');
+      const modalCategoryBadge = document.getElementById('modalCategoryBadge');
+      const modalPriceBadge = document.getElementById('modalPriceBadge');
       const modalEventTitle = document.getElementById('modalEventTitle');
-      const modalVenue = document.getElementById('modalVenue');
-      const modalPriceBox = document.getElementById('modalPriceBox');
-      const modalPriceMain = document.getElementById('modalPriceMain');
-      const modalPriceDesc = document.getElementById('modalPriceDesc');
-      const modalDescription = document.getElementById('modalDescription');
+      const modalVenueSub = document.getElementById('modalVenueSub');
+      const modalFactDate = document.getElementById('modalFactDate');
+      const modalFactTime = document.getElementById('modalFactTime');
+      const modalFactVenue = document.getElementById('modalFactVenue');
+      const modalFactAddress = document.getElementById('modalFactAddress');
+      const modalDirectionsLink = document.getElementById('modalDirectionsLink');
+      const modalFactPrice = document.getElementById('modalFactPrice');
+      const modalFactPriceDetails = document.getElementById('modalFactPriceDetails');
+      const modalTicketLink = document.getElementById('modalTicketLink');
+      const modalDesc = document.getElementById('modalDesc');
       const modalOpenAppBtn = document.getElementById('modalOpenAppBtn');
-      const modalMapsBtn = document.getElementById('modalMapsBtn');
       const modalShareBtn = document.getElementById('modalShareBtn');
+      const shareBtnText = document.getElementById('shareBtnText');
 
-      // Helper Formats
-      const days = ['DOM', 'LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB'];
-      const months = ['GEN', 'FEB', 'MAR', 'APR', 'MAG', 'GIU', 'LUGL', 'AGO', 'SET', 'OTT', 'NOV', 'DIC'];
+      let currentModalEvent = null;
 
-      function formatDate(isoDate) {
-        if (!isoDate) return '';
-        const d = new Date(isoDate);
-        if (isNaN(d.getTime())) return isoDate;
-        return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
+      // Month dictionary for App-style date column
+      const SHORT_MONTHS = ['GEN', 'FEB', 'MAR', 'APR', 'MAG', 'GIU', 'LUG', 'AGO', 'SET', 'OTT', 'NOV', 'DIC'];
+
+      function parseDateParts(iso) {
+        if (!iso) return { day: '', month: '', formatted: '' };
+        try {
+          const parts = iso.split('T')[0].split('-');
+          if (parts.length === 3) {
+            const y = parseInt(parts[0], 10);
+            const m = parseInt(parts[1], 10) - 1;
+            const d = parseInt(parts[2], 10);
+            const dt = new Date(y, m, d);
+            const dayNum = String(d);
+            const mon = SHORT_MONTHS[m] || '';
+            const dayNames = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
+            return {
+              day: dayNum,
+              month: mon,
+              formatted: `${dayNames[dt.getDay()]} ${d} ${mon}`
+            };
+          }
+        } catch (_) {}
+        return { day: '', month: '', formatted: iso };
       }
 
       function formatPrice(price, priceDetails) {
-        if (price === 0) return 'Ingresso Libero';
-        if (price > 0) return `Da ${price.toFixed(0)}€`;
+        if (price === 0) return 'Gratuito';
+        if (price && price > 0) return '€' + Number(price).toString();
         if (priceDetails && priceDetails.length > 0) {
           const minP = Math.min(...priceDetails.map(p => p.price));
-          return `Da ${minP.toFixed(0)}€`;
+          return minP === 0 ? 'Gratuito' : 'Da €' + minP;
         }
-        return 'Vedi scheda';
+        return 'Ingresso';
       }
 
-      // Read URL Params (Deep Linking & Presets)
-      function parseUrlParams() {
+      // Init from URL Query
+      function initFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('citta')) {
-          const c = urlParams.get('citta');
-          state.city = c;
-          let found = false;
-          for (let opt of citySelect.options) {
-            if (opt.value.toLowerCase() === c.toLowerCase()) {
-              citySelect.value = opt.value;
-              found = true;
-              break;
+
+        if (urlParams.has('city')) {
+          const c = urlParams.get('city');
+          state.city = c.charAt(0).toUpperCase() + c.slice(1).toLowerCase();
+          if (citySelect) {
+            let found = false;
+            for (let opt of citySelect.options) {
+              if (opt.value.toLowerCase() === state.city.toLowerCase()) {
+                opt.selected = true;
+                found = true;
+                break;
+              }
+            }
+            if (!found) {
+              const newOpt = document.createElement('option');
+              newOpt.value = state.city;
+              newOpt.textContent = state.city;
+              newOpt.selected = true;
+              citySelect.appendChild(newOpt);
             }
           }
-          if (!found) {
-            const newOpt = new Option(c, c);
-            citySelect.add(newOpt);
-            citySelect.value = c;
-          }
         }
-        if (urlParams.get('categoria')) {
+
+        if (urlParams.has('categoria')) {
           const cat = urlParams.get('categoria');
           state.category = cat;
-          categoryChips.forEach(chip => {
-            chip.classList.toggle('is-active', chip.dataset.category.toLowerCase() === cat.toLowerCase());
+          categoryChips.forEach(c => {
+            c.classList.toggle('is-active', c.dataset.category.toLowerCase() === cat.toLowerCase());
           });
         }
-        if (urlParams.get('data')) {
+
+        if (urlParams.has('data')) {
           const d = urlParams.get('data');
           state.date = d;
-          dateChips.forEach(chip => {
-            chip.classList.toggle('is-active', chip.dataset.date === d);
+          dateChips.forEach(c => {
+            c.classList.toggle('is-active', c.dataset.date === d);
           });
         }
-        if (urlParams.get('cerca')) {
+
+        if (urlParams.has('cerca')) {
           state.search = urlParams.get('cerca');
           searchInput.value = state.search;
           searchClearBtn.style.display = 'block';
@@ -914,7 +1585,7 @@
         if (!append) {
           state.page = 1;
           eventsGrid.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 48px 0; color: var(--p-muted);">
+            <div style="grid-column: 1/-1; text-align: center; padding: 48px 0; color: var(--muted);">
               Caricamento serate ed eventi...
             </div>`;
         }
@@ -959,7 +1630,7 @@
         }
       }
 
-      // Render Cards
+      // Render Cards (Matching App EventCard Style)
       function renderEvents(append = false) {
         if (!state.events.length) {
           eventsGrid.innerHTML = `
@@ -974,43 +1645,55 @@
         }
 
         const cardsHtml = state.events.map(ev => {
-          const dateStr = formatDate(ev.date);
-          const timeStr = ev.startTime ? ` • ${ev.startTime}` : '';
+          const { day, month } = parseDateParts(ev.date);
+          const timeStr = ev.startTime ? `ore ${ev.startTime}` : 'Orario serale';
           const priceStr = formatPrice(ev.price, ev.priceDetails);
-          const imgFallback = 'assets/share.jpg';
+          const isFree = priceStr.toLowerCase() === 'gratuito';
           const venueStr = ev.city ? `${ev.venue} &bull; ${ev.city}` : ev.venue;
+          const distStr = ev.distanceKm ? `&bull; ${ev.distanceKm.toFixed(1)} km` : '';
+          const hasImg = Boolean(ev.imageUrl && ev.imageUrl.trim());
+          const cat = ev.category || 'Club';
 
           return `
             <article class="event-card" data-event-id="${ev.id}">
               <div class="event-poster-frame">
-                <img class="event-poster-img"
-                     src="${ev.imageUrl || imgFallback}"
-                     alt="${ev.title}"
-                     loading="lazy"
-                     onerror="this.onerror=null;this.src='${imgFallback}'">
-                <span class="event-category-pill">${ev.category || 'Serata'}</span>
-                <span class="event-price-pill">${priceStr}</span>
+                ${hasImg ? `
+                  <img class="event-poster-img"
+                       src="${ev.imageUrl}"
+                       alt="${ev.title}"
+                       loading="lazy"
+                       onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'event-poster-fallback\\'><svg width=\\'36\\' height=\\'36\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><circle cx=\\'12\\' cy=\\'12\\' r=\\'10\\'/><path d=\\'M12 6v6l4 2\\'/></svg><span style=\\'font-size:12px;\\'>${ev.venue}</span></div>';">
+                  <div class="event-poster-gradient" aria-hidden="true"></div>
+                ` : `
+                  <div class="event-poster-fallback">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <span style="font-size: 12px;">${ev.venue}</span>
+                  </div>
+                `}
+                <span class="event-category-pill">${cat}</span>
+                <span class="event-price-pill ${isFree ? 'is-free' : ''}">${priceStr}</span>
               </div>
 
               <div class="event-card-body">
-                <div>
-                  <div class="event-timing-row">
-                    <i></i>
-                    <span>${dateStr}${timeStr}</span>
-                  </div>
+                <div class="event-date-col">
+                  <span class="event-date-day">${day || '&bull;'}</span>
+                  <span class="event-date-month">${month || 'SERA'}</span>
+                </div>
+
+                <div class="event-info-col">
                   <h3 class="event-title">${ev.title}</h3>
-                </div>
 
-                <div class="event-venue-meta">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  <span>${venueStr}</span>
-                </div>
+                  <div class="event-venue-meta">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>${venueStr} ${distStr}</span>
+                  </div>
 
-                <div class="event-card-footer">
-                  <span class="btn-detail">
-                    <span>Dettagli serata</span>
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 6h8M6 2.5l3.5 3.5L6 9.5"/></svg>
-                  </span>
+                  <div class="event-bottom-row">
+                    <span class="time-tag">${timeStr}</span>
+                    <span class="action-arrow">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                  </div>
                 </div>
               </div>
             </article>
@@ -1041,7 +1724,7 @@
 
       function updateStatusBar() {
         const count = state.total;
-        resultsCount.textContent = `${count} ${count === 1 ? 'serata trovata' : 'serate trovate'}`;
+        resultsCount.textContent = `${count} ${count === 1 ? 'serata trovata' : 'serate in programma'}`;
 
         let subParts = [];
         if (state.city !== 'Tutte') subParts.push(`a ${state.city}`);
@@ -1049,17 +1732,17 @@
         else if (state.date === 'domani') subParts.push('per domani');
         else if (state.date === 'weekend') subParts.push('questo fine settimana');
         if (state.category !== 'Tutti') subParts.push(`genere ${state.category}`);
+        if (state.lat !== null) subParts.push('ordinate per distanza GPS');
 
-        resultsSubtitle.textContent = subParts.length ? `(${subParts.join(' • ')})` : 'in tutta Italia';
-
-        const isFiltered = state.category !== 'Tutti' || state.date !== 'tutte' || state.city !== 'Tutte' || state.search.trim() !== '' || state.lat !== null;
+        resultsSubtitle.textContent = subParts.length ? `• ${subParts.join(' ')}` : 'in tutta Italia';
+        const isFiltered = state.city !== 'Tutte' || state.date !== 'tutte' || state.category !== 'Tutti' || state.search.trim() !== '' || state.lat !== null;
         resetFiltersBtn.style.display = isFiltered ? 'inline-block' : 'none';
       }
 
       function resetAllFilters() {
-        state.category = 'Tutti';
-        state.date = 'tutte';
         state.city = 'Tutte';
+        state.date = 'tutte';
+        state.category = 'Tutti';
         state.search = '';
         state.lat = null;
         state.lng = null;
@@ -1069,126 +1752,136 @@
         citySelect.value = 'Tutte';
         gpsBtn.classList.remove('is-active');
 
+        dateChips.forEach(c => c.classList.toggle('is-active', c.dataset.date === 'tutte'));
         categoryChips.forEach(c => c.classList.toggle('is-active', c.dataset.category === 'Tutti'));
-        dateChips.forEach(d => d.classList.toggle('is-active', d.dataset.date === 'tutte'));
-
-        // Update URL
-        const url = new URL(window.location);
-        url.search = '';
-        window.history.replaceState({}, '', url);
 
         fetchEvents();
       }
 
-      // Event Modal Handlers
+      // Event Spotlight Modal
       function openEventModal(ev) {
+        currentModalEvent = ev;
+        const { formatted } = parseDateParts(ev.date);
+        const timeStr = ev.startTime ? `Dalle ore ${ev.startTime}` : 'Orario serale da confermare';
+        const priceStr = formatPrice(ev.price, ev.priceDetails);
+        const isFree = priceStr.toLowerCase() === 'gratuito';
+        const cat = ev.category || 'Club';
+
         modalImg.src = ev.imageUrl || 'assets/share.jpg';
         modalImg.alt = ev.title;
+        modalCategoryBadge.textContent = cat;
+        modalPriceBadge.textContent = priceStr;
+        modalPriceBadge.classList.toggle('is-free', isFree);
 
-        const dateStr = formatDate(ev.date);
-        const timeStr = ev.startTime ? ` • Ore ${ev.startTime}` : '';
-        modalTiming.textContent = `${dateStr}${timeStr} — ${ev.category || 'Serata'}`;
         modalEventTitle.textContent = ev.title;
-        modalVenue.innerHTML = `<strong>${ev.venue}</strong> &bull; ${ev.address || ev.city}`;
+        modalVenueSub.textContent = ev.city ? `${ev.venue} • ${ev.city}` : ev.venue;
 
-        // Price
-        const priceStr = formatPrice(ev.price, ev.priceDetails);
-        modalPriceMain.textContent = priceStr;
-        if (ev.priceDetails && ev.priceDetails.length > 0) {
-          modalPriceDesc.textContent = ev.priceDetails.map(p => `${p.label}: ${p.price}€`).join(' | ');
-          modalPriceBox.style.display = 'block';
-        } else if (ev.price > 0) {
-          modalPriceDesc.textContent = 'Biglietto / ingresso stimato alla cassa o prevendita';
-          modalPriceBox.style.display = 'block';
+        modalFactDate.textContent = formatted || 'Data in definizione';
+        modalFactTime.textContent = timeStr;
+
+        modalFactVenue.textContent = ev.venue;
+        modalFactAddress.textContent = ev.address || (ev.city ? `${ev.city}, Italia` : 'Italia');
+
+        const mapQuery = (ev.latitude && ev.longitude)
+          ? `${ev.latitude},${ev.longitude}`
+          : encodeURIComponent(`${ev.venue}, ${ev.address || ''} ${ev.city || ''}`);
+        modalDirectionsLink.href = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
+        modalFactPrice.textContent = priceStr;
+        modalFactPriceDetails.textContent = ev.priceDetails && ev.priceDetails.length
+          ? ev.priceDetails.map(p => `${p.name || 'Ingresso'}: €${p.price}`).join(' • ')
+          : (isFree ? 'Ingresso libero senza prevendita' : 'Verifica condizioni alla cassa');
+
+        if (ev.ticketUrl) {
+          modalTicketLink.href = ev.ticketUrl;
+          modalTicketLink.style.display = 'inline-flex';
         } else {
-          modalPriceDesc.textContent = 'Ingresso libero o consumazione facoltativa';
-          modalPriceBox.style.display = 'block';
+          modalTicketLink.style.display = 'none';
         }
 
-        modalDescription.textContent = ev.description || 'Dettagli completi della serata disponibili all\'ingresso o sui canali ufficiali del locale.';
+        modalDesc.textContent = ev.description || 'Nessuna descrizione aggiuntiva fornita dagli organizzatori. Consulta la programmazione e la mappa completa nell\'app mobile Seratina.';
 
-        // Google Maps Link
-        if (ev.latitude && ev.longitude) {
-          modalMapsBtn.href = `https://www.google.com/maps/search/?api=1&query=${ev.latitude},${ev.longitude}`;
-          modalMapsBtn.style.display = 'flex';
-        } else if (ev.address) {
-          modalMapsBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.address)}`;
-          modalMapsBtn.style.display = 'flex';
-        } else {
-          modalMapsBtn.style.display = 'none';
-        }
+        modalOpenAppBtn.href = `seratina://event/${ev.id}`;
 
-        // Native App URL Handoff
-        const isAndroid = /Android/i.test(navigator.userAgent);
-        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        const isMobile = isAndroid || isIOS;
-        const appScheme = isAndroid
-          ? `intent://event/${encodeURIComponent(ev.id)}#Intent;scheme=seratina;package=com.seratinaclub.seratina;end;`
-          : `seratina://event/${encodeURIComponent(ev.id)}`;
-
-        modalOpenAppBtn.onclick = function(e) {
-          if (isMobile) {
-            try { window.location.href = appScheme; } catch (_) {}
-          }
-        };
-
-        // Share Link
-        const shareUrl = `${window.location.origin}/eventi.html?event=${encodeURIComponent(ev.id)}`;
-        modalShareBtn.onclick = async function() {
-          if (navigator.share) {
-            try {
-              await navigator.share({
-                title: `${ev.title} • ${ev.venue}`,
-                text: `Guarda questa serata su Seratina: ${ev.title} (${dateStr}) a ${ev.venue}`,
-                url: shareUrl
-              });
-              return;
-            } catch (_) {}
-          }
-          try {
-            await navigator.clipboard.writeText(shareUrl);
-            modalShareBtn.textContent = 'Link Copiato!';
-            setTimeout(() => { modalShareBtn.textContent = 'Condividi'; }, 2000);
-          } catch (_) {
-            prompt('Copia il link della serata:', shareUrl);
-          }
-        };
-
-        modal.hidden = false;
+        eventModal.hidden = false;
         document.body.style.overflow = 'hidden';
+
+        // Update URL query ?event=ID without reloading
+        const url = new URL(window.location);
+        url.searchParams.set('event', ev.id);
+        window.history.replaceState({}, '', url);
       }
 
-      function closeModal() {
-        modal.hidden = true;
+      function closeEventModal() {
+        eventModal.hidden = true;
         document.body.style.overflow = '';
+        currentModalEvent = null;
+
+        const url = new URL(window.location);
+        url.searchParams.delete('event');
+        window.history.replaceState({}, '', url);
       }
 
-      modalCloseBtn.addEventListener('click', closeModal);
-      modalBackdrop.addEventListener('click', closeModal);
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !modal.hidden) closeModal();
-      });
-
-      async function fetchSingleEvent(id) {
+      async function fetchSingleEvent(eventId) {
         try {
-          const res = await fetch(`${API_BASE}/events/${encodeURIComponent(id)}`);
-          if (res.ok) {
-            const data = await res.json();
-            if (data.data) openEventModal(data.data);
-          }
-        } catch (_) {}
+          const res = await fetch(`${API_BASE}/events/${encodeURIComponent(eventId)}`);
+          if (!res.ok) throw new Error('Evento non trovato');
+          const data = await res.json();
+          const ev = data.data || data;
+          if (ev) openEventModal(ev);
+        } catch (err) {
+          console.warn('Impossibile aprire modale evento:', err);
+        }
       }
 
-      // Listeners
+      // Geolocation
+      function handleGeolocation() {
+        if (!navigator.geolocation) {
+          alert('La geolocalizzazione non è supportata dal tuo browser.');
+          return;
+        }
+
+        if (state.lat !== null) {
+          state.lat = null;
+          state.lng = null;
+          gpsBtn.classList.remove('is-active');
+          fetchEvents();
+          return;
+        }
+
+        gpsBtn.textContent = 'Rilevamento...';
+        navigator.geolocation.getCurrentPosition(
+          pos => {
+            state.lat = pos.coords.latitude;
+            state.lng = pos.coords.longitude;
+            gpsBtn.innerHTML = `
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg>
+              <span>Attiva (GPS)</span>`;
+            gpsBtn.classList.add('is-active');
+            fetchEvents();
+          },
+          err => {
+            console.warn(err);
+            alert('Impossibile ottenere la tua posizione. Verifica i permessi del browser.');
+            gpsBtn.innerHTML = `
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg>
+              <span>Vicino a me</span>`;
+            gpsBtn.classList.remove('is-active');
+          },
+          { enableHighAccuracy: true, timeout: 8000 }
+        );
+      }
+
+      // Event Listeners
       let searchTimeout = null;
-      searchInput.addEventListener('input', (e) => {
+      searchInput.addEventListener('input', e => {
         const val = e.target.value;
         searchClearBtn.style.display = val ? 'block' : 'none';
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
           state.search = val;
           fetchEvents();
-        }, 320);
+        }, 300);
       });
 
       searchClearBtn.addEventListener('click', () => {
@@ -1198,37 +1891,12 @@
         fetchEvents();
       });
 
-      citySelect.addEventListener('change', (e) => {
+      citySelect.addEventListener('change', e => {
         state.city = e.target.value;
-        state.lat = null;
-        state.lng = null;
-        gpsBtn.classList.remove('is-active');
         fetchEvents();
       });
 
-      gpsBtn.addEventListener('click', () => {
-        if (!navigator.geolocation) {
-          alert('Geolocalizzazione non supportata dal tuo browser');
-          return;
-        }
-        gpsBtn.textContent = 'Rilevamento...';
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            state.lat = pos.coords.latitude;
-            state.lng = pos.coords.longitude;
-            state.city = 'Tutte';
-            citySelect.value = 'Tutte';
-            gpsBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Posizione Attiva</span>`;
-            gpsBtn.classList.add('is-active');
-            fetchEvents();
-          },
-          (err) => {
-            alert('Impossibile ottenere la posizione GPS: autorizzazione negata o segnale assente.');
-            gpsBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Vicino a me</span>`;
-            gpsBtn.classList.remove('is-active');
-          }
-        );
-      });
+      gpsBtn.addEventListener('click', handleGeolocation);
 
       dateChips.forEach(chip => {
         chip.addEventListener('click', () => {
@@ -1253,14 +1921,80 @@
       loadMoreBtn.addEventListener('click', () => {
         if (state.page < state.totalPages) {
           state.page += 1;
+          loadMoreBtn.textContent = 'Caricamento in corso...';
           loadMoreBtn.disabled = true;
-          loadMoreBtn.textContent = 'Caricamento...';
           fetchEvents(true);
         }
       });
 
-      // Init
-      parseUrlParams();
+      // Modal Events
+      modalCloseBtn.addEventListener('click', closeEventModal);
+      modalBackdrop.addEventListener('click', closeEventModal);
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !eventModal.hidden) closeEventModal();
+      });
+
+      modalShareBtn.addEventListener('click', async () => {
+        if (!currentModalEvent) return;
+        const shareUrl = `${window.location.origin}/eventi.html?event=${currentModalEvent.id}`;
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: currentModalEvent.title,
+              text: `Scopri "${currentModalEvent.title}" presso ${currentModalEvent.venue} su Seratina:`,
+              url: shareUrl
+            });
+          } catch (_) {}
+        } else {
+          try {
+            await navigator.clipboard.writeText(shareUrl);
+            shareBtnText.textContent = 'Link copiato!';
+            setTimeout(() => { shareBtnText.textContent = 'Condividi serata'; }, 2000);
+          } catch (_) {
+            alert(shareUrl);
+          }
+        }
+      });
+
+      // Populate cities dropdown from BE
+      async function populateZones() {
+        try {
+          const res = await fetch(`${API_BASE}/events/zones`);
+          if (!res.ok) return;
+          const data = await res.json();
+          if (Array.isArray(data.data) && data.data.length > 0) {
+            citySelect.innerHTML = '';
+            data.data.forEach(z => {
+              const opt = document.createElement('option');
+              opt.value = z;
+              opt.textContent = z === 'Tutte' ? 'Tutta Italia' : z;
+              if (z.toLowerCase() === state.city.toLowerCase()) opt.selected = true;
+              citySelect.appendChild(opt);
+            });
+          }
+        } catch (_) {}
+      }
+
+      // Mobile Nav Toggle
+      const navEl = document.querySelector('.nav');
+      const navToggle = navEl?.querySelector('.nav__toggle');
+      navToggle?.addEventListener('click', () => {
+        const open = !navEl.classList.contains('is-open');
+        navEl.classList.toggle('is-open', open);
+        document.body.classList.toggle('nav-locked', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+      });
+      navEl?.addEventListener('click', (e) => {
+        if (navEl.classList.contains('is-open') && e.target.closest?.('a[href]')) {
+          navEl.classList.remove('is-open');
+          document.body.classList.remove('nav-locked');
+          navToggle?.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Bootstrap
+      initFromUrl();
+      populateZones();
       fetchEvents();
     })();
   </script>

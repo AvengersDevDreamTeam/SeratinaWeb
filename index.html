@@ -539,8 +539,9 @@
     }
 
     /* #scopri: editorial split (head left, ruled numbered list right), genre strip at the foot */
-    #scopri { border-bottom: 1px solid var(--line); }
-    #scopri .scopri { justify-content: space-between; gap: var(--s-8); }
+    #scopri { border-bottom: 1px solid var(--line); height: auto; min-height: 0; }
+    #scopri > .wrap { height: auto; }
+    #scopri .scopri { gap: var(--s-7); }
     #scopri .scopri__top { align-items: start; }
     #scopri .scopri__head { display: grid; gap: var(--s-5); align-content: start; }
     #scopri .scopri__lede { color: var(--muted); font-size: var(--t-lead); line-height: 1.5; max-width: 46ch; }
@@ -583,7 +584,7 @@
       #scopri .scopri__list { margin-top: var(--s-6); }
     }
     @media (max-width: 639px) {
-      #scopri .scopri { gap: var(--s-6); }
+      #scopri .scopri { gap: var(--s-5); }
       #scopri .scopri__list li { grid-template-columns: 40px 1fr; padding-block: var(--s-4); }
       #scopri .scopri__genres { gap: var(--s-1) var(--s-3); }
       #scopri .scopri__genres li:not(:last-child)::after { margin-left: var(--s-3); }

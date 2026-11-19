@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Eventi e Serate nei Club in Italia — Seratina</title>
-  <meta name="description" content="Esplora gli eventi serali, i club e i concerti in programma in tutta Italia. Filtra per città, data, genere musicale e trova la tua serata su Seratina.">
+  <meta name="description" content="Esplora gli eventi serali, i club e i concerti in programma in tutta Italia. Filtra per città, data e categoria e trova la tua serata su Seratina.">
   <link rel="canonical" href="https://seratina.org/eventi.html">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Seratina">
   <meta property="og:url" content="https://seratina.org/eventi.html">
   <meta property="og:title" content="Eventi, Club e Serate in Italia | Seratina">
-  <meta property="og:description" content="Filtra le serate per città, data e genere musicale. Trova i club più vicini a te con Seratina.">
+  <meta property="og:description" content="Filtra le serate per città, data e categoria. Trova i club più vicini a te con Seratina.">
   <meta property="og:image" content="https://seratina.org/assets/share.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Eventi e Serate nei Club in Italia | Seratina">
-  <meta name="twitter:description" content="Tutte le serate e i club in Italia. Filtra per città, data e genere.">
+  <meta name="twitter:description" content="Tutte le serate e i club in Italia. Filtra per città, data e categoria.">
   <meta name="twitter:image" content="https://seratina.org/assets/share.jpg">
 
   <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -33,7 +33,7 @@
     "@type": "CollectionPage",
     "name": "Eventi, Club e Serate in Italia — Seratina",
     "url": "https://seratina.org/eventi.html",
-    "description": "Motore di ricerca eventi serali, discoteche e concerti con filtri per città, data e genere musicale.",
+    "description": "Motore di ricerca eventi serali, discoteche e concerti con filtri per città, data e categoria.",
     "publisher": {
       "@type": "Organization",
       "name": "Seratina",
@@ -257,13 +257,24 @@
       background: var(--magenta-hover);
       transform: translateY(-1px);
     }
-    .nav__toggle {
-      display: none;
+    /* menu button only where the links are hidden (below 769px); system.css styles it and the open sheet */
+    @media (min-width: 769px) {
+      .nav__toggle { display: none; }
     }
     @media (max-width: 768px) {
       .nav__links,
       .nav-links {
         display: none;
+      }
+      /* open sheet: backdrop-filter would make the nav the containing block of the fixed sheet */
+      .nav.is-open {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: var(--bg);
+      }
+      .nav.is-open .nav__links {
+        justify-content: flex-start;
+        align-items: stretch;
       }
       .nav__actions .btn {
         height: 38px;
@@ -527,6 +538,8 @@
       cursor: pointer;
       text-align: left;
       position: relative;
+      color: inherit;
+      text-decoration: none;
     }
     .event-card:hover {
       transform: translateY(-4px);
@@ -570,6 +583,15 @@
       background: linear-gradient(135deg, #1c1b24 0%, #121118 100%);
       color: var(--muted);
       gap: 6px;
+    }
+    /* poster that fails to load: hide it and show the fallback rendered next to it */
+    .event-poster-img ~ .event-poster-fallback,
+    .event-poster-frame.is-broken > .event-poster-img,
+    .event-poster-frame.is-broken > .event-poster-gradient {
+      display: none;
+    }
+    .event-poster-frame.is-broken > .event-poster-fallback {
+      display: flex;
     }
     .event-poster-fallback svg {
       color: var(--magenta);
@@ -1267,7 +1289,7 @@
 
         <!-- Category Presets -->
         <div class="filter-group" id="categoryChipsGroup">
-          <span class="filter-group-label">Genere</span>
+          <span class="filter-group-label">Categoria</span>
           <button type="button" class="chip is-active" data-category="Tutti">Tutti</button>
           <button type="button" class="chip" data-category="Club">Club</button>
           <button type="button" class="chip" data-category="Musica">Musica</button>
@@ -1357,12 +1379,12 @@
       <div class="spotlight-poster-frame">
         <img id="modalImg" class="spotlight-poster" src="" alt="">
         <div class="spotlight-poster-gradient" aria-hidden="true"></div>
-        <span id="modalCategoryBadge" class="event-category-pill" style="top: 14px; left: 14px;"></span>
         <span id="modalPriceBadge" class="event-price-pill" style="bottom: 12px; right: 14px;"></span>
       </div>
 
       <div class="spotlight-content">
         <div class="spotlight-header">
+          <span id="modalCategoryBadge" class="event-category-pill" style="position: static; align-self: flex-start; margin-bottom: 4px;"></span>
           <h2 id="modalEventTitle" class="spotlight-title"></h2>
           <div class="spotlight-venue-sub">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -1410,9 +1432,6 @@
               <strong id="modalFactPrice" class="spotlight-fact-val"></strong>
               <span id="modalFactPriceDetails" class="spotlight-fact-sub"></span>
             </div>
-            <a id="modalTicketLink" href="#" target="_blank" rel="noopener" class="spotlight-fact-btn" style="display: none;">
-              <span>Prevendita ↗</span>
-            </a>
           </div>
         </div>
 
@@ -1482,7 +1501,6 @@
       const modalDirectionsLink = document.getElementById('modalDirectionsLink');
       const modalFactPrice = document.getElementById('modalFactPrice');
       const modalFactPriceDetails = document.getElementById('modalFactPriceDetails');
-      const modalTicketLink = document.getElementById('modalTicketLink');
       const modalDesc = document.getElementById('modalDesc');
       const modalOpenAppBtn = document.getElementById('modalOpenAppBtn');
       const modalShareBtn = document.getElementById('modalShareBtn');
@@ -1513,6 +1531,13 @@
           }
         } catch (_) {}
         return { day: '', month: '', formatted: iso };
+      }
+
+      // Escapes a value for HTML text and quoted attributes (& < > " ')
+      function escapeHtml(value) {
+        return String(value ?? '').replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[c]);
       }
 
       function formatPrice(price, priceDetails) {
@@ -1644,44 +1669,48 @@
           return;
         }
 
+        // Event data comes from scraped posts and ticketing sites: every value is escaped before it
+        // reaches the HTML template (titles, venues, URLs), so markup in the data stays plain text.
         const cardsHtml = state.events.map(ev => {
           const { day, month } = parseDateParts(ev.date);
-          const timeStr = ev.startTime ? `ore ${ev.startTime}` : 'Orario serale';
+          const timeStr = ev.startTime ? `ore ${escapeHtml(ev.startTime)}` : 'Orario serale';
           const priceStr = formatPrice(ev.price, ev.priceDetails);
           const isFree = priceStr.toLowerCase() === 'gratuito';
-          const venueStr = ev.city ? `${ev.venue} &bull; ${ev.city}` : ev.venue;
-          const distStr = ev.distanceKm ? `&bull; ${ev.distanceKm.toFixed(1)} km` : '';
+          const venue = escapeHtml(ev.venue);
+          const venueStr = ev.city ? `${venue} &bull; ${escapeHtml(ev.city)}` : venue;
+          const distStr = typeof ev.distanceKm === 'number' ? `&bull; ${ev.distanceKm.toFixed(1)} km` : '';
           const hasImg = Boolean(ev.imageUrl && ev.imageUrl.trim());
-          const cat = ev.category || 'Club';
+          const cat = escapeHtml(ev.category || 'Club');
+          const fallback = `
+                  <div class="event-poster-fallback">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <span style="font-size: 12px;">${venue}</span>
+                  </div>`;
 
           return `
-            <article class="event-card" data-event-id="${ev.id}">
+            <a class="event-card" href="eventi.html?event=${encodeURIComponent(ev.id)}" data-event-id="${escapeHtml(ev.id)}">
               <div class="event-poster-frame">
                 ${hasImg ? `
                   <img class="event-poster-img"
-                       src="${ev.imageUrl}"
-                       alt="${ev.title}"
+                       src="${escapeHtml(ev.imageUrl)}"
+                       alt="${escapeHtml(ev.title)}"
                        loading="lazy"
-                       onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'event-poster-fallback\\'><svg width=\\'36\\' height=\\'36\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><circle cx=\\'12\\' cy=\\'12\\' r=\\'10\\'/><path d=\\'M12 6v6l4 2\\'/></svg><span style=\\'font-size:12px;\\'>${ev.venue}</span></div>';">
+                       onerror="this.onerror=null;this.parentElement.classList.add('is-broken')">
                   <div class="event-poster-gradient" aria-hidden="true"></div>
-                ` : `
-                  <div class="event-poster-fallback">
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    <span style="font-size: 12px;">${ev.venue}</span>
-                  </div>
-                `}
+                ` : ''}
+                ${fallback}
                 <span class="event-category-pill">${cat}</span>
-                <span class="event-price-pill ${isFree ? 'is-free' : ''}">${priceStr}</span>
+                <span class="event-price-pill ${isFree ? 'is-free' : ''}">${escapeHtml(priceStr)}</span>
               </div>
 
               <div class="event-card-body">
                 <div class="event-date-col">
-                  <span class="event-date-day">${day || '&bull;'}</span>
-                  <span class="event-date-month">${month || 'SERA'}</span>
+                  <span class="event-date-day">${day ? escapeHtml(day) : '&bull;'}</span>
+                  <span class="event-date-month">${month ? escapeHtml(month) : 'SERA'}</span>
                 </div>
 
                 <div class="event-info-col">
-                  <h3 class="event-title">${ev.title}</h3>
+                  <h3 class="event-title">${escapeHtml(ev.title)}</h3>
 
                   <div class="event-venue-meta">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -1696,7 +1725,7 @@
                   </div>
                 </div>
               </div>
-            </article>
+            </a>
           `;
         }).join('');
 
@@ -1704,7 +1733,10 @@
 
         // Wire click on cards
         document.querySelectorAll('.event-card').forEach(card => {
-          card.addEventListener('click', () => {
+          card.addEventListener('click', (e) => {
+            // real link for crawlers and new-tab clicks; plain click opens the modal in place
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+            e.preventDefault();
             const id = card.dataset.eventId;
             const ev = state.events.find(e => e.id === id);
             if (ev) openEventModal(ev);
@@ -1731,7 +1763,7 @@
         if (state.date === 'oggi') subParts.push('per stasera');
         else if (state.date === 'domani') subParts.push('per domani');
         else if (state.date === 'weekend') subParts.push('questo fine settimana');
-        if (state.category !== 'Tutti') subParts.push(`genere ${state.category}`);
+        if (state.category !== 'Tutti') subParts.push(`categoria ${state.category}`);
         if (state.lat !== null) subParts.push('ordinate per distanza GPS');
 
         resultsSubtitle.textContent = subParts.length ? `• ${subParts.join(' ')}` : 'in tutta Italia';
@@ -1758,12 +1790,112 @@
         fetchEvents();
       }
 
+      // Per-event SEO: ?event=ID gets its own canonical, title, description and Event schema
+      // (the list page's tags are restored on close). Mirrors SeratinaBE share_renderer.py.
+      const seoTags = {
+        canonical: document.querySelector('link[rel="canonical"]'),
+        description: document.querySelector('meta[name="description"]'),
+        ogUrl: document.querySelector('meta[property="og:url"]'),
+        ogTitle: document.querySelector('meta[property="og:title"]'),
+        ogDescription: document.querySelector('meta[property="og:description"]'),
+        ogImage: document.querySelector('meta[property="og:image"]'),
+      };
+      const seoDefaults = {
+        title: document.title,
+        canonical: seoTags.canonical.href,
+        description: seoTags.description.content,
+        ogUrl: seoTags.ogUrl.content,
+        ogTitle: seoTags.ogTitle.content,
+        ogDescription: seoTags.ogDescription.content,
+        ogImage: seoTags.ogImage.content,
+      };
+
+      function applyEventSeo(ev) {
+        const url = `https://seratina.org/eventi.html?event=${encodeURIComponent(ev.id)}`;
+        const { formatted } = parseDateParts(ev.date);
+        const place = ev.city ? `${ev.venue}, ${ev.city}` : ev.venue;
+        const title = `${ev.title} @ ${ev.venue} — Seratina`;
+        const firstLine = (ev.description || '').split('\n')[0].slice(0, 120).trim();
+        const description = `${formatted ? formatted + ' presso ' : ''}${place}${firstLine ? ': ' + firstLine : ''}`;
+        const image = ev.imageUrl || 'https://seratina.org/assets/share.jpg';
+
+        document.title = title;
+        seoTags.canonical.href = url;
+        seoTags.description.content = description;
+        seoTags.ogUrl.content = url;
+        seoTags.ogTitle.content = title;
+        seoTags.ogDescription.content = description;
+        seoTags.ogImage.content = image;
+
+        const schema = {
+          '@context': 'https://schema.org',
+          '@type': 'Event',
+          name: ev.title,
+          startDate: ev.startTime && ev.startTime.length === 5 ? `${ev.date}T${ev.startTime}:00` : `${ev.date}T22:00:00`,
+          eventStatus: 'https://schema.org/EventScheduled',
+          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+          location: {
+            '@type': 'Place',
+            name: ev.venue,
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: ev.address || ev.venue,
+              addressLocality: ev.city || 'Italia',
+              addressCountry: 'IT',
+            },
+          },
+          image: [image],
+          description: ev.description || `Serata ${ev.title} presso ${place}.`,
+          organizer: { '@type': 'Organization', name: ev.venue, url },
+          url,
+        };
+        if (ev.latitude && ev.longitude) {
+          schema.location.geo = { '@type': 'GeoCoordinates', latitude: ev.latitude, longitude: ev.longitude };
+        }
+        const prices = (ev.priceDetails || []).map(p => p.price).filter(p => typeof p === 'number');
+        const price = prices.length ? Math.min(...prices) : ev.price;
+        if (typeof price === 'number') {
+          schema.offers = {
+            '@type': 'Offer',
+            price,
+            priceCurrency: 'EUR',
+            availability: 'https://schema.org/InStock',
+            url,
+            validFrom: `${ev.date}T00:00:00`,
+          };
+        }
+
+        let ld = document.getElementById('eventJsonLd');
+        if (!ld) {
+          ld = document.createElement('script');
+          ld.type = 'application/ld+json';
+          ld.id = 'eventJsonLd';
+          document.head.appendChild(ld);
+        }
+        // "<" escaped so a title or description can never close the script tag
+        ld.textContent = JSON.stringify(schema).replace(/</g, '\\u003c');
+      }
+
+      function resetEventSeo() {
+        document.title = seoDefaults.title;
+        seoTags.canonical.href = seoDefaults.canonical;
+        seoTags.description.content = seoDefaults.description;
+        seoTags.ogUrl.content = seoDefaults.ogUrl;
+        seoTags.ogTitle.content = seoDefaults.ogTitle;
+        seoTags.ogDescription.content = seoDefaults.ogDescription;
+        seoTags.ogImage.content = seoDefaults.ogImage;
+        document.getElementById('eventJsonLd')?.remove();
+      }
+
       // Event Spotlight Modal
       function openEventModal(ev) {
         currentModalEvent = ev;
         const { formatted } = parseDateParts(ev.date);
         const timeStr = ev.startTime ? `Dalle ore ${ev.startTime}` : 'Orario serale da confermare';
-        const priceStr = formatPrice(ev.price, ev.priceDetails);
+        const prices = (ev.priceDetails || []).map(p => p.price);
+        const priceStr = new Set(prices).size > 1
+          ? 'A partire da €' + Math.min(...prices)
+          : formatPrice(ev.price, ev.priceDetails);
         const isFree = priceStr.toLowerCase() === 'gratuito';
         const cat = ev.category || 'Club';
 
@@ -1792,13 +1924,6 @@
           ? ev.priceDetails.map(p => `${p.name || 'Ingresso'}: €${p.price}`).join(' • ')
           : (isFree ? 'Ingresso libero senza prevendita' : 'Verifica condizioni alla cassa');
 
-        if (ev.ticketUrl) {
-          modalTicketLink.href = ev.ticketUrl;
-          modalTicketLink.style.display = 'inline-flex';
-        } else {
-          modalTicketLink.style.display = 'none';
-        }
-
         modalDesc.textContent = ev.description || 'Nessuna descrizione aggiuntiva fornita dagli organizzatori. Consulta la programmazione e la mappa completa nell\'app mobile Seratina.';
 
         modalOpenAppBtn.href = `seratina://event/${ev.id}`;
@@ -1810,6 +1935,7 @@
         const url = new URL(window.location);
         url.searchParams.set('event', ev.id);
         window.history.replaceState({}, '', url);
+        applyEventSeo(ev);
       }
 
       function closeEventModal() {
@@ -1820,6 +1946,7 @@
         const url = new URL(window.location);
         url.searchParams.delete('event');
         window.history.replaceState({}, '', url);
+        resetEventSeo();
       }
 
       async function fetchSingleEvent(eventId) {

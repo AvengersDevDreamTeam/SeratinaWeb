@@ -455,9 +455,11 @@
 
     /* Newsletter closing band & autocomplete */
     #newsletter {
-      overflow-x: clip;
+      overflow: clip;
       --head-gap: 24px;
       border-top: 0;
+      /* between page bg (#scopri above) and surface (links band below) */
+      background: color-mix(in oklab, var(--p-bg) 45%, var(--p-surface));
     }
     #newsletter > .wrap {
       row-gap: var(--s-8);
@@ -485,10 +487,11 @@
       content: "";
       position: absolute;
       top: 0;
-      bottom: calc(-1 * (var(--padb) + var(--bar, 0px)));
+      bottom: -100vh; /* clipped by #newsletter: reaches the footer's foot whatever its padding */
       left: -100vw;
       right: -100vw;
       background: var(--p-surface);
+      border-top: 1px solid var(--line);
       z-index: -1;
       pointer-events: none;
     }
@@ -533,6 +536,57 @@
       #newsletter .gps-box { padding: 10px 12px; gap: 8px; }
       #newsletter .gps-box__desc { display: none; }
       #newsletter .closing__links { gap: var(--s-4); padding-top: var(--s-4); }
+    }
+
+    /* #scopri: editorial split (head left, ruled numbered list right), genre strip at the foot */
+    #scopri { border-bottom: 1px solid var(--line); }
+    #scopri .scopri { justify-content: space-between; gap: var(--s-8); }
+    #scopri .scopri__top { align-items: start; }
+    #scopri .scopri__head { display: grid; gap: var(--s-5); align-content: start; }
+    #scopri .scopri__lede { color: var(--muted); font-size: var(--t-lead); line-height: 1.5; max-width: 46ch; }
+    #scopri .scopri__list { list-style: none; padding: 0; border-top: 1px solid var(--line-strong); }
+    #scopri .scopri__list li {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      column-gap: var(--s-4);
+      row-gap: var(--s-2);
+      padding-block: var(--s-5);
+      border-bottom: 1px solid var(--line);
+    }
+    #scopri .scopri__num {
+      grid-row: span 2;
+      font: 500 var(--t-small)/1.6 var(--font-text);
+      font-variant-numeric: tabular-nums;
+      color: var(--p-accent);
+    }
+    #scopri .scopri__list h3 { font-size: var(--t-card); }
+    #scopri .scopri__list p { color: var(--muted); line-height: 1.55; max-width: 52ch; }
+    #scopri .scopri__genres {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s-2) var(--s-4);
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2vw, 30px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: color-mix(in oklab, var(--ink) 28%, transparent);
+    }
+    #scopri .scopri__genres li:not(:last-child)::after {
+      content: "·";
+      margin-left: var(--s-4);
+      color: var(--p-accent);
+    }
+    @media (max-width: 1023px) {
+      #scopri .scopri__list { margin-top: var(--s-6); }
+    }
+    @media (max-width: 639px) {
+      #scopri .scopri { gap: var(--s-6); }
+      #scopri .scopri__list li { grid-template-columns: 40px 1fr; padding-block: var(--s-4); }
+      #scopri .scopri__genres { gap: var(--s-1) var(--s-3); }
+      #scopri .scopri__genres li:not(:last-child)::after { margin-left: var(--s-3); }
     }
     .field--city { position: relative; }
     .city-label-row {
@@ -754,6 +808,7 @@
     <nav class="nav__links" aria-label="Principale">
       <div class="nav__item"><a class="nav__link" href="eventi.html">Eventi</a></div>
       <div class="nav__item"><a class="nav__link" href="#anteprima">Schermate</a></div>
+      <div class="nav__item"><a class="nav__link" href="#scopri">Come funziona</a></div>
       <div class="nav__item"><a class="nav__link" href="#newsletter">Newsletter</a></div>
       <div class="nav__item"><a class="nav__link" href="gestori.html">Gestori</a></div>
     </nav>
@@ -905,7 +960,7 @@
 
           <li class="mo-pc__step">
             <h3>Mappa interattiva dal vivo</h3>
-            <p>Locali ed eventi su mappa scura con filtri per genere e data.</p>
+            <p>Locali ed eventi su mappa scura con filtri per categoria e data.</p>
             <figure class="mo-pc__visual">
               <div class="seratina-shot-stage">
                 <div class="seratina-device">
@@ -967,57 +1022,40 @@
   </section>
 
   <!-- 2.5 Guida Seratina & Vita Notturna in Italia -->
-  <section class="section seo-guide" id="scopri" aria-labelledby="scopri-h" style="padding-block: clamp(64px, 8vw, 110px); border-top: 1px solid rgba(242, 239, 233, 0.08);">
-    <div class="wrap">
-      <div class="section-head" style="margin-bottom: var(--s-7); max-width: 760px;">
-        <h2 id="scopri-h" style="font-size: clamp(26px, 3.8vw, 42px); line-height: 1.15; letter-spacing: -0.03em;">Tutta la vita notturna a portata di mappa<span class="dot-accent">.</span></h2>
-        <p style="color: var(--p-muted); font-size: clamp(15px, 1.8vw, 18px); margin-top: 12px; line-height: 1.5;">Seratina raccoglie serate, club, discoteche, concerti ed eventi speciali in tutta Italia. Dalla musica elettronica ai format commerciali, scopri cosa succede stasera vicino a te con orari, prezzi e indicazioni stradali in tempo reale.</p>
+  <section class="section" id="scopri" aria-labelledby="scopri-h">
+    <div class="wrap scopri">
+      <div class="grid scopri__top">
+        <div class="span-5 scopri__head">
+          <h2 id="scopri-h">Tutta la vita notturna a portata di mappa<span class="dot-accent">.</span></h2>
+          <p class="scopri__lede">Seratina raccoglie serate, club, discoteche, concerti ed eventi speciali in tutta Italia. Dai club ai festival, dagli aperitivi agli spettacoli, scopri cosa succede stasera vicino a te con orari, prezzi e indicazioni stradali in tempo reale.</p>
+          <p class="t-small"><a class="link" href="eventi.html">Cerca le serate di questa settimana</a></p>
+        </div>
+
+        <ol class="span-6 start-7 scopri__list">
+          <li>
+            <span class="scopri__num" aria-hidden="true">01</span>
+            <h3>Mappa e distanza reale</h3>
+            <p>Ogni serata e locale è posizionato sulla mappa interattiva con la distanza chilometrica reale calcolata automaticamente dalla tua posizione.</p>
+          </li>
+          <li>
+            <span class="scopri__num" aria-hidden="true">02</span>
+            <h3>Locali seguiti e notifiche</h3>
+            <p>Segui i tuoi locali preferiti: la sera ti avvisiamo se hanno una serata in programma, all'orario che scegli tu.</p>
+          </li>
+          <li>
+            <span class="scopri__num" aria-hidden="true">03</span>
+            <h3>Orari, prezzi e liste</h3>
+            <p>Consulta le schede dettagliate con costi d'ingresso, orari di apertura e chiusura, canali ufficiali e link rapidi per aggiungere le serate al calendario.</p>
+          </li>
+        </ol>
       </div>
 
-      <div class="grid" style="row-gap: var(--s-6); margin-bottom: var(--s-8);">
-        <div class="span-4 card" style="background: var(--p-surface); border: 1px solid rgba(242, 239, 233, 0.1); border-radius: var(--r-md); padding: var(--s-5);">
-          <div style="color: var(--p-accent); font-size: 20px; font-weight: 600; margin-bottom: 8px;">Mappa e Distanza Reale</div>
-          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Ogni serata e locale è posizionato sulla mappa interattiva con la distanza chilometrica reale calcolata automaticamente dalla tua posizione.</p>
-        </div>
-
-        <div class="span-4 card" style="background: var(--p-surface); border: 1px solid rgba(242, 239, 233, 0.1); border-radius: var(--r-md); padding: var(--s-5);">
-          <div style="color: var(--seratina-mint); font-size: 20px; font-weight: 600; margin-bottom: 8px;">Tutti i Generi Musicali</div>
-          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Dalla Techno, House ed Elettronica a Reggaeton, Commerciale, Hip-Hop, Indie, Rock e serate con musica dal vivo: filtra rapidamente in base ai tuoi gusti.</p>
-        </div>
-
-        <div class="span-4 card" style="background: var(--p-surface); border: 1px solid rgba(242, 239, 233, 0.1); border-radius: var(--r-md); padding: var(--s-5);">
-          <div style="color: var(--p-ink); font-size: 20px; font-weight: 600; margin-bottom: 8px;">Orari, Prezzi e Liste</div>
-          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Consulta le schede dettagliate con costi d'ingresso, orari di apertura e chiusura, canali ufficiali e link rapidi per aggiungere le serate al calendario.</p>
-        </div>
-      </div>
-
-      <div class="section-head" style="margin-top: var(--s-8); margin-bottom: var(--s-6);">
-        <h3 style="font-size: clamp(20px, 2.6vw, 28px); letter-spacing: -0.02em;">Domande Frequenti su Seratina<span class="dot-accent">.</span></h3>
-      </div>
-
-      <div class="grid" style="row-gap: var(--s-5);">
-        <div class="span-6 stack-2">
-          <strong style="color: var(--p-ink); font-size: 16px; display: block;">Come funziona Seratina per trovare serate oggi o nel weekend?</strong>
-          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Apri l'app o il sito, attiva la geolocalizzazione o seleziona la tua città. La mappa e il feed mostrano istantaneamente tutti gli eventi in programma con orari, distanze e scheda del locale.</p>
-        </div>
-
-        <div class="span-6 stack-2">
-          <strong style="color: var(--p-ink); font-size: 16px; display: block;">L'app Seratina è gratuita?</strong>
-          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Sì, Seratina è 100% gratuita sia su iOS che su Android. Non è richiesta alcuna carta di credito e puoi esplorare gli eventi anche come ospite senza registrarti.</p>
-        </div>
-
-        <div class="span-6 stack-2">
-          <strong style="color: var(--p-ink); font-size: 16px; display: block;">In quali città è attiva Seratina?</strong>
-          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">Seratina copre tutta Italia da Nord a Sud su tutte le 20 regioni: dalle grandi città alle mete della nightlife costiera e provinciale, con club e serate sempre aggiornati sulla mappa dal vivo.</p>
-        </div>
-
-        <div class="span-6 stack-2">
-          <strong style="color: var(--p-ink); font-size: 16px; display: block;">Come posso aggiornare o inserire un locale se sono un gestore?</strong>
-          <p style="color: var(--p-muted); font-size: 14px; line-height: 1.55;">I titolari possono accedere all'<a href="gestori.html" class="link" style="color: var(--p-accent); text-decoration: underline;">Area Gestori</a> per verificare o modificare le informazioni della propria scheda o per esercitare il diritto di opposizione conforme a GDPR.</p>
-        </div>
-      </div>
+      <ul class="scopri__genres" aria-label="Categorie di eventi su Seratina">
+        <li>Club</li><li>Musica</li><li>Festival</li><li>Aperitivo</li><li>Arte &amp; Spettacolo</li>
+      </ul>
     </div>
   </section>
+
 </main>
 
 <!-- 3. Newsletter & Footer (closing, 1 screen) -->

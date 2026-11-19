@@ -1,61 +1,64 @@
 # Deep Linking & Event Spotlight Modal — SeratinaWeb 🔗
 
-Questo documento descrive il funzionamento del sistema universale di condivisione eventi e dell'**Event Spotlight Modal** integrato in `SeratinaWeb`.
+Questo documento descrive come il sito gestisce i link agli eventi condivisi e la scheda evento (**Event Spotlight Modal**).
 
 ---
 
-## 1. Il Problema della Condivisione Cross-Platform
+## 1. Perché un Link Web
 
-Quando un utente tocca *"Condividi"* all'interno dell'app mobile Seratina, il link generato può essere aperto da qualsiasi dispositivo:
-- Uno smartphone con l'app installata.
-- Uno smartphone **senza** l'app installata.
-- Un computer desktop o tablet.
-
-I custom scheme proprietari (es. `seratina://event/123`) falliscono miseramente se aperti in un normale browser o se l'app non è presente, restituendo un errore di protocollo non supportato.
+Un evento condiviso dall'app può essere aperto da qualsiasi dispositivo: smartphone con o senza l'app, computer, tablet. Lo schema dell'app (`seratina://event/{id}`) funziona solo dove l'app è installata, quindi il link condiviso è sempre un URL web HTTPS.
 
 ---
 
-## 2. Il Flusso del Link Universale (`https://seratina.org/?event={id}`)
+## 2. Il Link di Condivisione (`https://seratina.org/eventi.html?event={id}`)
 
-Per risolvere il problema alla radice, Seratina genera un link web universale standard HTTPS:
 ```text
-https://seratina.org/?event=C7wKl81_1
+https://seratina.org/eventi.html?event=C7wKl81_1
 ```
+
+È il link condiviso dall'app, usato dal pulsante *"Condividi serata"* della scheda web e indicato come URL canonico della serata per i motori di ricerca (vedi [seo.md](seo.md)).
 
 ```mermaid
 sequenceDiagram
     participant User as Destinatario
-    participant Web as SeratinaWeb (index.html)
-    participant BE as SeratinaBE (GET /events/{id})
+    participant Web as seratina.org (eventi.html)
+    participant API as API Seratina (GET /events/{id})
     participant App as App Seratina (se presente)
 
-    User->>Web: Clicca sul link https://seratina.org/?event=C7wKl81_1
-    Web->>Web: Rileva parametro query ?event=...
-    Web->>BE: fetch(GET /events/C7wKl81_1)
-    BE-->>Web: JSON con titolo, data, venue, prezzo, immagine WebP
-    Web->>Web: Apre "Event Spotlight Modal" (overlay Ink/Bone/Magenta)
-    
-    alt Utente è su smartphone
-        Web->>App: Tenta apertura protocollo seratina://event/C7wKl81_1
-        opt App Non Installata
-            User->>Web: Clicca su "Prova la Beta" (test.html)
-        end
-    else Utente è su Desktop
-        Web->>User: Mostra anteprima evento completa
+    User->>Web: Apre https://seratina.org/eventi.html?event=C7wKl81_1
+    Web->>Web: Rileva il parametro ?event=...
+    Web->>API: GET /events/C7wKl81_1
+    API-->>Web: Titolo, data, locale, prezzi, immagine
+    Web->>Web: Apre la scheda evento e aggiorna canonical, title e schema Event
+    opt L'utente ha l'app
+        User->>App: Tocca "Apri nell'app Seratina" (seratina://event/C7wKl81_1)
     end
 ```
 
+`eventi.html` **non** apre l'app automaticamente: l'apertura avviene solo con il pulsante, così la pagina resta leggibile da browser e motori di ricerca.
+
 ---
 
-## 3. Specifiche dell'Event Spotlight Modal
+## 3. La Scheda Evento (`eventi.html`)
 
-All'apertura della landing page con il parametro `?event=ID`:
-1. **Fetch dei Dati in Tempo Reale**: il client invoca in modo trasparente `GET /events/{id}` su `SeratinaBE`.
-2. **Presentazione Grafica Notturna**:
-   - Locandina evento con bordi coerenti con il sistema **Ink / Bone / Magenta / Mint**.
-   - Badge di categoria (`Club`, `Musica`, `Aperitivo`, `Festival`, `Arte`).
-   - Data formattata in italiano, orario di inizio, nome del locale e indirizzo.
-   - Badge del prezzo (`Da €X` o `Omaggio`).
-3. **Pulsante Primario Call-to-Action**:
-   - *"Apri nell'App Seratina"* (tentativo deep link `seratina://event/{id}` / `intent://` su Android).
-   - Fallback secondario: pulsante *"Prova la Beta"* verso `test.html` (Apple TestFlight e Google Play Closed Beta).
+1. **Dati**: aperta da una card usa i dati già caricati; aperta da URL diretto chiama `GET /events/{id}`.
+2. **Contenuto**:
+   - Locandina dell'evento con badge del prezzo.
+   - Badge di categoria (`Club`, `Musica`, `Festival`, `Aperitivo`, `Arte`) accanto al titolo.
+   - Data in italiano, orario di inizio, locale, indirizzo e pulsante *"Mappe"* (Google Maps).
+   - Ingresso: `Gratuito`, prezzo singolo (`€X`) oppure *"A partire da €X"* se ci sono più tariffe diverse, con l'elenco delle tariffe sotto.
+   - Descrizione dell'evento.
+3. **Pulsanti**:
+   - *"Apri nell'app Seratina"*: `seratina://event/{id}`.
+   - *"Condividi serata"*: Web Share API se disponibile, altrimenti copia del link negli appunti.
+4. **URL e SEO**: all'apertura l'URL diventa `?event=ID` e la pagina aggiorna canonical, `<title>`, description, Open Graph e schema `Event`; alla chiusura tornano quelli della pagina elenco.
+
+---
+
+## 4. Link Legacy (`https://seratina.org/?event={id}`)
+
+I link condivisi con le versioni precedenti dell'app puntano alla home. `index.html` li gestisce ancora con un proprio modal:
+- Su smartphone tenta subito l'apertura dell'app (`intent://` su Android, `seratina://event/{id}` su iOS).
+- Mostra l'anteprima dell'evento con il pulsante *"Prova la Beta"* verso `test.html`; se l'evento non esiste più indica che la serata potrebbe essere terminata.
+
+I nuovi link usano sempre `eventi.html?event={id}`.

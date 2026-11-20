@@ -5,7 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Eventi e Serate nei Club in Italia — Seratina</title>
   <meta name="description" content="Esplora gli eventi serali, i club e i concerti in programma in tutta Italia. Filtra per città, data e categoria e trova la tua serata su Seratina.">
-  <link rel="canonical" href="https://seratina.org/eventi.html">
+  <script>
+    // Canonical built here, not as static HTML: Google reads the static tag first and would fold every ?event=ID into the list page
+    (() => {
+      const id = new URLSearchParams(location.search).get('event');
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = 'https://seratina.org/eventi.html' + (id ? '?event=' + encodeURIComponent(id) : '');
+      document.head.appendChild(link);
+    })();
+  </script>
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Seratina">
@@ -1818,7 +1827,7 @@
       };
       const seoDefaults = {
         title: document.title,
-        canonical: seoTags.canonical.href,
+        canonical: 'https://seratina.org/eventi.html',
         description: seoTags.description.content,
         ogUrl: seoTags.ogUrl.content,
         ogTitle: seoTags.ogTitle.content,
@@ -1975,6 +1984,11 @@
           openEventModal(ev);
         } catch (err) {
           console.warn('Impossibile aprire modale evento:', err);
+          // Past or unknown event: GitHub Pages still answers 200, so noindex keeps it from piling up as a soft 404
+          const robots = document.createElement('meta');
+          robots.name = 'robots';
+          robots.content = 'noindex';
+          document.head.appendChild(robots);
           document.getElementById('notFoundModal').hidden = false;
         }
       }

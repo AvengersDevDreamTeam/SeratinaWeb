@@ -14,7 +14,7 @@ Questo documento descrive come il sito si presenta ai motori di ricerca e agli a
 
 Ogni pagina pubblica ha `title`, meta description, Open Graph (`og:title`, `og:description`, `og:url`, `og:image`), Twitter Card e un solo `<h1>`.
 
-`SoftwareApplication` non ha ancora `downloadUrl` / `installUrl`: vanno aggiunti quando l'app sarà pubblicata su App Store e Google Play.
+`SoftwareApplication` espone `downloadUrl` con i link App Store e Google Play.
 
 ---
 
@@ -41,7 +41,7 @@ Google esegue il JavaScript prima di indicizzare, quindi legge i tag aggiornati;
 
 - **`sitemap.xml`** (statica): home, `eventi.html`, `gestori.html`, `privacy.html`, `terms.html`.
 - **Sitemap degli eventi**: generata dall'API di Seratina e dichiarata in `robots.txt`; contiene un URL `eventi.html?event=ID` per ogni serata di oggi e dei giorni successivi.
-- **`robots.txt`**: consente tutto tranne `test.html`, `delete-account.html` e `unsubscribe.html`; autorizza esplicitamente i crawler AI (`GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`) e dichiara entrambe le sitemap.
+- **`robots.txt`**: consente tutto tranne `delete-account.html` e `unsubscribe.html`; autorizza esplicitamente i crawler AI (`GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`) e dichiara entrambe le sitemap.
 
 ---
 

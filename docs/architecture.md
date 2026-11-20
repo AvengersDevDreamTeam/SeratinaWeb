@@ -16,14 +16,13 @@ Questo documento descrive l'architettura del sito statico **SeratinaWeb** (`http
 
 | File | Scopo | API usate |
 |---|---|---|
-| **`index.html`** | Landing page: Hero triptych (`Prova la Beta` -> `test.html`), 4 schermate app (`#anteprima`), sezione "Tutta la vita notturna a portata di mappa" (`#scopri`), newsletter + footer (`#newsletter`). Gestisce ancora i link legacy `/?event=ID`. | `GET /events/{id}` (link legacy), `POST /newsletter/subscribe` |
+| **`index.html`** | Landing page: Hero triptych (pulsanti `App Store` / `Google Play`, ancora `#scarica`), 4 schermate app (`#anteprima`), sezione "Tutta la vita notturna a portata di mappa" (`#scopri`), newsletter + footer (`#newsletter`). Reindirizza i link legacy `/?event=ID` a `eventi.html?event=ID`. | `POST /newsletter/subscribe` |
 | **`eventi.html`** | Ricerca eventi: elenco paginato con ricerca, filtri (zona, data, categoria), ordinamento GPS e scheda evento su `?event=ID`. | `GET /events`, `GET /events/zones`, `GET /events/{id}` |
 | **`gestori.html`** | Modulo per i titolari dei locali: verifica o correzione dei dati, rivendicazione della scheda o diritto di opposizione (Opt-Out GDPR Art. 21). | `POST /gestori/richiesta` |
 | **`privacy.html`** | Informativa sul trattamento dei dati personali (GDPR, Apple App Store, Google Play Data Safety). | — |
 | **`terms.html`** | Termini di servizio e clausola di non responsabilità sui dati aggregati. | — |
 | **`delete-account.html`** | Istruzioni per richiedere la cancellazione dell'account, richieste dalle policy di Google Play e Apple. | — |
 | **`unsubscribe.html`** | Disiscrizione 1-click dalla newsletter dal link presente nelle email (`?token=...`). | `POST /newsletter/unsubscribe` |
-| **`test.html`** | Onboarding dei beta tester: Apple TestFlight e Google Play Closed Beta con selettore di piattaforma. | — |
 
 Tutte le chiamate vanno all'API pubblica di Seratina, il cui indirizzo è definito negli script di ogni pagina.
 

@@ -12,7 +12,7 @@ Seratina è la piattaforma digitale e app mobile (disponibile per Apple iOS e Go
 
 ### 2. Dettaglio Serata e Condivisione Deep Link
 - Ogni evento dispone di una scheda completa che include: nome serata, locale ospitante, indirizzo completo, coordinate geografiche, orario di apertura e chiusura, categoria dell'evento (Club, Musica, Festival, Aperitivo, Arte & Spettacolo), prezzi d'ingresso e note organizzative.
-- Gli utenti possono condividere un evento tramite il link web canonico `https://seratina.org/eventi.html?event={id}`. Quando il destinatario apre il link su smartphone con l'app installata, viene reindirizzato allo schema `seratina://event/{id}` per un'apertura immediata; da browser desktop o senza app, viene mostrata una modale interattiva (Spotlight Modal) con tutti i dettagli e la possibilità di installare la versione beta.
+- Gli utenti possono condividere un evento tramite il link web canonico `https://seratina.org/eventi.html?event={id}`. Il link apre una scheda evento (Spotlight Modal) con tutti i dettagli e il pulsante per aprire la serata nell'app (`seratina://event/{id}`).
 
 ### 3. Calendario Serate e Filtri per Categoria
 - Navigazione temporale giorno per giorno e vista calendario mensile per pianificare le uscite del fine settimana.

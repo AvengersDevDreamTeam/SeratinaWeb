@@ -41,7 +41,7 @@ sequenceDiagram
 
 ## 3. La Scheda Evento (`eventi.html`)
 
-1. **Dati**: aperta da una card usa i dati già caricati; aperta da URL diretto chiama `GET /events/{id}`.
+1. **Dati**: aperta da una card usa i dati già caricati; aperta da URL diretto chiama `GET /events/{id}`. Se l'evento non esiste o la chiamata fallisce compare il popup *"Evento non trovato"* (`#notFoundModal`): chiudendolo si rimuove `?event` dall'URL e resta l'elenco serate.
 2. **Contenuto**:
    - Locandina dell'evento con badge del prezzo.
    - Badge di categoria (`Club`, `Musica`, `Festival`, `Aperitivo`, `Arte`) accanto al titolo.
@@ -57,8 +57,6 @@ sequenceDiagram
 
 ## 4. Link Legacy (`https://seratina.org/?event={id}`)
 
-I link condivisi con le versioni precedenti dell'app puntano alla home. `index.html` li gestisce ancora con un proprio modal:
-- Su smartphone tenta subito l'apertura dell'app (`intent://` su Android, `seratina://event/{id}` su iOS).
-- Mostra l'anteprima dell'evento con il pulsante *"Prova la Beta"* verso `test.html`; se l'evento non esiste più indica che la serata potrebbe essere terminata.
+I link condivisi con le versioni dell'app fino alla v1.5.0 puntano alla home. Uno script in testa a `index.html` li reindirizza subito (`location.replace`) a `eventi.html?event={id}`, che mostra la scheda evento come per i link nuovi. Nessuna apertura automatica dell'app: si apre solo col pulsante *"Apri nell'app Seratina"* (vedi sezione 2).
 
 I nuovi link usano sempre `eventi.html?event={id}`.

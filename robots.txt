@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /test.html
 Disallow: /delete-account.html
 Disallow: /unsubscribe.html
 

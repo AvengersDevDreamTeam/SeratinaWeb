@@ -244,7 +244,7 @@
       <img src="assets/logo.png" alt="Seratina" class="logo">
       <div class="badge">Privacy & Termini</div>
       <h1>Informativa sulla Privacy & Termini d'Uso</h1>
-      <p class="subtitle">Ultimo aggiornamento: Novembre 2026 &bull; Versione 1.8</p>
+      <p class="subtitle">Ultimo aggiornamento: Novembre 2026 &bull; Versione 1.9</p>
     </header>
 
     <!-- 1. Titolare -->
@@ -255,7 +255,7 @@
         <li><strong>Applicazione:</strong> Seratina</li>
         <li><strong>Email di contatto / Supporto Privacy:</strong> <a href="mailto:info@seratina.org">info@seratina.org</a></li>
       </ul>
-      <p>La presente informativa si applica all'applicazione mobile Seratina (iOS e Android), alle relative API REST e a qualsiasi servizio digitale connesso.</p>
+      <p>La presente informativa si applica all'applicazione mobile Seratina (iOS e Android), al sito web seratina.org, alle relative API REST e a qualsiasi servizio digitale connesso.</p>
     </div>
 
     <!-- 2. Geolocalizzazione -->
@@ -277,12 +277,19 @@
     <!-- 3. Dati Utente Raccolti -->
     <div class="card">
       <h2>3. Dati Personali Raccolti e Finalità</h2>
-      <h3>a. Utenti Registrati (Accesso con Google)</h3>
-      <p>Quando effettui l'accesso tramite Google Sign-In, raccogliamo le seguenti informazioni essenziali fornite dal tuo provider:</p>
+      <h3>a. Utenti Registrati (Accesso con Google o Apple)</h3>
+      <p>Quando effettui l'accesso tramite <strong>Google Sign-In</strong>, raccogliamo le seguenti informazioni essenziali fornite dal tuo provider:</p>
       <ul>
         <li>Identificativo univoco Google (sub)</li>
         <li>Indirizzo email</li>
         <li>Nome completo e foto profilo</li>
+      </ul>
+      <p>Quando effettui l'accesso tramite <strong>Accedi con Apple (Sign in with Apple)</strong>, raccogliamo:</p>
+      <ul>
+        <li>Identificativo univoco Apple dell'utente</li>
+        <li>Indirizzo email, che può essere l'indirizzo reale oppure un indirizzo di inoltro privato generato da Apple (<em>Nascondi la mia email</em>), a tua scelta</li>
+        <li>Nome, solo se scegli di condividerlo al primo accesso</li>
+        <li>Un token tecnico di aggiornamento (<em>refresh token</em>) rilasciato da Apple, conservato in forma riservata sul nostro database al solo scopo di revocare l'autorizzazione presso Apple quando elimini l'account, come richiesto dalle linee guida Apple</li>
       </ul>
       <p><strong>Finalità:</strong> Consentire la creazione della sessione utente, la sincronizzazione cloud dei tuoi eventi preferiti, dei locali salvati e delle preferenze di notifica serate su tutti i tuoi dispositivi, nonché l'invio di proposte o feedback alla community.</p>
 
@@ -340,10 +347,48 @@
       </ul>
     </div>
 
-    <!-- 6. Diritti GDPR ed Eliminazione Account -->
+    <!-- 6. Basi giuridiche e conservazione -->
     <div class="card">
-      <h2>6. I Tuoi Diritti (Artt. 15-22 GDPR) & Eliminazione Account</h2>
-      <p>In base al Regolamento Generale sulla Protezione dei Dati (GDPR), hai il pieno diritto di richiedere l'accesso, la rettifica, la portabilità e la <strong>cancellazione definitiva (diritto all'oblio)</strong> di tutti i tuoi dati personali.</p>
+      <h2>6. Basi Giuridiche e Periodi di Conservazione</h2>
+      <ul>
+        <li><strong>Account, sincronizzazione di preferiti e preferenze di notifica:</strong> esecuzione del servizio richiesto dall'utente (Art. 6, par. 1, lett. b, GDPR). Conservazione fino all'eliminazione dell'account.</li>
+        <li><strong>Token Apple di revoca:</strong> esecuzione del servizio e adempimento dei requisiti della piattaforma (Art. 6, par. 1, lett. b, GDPR). Conservato fino all'eliminazione dell'account, quando viene usato per la revoca e poi cancellato.</li>
+        <li><strong>Feedback e segnalazioni di locali:</strong> esecuzione del servizio richiesto (Art. 6, par. 1, lett. b, GDPR) e legittimo interesse al miglioramento del servizio (Art. 6, par. 1, lett. f, GDPR). Conservati fino all'eliminazione dell'account; le segnalazioni approvate diventano schede pubbliche dei locali, che non contengono i tuoi dati personali.</li>
+        <li><strong>Newsletter:</strong> consenso (Art. 6, par. 1, lett. a, GDPR). Conservazione fino alla disiscrizione.</li>
+        <li><strong>Dati degli eventi pubblici e nomi di artisti / DJ:</strong> legittimo interesse (Art. 6, par. 1, lett. f, GDPR), come descritto nella sezione 4. I dati sono conservati per il tempo necessario a mostrare gli eventi nel catalogo, salvo richiesta di rimozione.</li>
+        <li><strong>Log tecnici dei server:</strong> legittimo interesse alla sicurezza e al funzionamento del servizio (Art. 6, par. 1, lett. f, GDPR). Possono contenere indirizzo IP e dati della richiesta e sono conservati per il periodo di retention predefinito dei fornitori di infrastruttura (Google Cloud), di norma non oltre 30 giorni.</li>
+      </ul>
+      <p>Il conferimento dei dati per la creazione dell'account è facoltativo: senza di esso puoi comunque usare l'app in modalità Ospite.</p>
+    </div>
+
+    <!-- 7. Fornitori e trasferimenti -->
+    <div class="card">
+      <h2>7. Fornitori Terzi, Sede dei Dati e Trasferimenti</h2>
+      <p>Per erogare il servizio ci avvaliamo dei seguenti fornitori, che operano come Responsabili del trattamento (Art. 28 GDPR) o come titolari autonomi per i propri servizi di autenticazione:</p>
+      <ul>
+        <li><strong>Supabase Inc.</strong> – database dell'app (account, preferiti, preferenze, feedback, iscritti alla newsletter). Dati ospitati nella region di <strong>Londra (Regno Unito)</strong>.</li>
+        <li><strong>Google Cloud (Google Ireland Ltd.)</strong> – hosting delle API e dei processi automatici, region di <strong>Milano (Italia)</strong>.</li>
+        <li><strong>Google (Google Ireland Ltd. / Google LLC)</strong> – autenticazione con Google Sign-In.</li>
+        <li><strong>Apple Distribution International Ltd. / Apple Inc.</strong> – autenticazione con Accedi con Apple.</li>
+        <li><strong>Google Gemini API (Google LLC)</strong> – elaborazione automatica dei testi. Non riceve dati degli utenti dell'app.</li>
+        <li><strong>Brevo (Sendinblue SAS, Francia)</strong> – invio della newsletter, come descritto nella sezione 3.f.</li>
+        <li><strong>Google Fonts (Google LLC)</strong> – caratteri tipografici del sito web. Il browser li scarica dai server di Google, che ricevono l'indirizzo IP del visitatore.</li>
+        <li><strong>OpenStreetMap Nominatim (OpenStreetMap Foundation, Regno Unito)</strong> – nel modulo di iscrizione alla newsletter sul sito, il testo della città cercata e, solo se acconsenti alla richiesta di posizione del browser, le coordinate GPS approssimative vengono inviati a Nominatim per individuare il comune. Il servizio riceve anche l'indirizzo IP del visitatore.</li>
+        <li><strong>Telegram (Telegram Messenger Inc.)</strong> – notifiche interne al team sulle bozze dei contenuti social, che riguardano solo eventi pubblici e non dati degli utenti.</li>
+      </ul>
+      <h3>Trasferimenti fuori dall'Unione Europea</h3>
+      <p>Alcuni fornitori possono trattare dati al di fuori dello Spazio Economico Europeo:</p>
+      <ul>
+        <li><strong>Regno Unito</strong> (Supabase, OpenStreetMap): paese coperto da una decisione di adeguatezza della Commissione Europea (Art. 45 GDPR).</li>
+        <li><strong>Stati Uniti</strong> (Google LLC, Apple Inc., Supabase Inc., Telegram): i trasferimenti avvengono verso società aderenti all'EU-US Data Privacy Framework, ove applicabile, oppure sulla base delle Clausole Contrattuali Standard approvate dalla Commissione Europea (Art. 46 GDPR).</li>
+      </ul>
+      <p>Non vendiamo i tuoi dati e non li condividiamo con inserzionisti o broker pubblicitari.</p>
+    </div>
+
+    <!-- 8. Diritti GDPR ed Eliminazione Account -->
+    <div class="card">
+      <h2>8. I Tuoi Diritti (Artt. 15-22 GDPR) & Eliminazione Account</h2>
+      <p>In base al Regolamento Generale sulla Protezione dei Dati (GDPR), hai il pieno diritto di richiedere l'accesso, la rettifica, la portabilità, la limitazione e la <strong>cancellazione definitiva (diritto all'oblio)</strong> di tutti i tuoi dati personali. Puoi inoltre <strong>opporti</strong> in qualsiasi momento ai trattamenti basati sul legittimo interesse (Art. 21 GDPR) e <strong>revocare il consenso</strong> già prestato, senza pregiudicare la liceità del trattamento effettuato prima della revoca. Le richieste vanno inviate a <a href="mailto:info@seratina.org">info@seratina.org</a> e ricevono risposta entro un mese.</p>
       
       <div class="box-alert">
         <p><strong>Eliminazione immediata in-app:</strong> All'interno dell'app Seratina, puoi andare nella sezione <em>Profilo &gt; Account &gt; Elimina account</em> per cancellare istantaneamente e in modo irreversibile il tuo profilo, le credenziali, l'elenco degli eventi e locali salvati, le preferenze di notifica e tutti i dati associati dal server e dai database.</p>
@@ -353,9 +398,9 @@
       <a href="delete-account.html" class="button">Procedura di Cancellazione Account e Dati</a>
     </div>
 
-    <!-- 7. Termini d'Uso e Disclaimer -->
+    <!-- 9. Termini d'Uso e Disclaimer -->
     <div class="card">
-      <h2>7. Termini d'Uso & Disclaimer sulle Informazioni</h2>
+      <h2>9. Termini d'Uso & Disclaimer sulle Informazioni</h2>
       
       <div class="box-disclaimer">
         <p>I dati sono raccolti da fonti pubbliche a mero scopo informativo; l'app non è collegata ufficialmente ai locali e non risponde di variazioni di programma o prezzi.</p>

@@ -44,7 +44,7 @@ Google esegue il JavaScript prima di indicizzare, quindi legge i tag aggiornati;
 ## 3. Sitemap e Robots
 
 - **`sitemap.xml`** (statica): home, `eventi.html`, `gestori.html`, `privacy.html`, `terms.html`.
-- **Sitemap degli eventi**: generata dall'API di Seratina e dichiarata in `robots.txt`; contiene un URL `eventi.html?event=ID` per ogni serata di oggi e dei giorni successivi. Il `lastmod` è la data di inserimento dell'evento (`scraped_at`), mai la data della serata: Google ignora i `lastmod` futuri. Sta su un altro host (Cloud Run), quindi in Google Search Console va inviata dalla proprietà prefisso URL di quell'host, verificata con il file servito dal backend.
+- **Sitemap degli eventi**: generata dall'API di Seratina e dichiarata in `robots.txt`; contiene un URL `eventi.html?event=ID` per ogni serata di oggi e dei giorni successivi. Il `lastmod` è la data di inserimento dell'evento (`scraped_at`), mai la data della serata: Google ignora i `lastmod` futuri. Sta su un altro host, quindi in Google Search Console va inviata dalla proprietà prefisso URL di quell'host, verificata con il file servito dal backend.
 - **`robots.txt`**: consente tutto tranne `delete-account.html` e `unsubscribe.html`; autorizza esplicitamente i crawler AI (`GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`) e dichiara entrambe le sitemap.
 
 ---

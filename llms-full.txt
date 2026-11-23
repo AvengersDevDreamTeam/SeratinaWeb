@@ -36,3 +36,8 @@ Seratina copre l'intero territorio nazionale italiano su tutte le 20 regioni, in
 - Nessun tracciamento invasivo: l'accesso come ospite non richiede registrazione.
 - L'autenticazione è supportata opzionalmente tramite Google Sign-In e Sign in with Apple per sincronizzare i locali ed eventi preferiti tra dispositivi diversi.
 - Procedura di eliminazione account self-service e conforme a Google Play e Apple App Store (`https://seratina.org/delete-account.html`).
+- Account e iscrizione alla newsletter riservati ai maggiori di 18 anni.
+- Dati degli utenti ospitati su Supabase (region di Londra, Regno Unito) e su Google Cloud (region di Milano); nessuna vendita di dati a inserzionisti o broker pubblicitari.
+- Il sito web non usa cookie di profilazione o tracciamento.
+- Contatto per privacy, diritti GDPR e segnalazioni di contenuti illeciti (Digital Services Act): info@seratina.org.
+- Informativa completa: `https://seratina.org/privacy.html` · Termini di Servizio: `https://seratina.org/terms.html`

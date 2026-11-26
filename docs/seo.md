@@ -10,8 +10,8 @@ Questo documento descrive come il sito si presenta ai motori di ricerca e agli a
 |---|---|---|
 | `index.html` | `https://seratina.org/` | `Organization`, `WebSite`, `SoftwareApplication` (gratuita, iOS e Android) |
 | `eventi.html` | `https://seratina.org/eventi.html` | `CollectionPage` |
-| `/eventi/ID` | `https://seratina.org/eventi/ID` | `Event` (nell'HTML generato dal backend, vedi sezione 2) |
-| `eventi.html?event=ID` | `https://seratina.org/eventi/ID` | `Event` (aggiunto via JavaScript) |
+| `/eventi/ID` | `https://seratina.org/eventi/ID` | `Event` e `BreadcrumbList` (nell'HTML generato dal backend, vedi sezione 2) |
+| `evento.html` | — | Template della pagina evento, `noindex` (vedi sezione 2) |
 
 Ogni pagina pubblica ha `title`, meta description, Open Graph (`og:title`, `og:description`, `og:url`, `og:image`), Twitter Card e un solo `<h1>`.
 
@@ -21,12 +21,13 @@ Ogni pagina pubblica ha `title`, meta description, Open Graph (`og:title`, `og:d
 
 ## 2. Indicizzazione delle Singole Serate
 
-Ogni serata ha un URL proprio: `https://seratina.org/eventi/ID`.
+Ogni serata ha un solo URL: `https://seratina.org/eventi/ID`.
 
-**Pagina renderizzata lato server.** Firebase Hosting inoltra `/eventi/**` al backend su Cloud Run (`GET /eventi/{id}`, `share_renderer.py` in SeratinaBE). Google riceve già nell'HTML:
+**Pagina renderizzata lato server.** Firebase Hosting inoltra `/eventi/**` al backend su Cloud Run (`GET /eventi/{id}`, `event_page_renderer.py` in SeratinaBE). Il backend riempie il template `evento.html` di questo repo, quindi la pagina ha header, footer e stili del sito. Google riceve già nell'HTML:
 - `<title>` (`{titolo} @ {locale} — Seratina`), description, canonical, Open Graph e Twitter Card;
-- schema `Event` in JSON-LD;
-- `<h1>`, locandina, data, locale, indirizzo e descrizione.
+- schema `Event` e `BreadcrumbList` in JSON-LD;
+- `<h1>`, locandina, data, orario, locale, indirizzo, prezzo e descrizione;
+- link interni: breadcrumb, elenco della città e tutte le prossime serate dello stesso locale (anche quelle nascoste dietro "Mostra tutte", che restano nell'HTML).
 
 Non serve eseguire JavaScript, quindi la pagina si indicizza come una pagina statica. Le risposte restano in cache sulla CDN di Firebase per un'ora (`s-maxage=3600`).
 
@@ -34,11 +35,9 @@ Non serve eseguire JavaScript, quindi la pagina si indicizza come una pagina sta
 - **Evento inesistente**: 404 con `noindex, follow`.
 - **Evento passato**: 200 con il badge "Evento concluso". La pagina resta indicizzabile e non perde il valore accumulato.
 
-**Scheda in `eventi.html`.** `eventi.html?event=ID` resta per la navigazione: apre la scheda in modal, aggiorna title, description, Open Graph e schema `Event` via JavaScript (`applyEventSeo()`). Canonical e `og:url` puntano a `/eventi/ID`, così Google consolida i due indirizzi sulla pagina server.
+**Template `evento.html`.** È pubblico (il backend lo scarica da `https://seratina.org/evento.html`), ma il blocco `<!--SSR:HEAD-->` contiene `<meta name="robots" content="noindex">`: il file grezzo non si indicizza, mentre nelle pagine generate il backend sostituisce l'intero blocco.
 
-Il canonical di `eventi.html` non è nell'HTML statico: lo crea uno script in testa alla `<head>`, verso `/eventi/ID` se c'è `?event=ID`, altrimenti verso `eventi.html`. Se la serata non esiste, lo script aggiunge `<meta name="robots" content="noindex">` insieme alla schermata "Evento non trovato".
-
-**Scoperta degli URL**: le card dell'elenco sono link `<a href="/eventi/ID">` e la sitemap degli eventi (sezione 3) elenca tutte le serate future.
+**Elenco `eventi.html`.** Ha canonical statico verso `eventi.html`. Le card sono link `<a href="/eventi/ID">`, quindi Google le segue senza eseguire JavaScript. La vecchia scheda in modal (`eventi.html?event=ID`) non esiste più.
 
 ---
 
@@ -64,5 +63,6 @@ Entrambi descrivono le categorie reali degli eventi (Club, Musica, Festival, Ape
 - Nuova pagina pubblica: canonical, title, description, Open Graph, un `<h1>`, voce in `sitemap.xml`.
 - Pagina di servizio da non indicizzare: `Disallow` in `robots.txt` e nessuna voce in `sitemap.xml`.
 - Nuova funzionalità del prodotto: aggiornare `llms.txt` e `llms-full.txt`.
-- Modifica ai campi dell'evento mostrati o indicizzati: aggiornare `applyEventSeo()` in `eventi.html` e applicare `escapeHtml()` a ogni nuovo valore inserito nel template delle card.
+- Modifica ai campi dell'evento mostrati o indicizzati: aggiornare `event_page_renderer.py` in SeratinaBE (pagina evento) e, per le card dell'elenco, il template in `eventi.html` con `escapeHtml()` su ogni nuovo valore.
+- Modifica a header, footer o stili della pagina evento: `evento.html` e `assets/site.css`. Il backend rilegge il template entro 10 minuti; le pagine già in cache CDN si aggiornano entro un'ora.
 - Le modifiche diventano visibili ai motori di ricerca solo dopo il merge di `develop` in `main` (deploy Firebase Hosting).

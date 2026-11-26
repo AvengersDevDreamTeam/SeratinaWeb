@@ -1,6 +1,6 @@
-# Deep Linking & Event Spotlight Modal — SeratinaWeb 🔗
+# Deep Linking & Pagina Evento — SeratinaWeb 🔗
 
-Questo documento descrive come il sito gestisce i link agli eventi condivisi e la scheda evento (**Event Spotlight Modal**).
+Questo documento descrive come il sito gestisce i link agli eventi condivisi e la pagina di ogni evento (`/eventi/{id}`).
 
 ---
 
@@ -10,56 +10,59 @@ Un evento condiviso dall'app può essere aperto da qualsiasi dispositivo: smartp
 
 ---
 
-## 2. Il Link di Condivisione (`https://seratina.org/eventi/{id}`)
+## 2. Il Link dell'Evento (`https://seratina.org/eventi/{id}`)
 
 ```text
 https://seratina.org/eventi/C7wKl81_1
 ```
 
-È il link condiviso dall'app, dal pulsante *"Condividi serata"* della scheda web e dalla newsletter, ed è l'URL canonico della serata per i motori di ricerca (vedi [seo.md](seo.md)). Firebase Hosting lo inoltra al backend, che restituisce una pagina HTML completa: locandina, data, locale, descrizione, meta tag, Open Graph e schema `Event`.
+È l'unico indirizzo di un evento: lo usano l'app, il pulsante *"Condividi serata"*, le card dell'elenco, la newsletter e la sitemap, ed è l'URL canonico per i motori di ricerca (vedi [seo.md](seo.md)).
+
+Firebase Hosting inoltra `/eventi/**` al backend su Cloud Run. Il backend scarica il template `evento.html` di questo repo (header, footer e stili del sito), inserisce head e contenuto della serata e restituisce la pagina completa.
 
 ```mermaid
 sequenceDiagram
     participant User as Destinatario
     participant Hosting as seratina.org (Firebase Hosting)
     participant BE as SeratinaBE (GET /eventi/{id})
-    participant Web as eventi.html
     participant App as App Seratina (se presente)
 
     User->>Hosting: Apre https://seratina.org/eventi/C7wKl81_1
     Hosting->>BE: Rewrite verso Cloud Run (path invariato)
-    BE-->>User: Pagina evento HTML (in cache CDN)
-    opt Continua su Seratina Web
-        User->>Web: eventi.html?event=C7wKl81_1 (scheda in modal)
-    end
+    BE->>Hosting: GET /evento.html (template, in cache 10 minuti)
+    BE-->>User: Pagina evento completa (in cache CDN 1 ora)
     opt L'utente ha l'app
         User->>App: Tocca "Apri nell'app Seratina" (seratina://event/C7wKl81_1)
     end
 ```
 
-La pagina **non** apre l'app automaticamente: l'apertura avviene solo con il pulsante, così resta leggibile da browser e motori di ricerca. Se l'evento non esiste risponde 404 con `noindex`; se è passato resta visibile con il badge "Evento concluso".
+La pagina **non** apre l'app automaticamente: l'apertura avviene solo con il pulsante, così resta leggibile da browser e motori di ricerca.
 
 ---
 
-## 3. La Scheda Evento (`eventi.html`)
+## 3. La Pagina Evento
 
-1. **Dati**: aperta da una card usa i dati già caricati; aperta da URL diretto chiama `GET /events/{id}`. Se l'evento non esiste o la chiamata fallisce compare il popup *"Evento non trovato"* (`#notFoundModal`): chiudendolo si rimuove `?event` dall'URL e resta l'elenco serate.
+1. **Struttura**: header e footer del sito (dal template `evento.html`), breadcrumb `Home › Eventi › {città} › {titolo}`.
 2. **Contenuto**:
-   - Locandina dell'evento con badge del prezzo.
-   - Badge di categoria (`Club`, `Musica`, `Festival`, `Aperitivo`, `Arte`) accanto al titolo.
+   - Locandina intera, senza ritaglio.
+   - Badge di categoria (`Club`, `Musica`, `Festival`, `Aperitivo`, `Arte`) e badge *"Evento concluso"* se la data è passata.
+   - Titolo come `<h1>` nascosto alla vista (è già nella locandina, resta per Google e screen reader), locale e città.
    - Data in italiano, orario di inizio, locale, indirizzo e pulsante *"Mappe"* (Google Maps).
-   - Ingresso: `Gratuito`, prezzo singolo (`€X`) oppure *"A partire da €X"* se ci sono più tariffe diverse, con l'elenco delle tariffe sotto.
-   - Descrizione dell'evento.
+   - Ingresso: `Gratuito`, prezzo singolo (`€X`) oppure *"A partire da €X"* se ci sono più tariffe diverse. Con più di una tariffa, la sezione *"Tipologie di ingresso"* mostra una card a forma di biglietto per tariffa, dalla più economica (badge *"Più conveniente"*), con il pulsante *"Acquista biglietti"* se c'è il link di vendita.
+   - Descrizione completa dell'evento.
+   - **Il locale**: logo (o l'iniziale se manca), nome, indirizzo, città, regione, `@username`, link a Google Maps e al profilo Instagram.
+   - **Prossime serate al locale**: tutte le serate future dello stesso locale, con le stesse card dell'elenco. Sono tutte nell'HTML; se sono più di 6 si vedono le prime 6 e *"Mostra tutte le N serate"* apre le altre senza altre richieste al server. Link *"Tutti gli eventi a {città}"* (`eventi.html?city=...`).
 3. **Pulsanti**:
    - *"Apri nell'app Seratina"*: `seratina://event/{id}`.
-   - *"Condividi serata"*: Web Share API se disponibile, altrimenti copia del link negli appunti.
-4. **URL e SEO**: all'apertura l'URL diventa `?event=ID` e la pagina aggiorna `<title>`, description, Open Graph e schema `Event`; canonical e `og:url` puntano a `https://seratina.org/eventi/ID`. Alla chiusura tornano i tag della pagina elenco.
-5. **Condivisione**: *"Condividi serata"* condivide `https://seratina.org/eventi/ID`.
+   - *"Condividi serata"*: Web Share API se disponibile, altrimenti copia di `https://seratina.org/eventi/{id}` negli appunti.
+4. **Evento inesistente**: risposta 404 con `noindex, follow`, messaggio *"Serata non trovata"* e pulsante verso l'elenco.
+
+Lo script del template gestisce solo il menu mobile, il pulsante Condividi e *"Mostra tutte le serate"*; tutto il resto è HTML generato dal server.
 
 ---
 
 ## 4. Link Legacy (`https://seratina.org/?event={id}`)
 
-I link condivisi con le versioni dell'app fino alla v1.5.0 puntano alla home. Uno script in testa a `index.html` li reindirizza subito (`location.replace`) a `/eventi/{id}`, la pagina evento dei link nuovi. Nessuna apertura automatica dell'app: si apre solo col pulsante *"Apri nell'app Seratina"* (vedi sezione 2).
+Le versioni dell'app fino alla v1.5.0 condividono `https://seratina.org/?event={id}`. Uno script in testa a `index.html` li reindirizza subito (`location.replace`) a `/eventi/{id}`.
 
-I nuovi link usano sempre `/eventi/{id}`. I link `eventi.html?event={id}` già condivisi continuano a funzionare: aprono la scheda in modal e hanno canonical verso `/eventi/{id}`.
+I vecchi link `eventi.html?event={id}` non hanno redirect: aprono l'elenco eventi. Nessuno di quegli URL era indicizzato.

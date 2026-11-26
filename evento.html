@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!--
+    Template della pagina evento. Non è una pagina del sito: SeratinaBE lo scarica, sostituisce il blocco
+    SSR:HEAD (title, meta, canonical, Open Graph, JSON-LD) e il segnaposto SSR:MAIN, e lo serve su /eventi/{id}.
+    Usare solo percorsi assoluti (/assets/..., /eventi.html): la pagina vive sotto /eventi/.
+  -->
+  <!--SSR:HEAD-->
+  <title>Evento — Seratina</title>
+  <meta name="robots" content="noindex">
+  <!--/SSR:HEAD-->
+
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <meta name="theme-color" content="#0f0f14">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/system.css">
+  <link rel="stylesheet" href="/assets/site.css">
+
+  <style>
+    /* !important: site.css azzera il padding di main per l'elenco eventi */
+    .ev-page { padding: 28px 0 72px !important; }
+
+    /* Breadcrumb */
+    .ev-breadcrumb ol {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .ev-breadcrumb li:not(:last-child)::after { content: "›"; margin-left: 6px; color: var(--dim); }
+    .ev-breadcrumb a:hover { color: var(--ink); }
+    .ev-breadcrumb li[aria-current] {
+      color: var(--ink);
+      max-width: 40ch;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Event: poster + details */
+    .ev {
+      display: grid;
+      /* locandine quasi sempre 1.94:1: colonna immagine più larga, così altezza simile alle info */
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 32px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .ev { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .ev-media {
+      position: sticky;
+      top: calc(var(--nav-h) + 24px);
+      background: #14131a;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    @media (max-width: 900px) { .ev-media { position: static; } }
+    /* whole poster, never cropped: posters are often vertical with text near the edges */
+    .ev-poster {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 78vh;
+      object-fit: contain;
+    }
+    .ev-body { display: flex; flex-direction: column; gap: 18px; }
+    .ev-tags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .ev-tags .event-category-pill { position: static; }
+    .ev-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    /* titolo già nella locandina: nascosto alla vista, resta <h1> per Google e screen reader */
+    .ev-title {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .ev-venue-sub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .ev-venue-sub svg { color: var(--magenta); flex-shrink: 0; }
+
+    /* Facts */
+    .ev-facts {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ev-fact {
+      display: grid;
+      grid-template-columns: 32px 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+    .ev-fact:not(:last-child) {
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(242, 239, 233, 0.06);
+    }
+    .ev-fact-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: rgba(255, 61, 139, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--magenta);
+    }
+    .ev-fact-text { display: flex; flex-direction: column; min-width: 0; }
+    .ev-fact-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--dim);
+      font-weight: 600;
+    }
+    .ev-fact-val { font-size: 15px; font-weight: 600; color: var(--ink); }
+    .ev-fact-val.is-free { color: var(--mint); }
+    .ev-fact-sub { font-size: 13px; color: var(--muted); }
+    .ev-chip-btn {
+      padding: 6px 12px;
+      border-radius: 9px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .ev-chip-btn:hover { border-color: var(--magenta); color: var(--magenta); }
+
+    /* Actions */
+    .ev-actions { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+    @media (max-width: 440px) { .ev-actions { grid-template-columns: 1fr; } }
+    .ev-btn-primary,
+    .ev-btn-secondary {
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    }
+    .ev-btn-primary {
+      background: var(--magenta);
+      color: #0f0f14;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 4px 14px rgba(255, 61, 139, 0.25);
+    }
+    .ev-btn-primary:hover { background: var(--magenta-hover); transform: translateY(-1px); }
+    .ev-btn-secondary {
+      padding: 0 18px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .ev-btn-secondary:hover { border-color: rgba(242, 239, 233, 0.3); background: var(--surface-elevated); }
+
+    /* Sections */
+    .ev-section { margin-top: 48px; }
+    .ev-section h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .ev-desc-text {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+      white-space: pre-line;
+      max-width: 70ch;
+    }
+    .ev-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .ev-section-head h2 { margin-bottom: 0; }
+    .ev-section-head > a:not(.ev-btn-primary) { color: var(--magenta); font-size: 14px; font-weight: 500; }
+    .ev-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 24px;
+      padding: 0 8px;
+      margin-left: 6px;
+      border-radius: 999px;
+      background: rgba(255, 61, 139, 0.12);
+      color: var(--magenta);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      vertical-align: middle;
+    }
+    .ev-buy { height: 42px; padding: 0 20px; font-size: 14px; }
+
+    /* Tickets: card a forma di biglietto, la più conveniente in evidenza */
+    .ev-tickets {
+      list-style: none;
+      display: grid;
+      /* due colonne anche su mobile, così molte tariffe non allungano troppo la pagina */
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
+      gap: 12px;
+    }
+    .ev-ticket {
+      --notch: 9px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 16px 18px 18px;
+      background: linear-gradient(160deg, var(--surface-elevated) 0%, var(--surface-card) 70%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      /* intagli laterali del biglietto */
+      -webkit-mask: radial-gradient(circle var(--notch) at 0 62%, transparent 98%, #000) left / 51% 100% no-repeat,
+                    radial-gradient(circle var(--notch) at 100% 62%, transparent 98%, #000) right / 51% 100% no-repeat;
+      mask: radial-gradient(circle var(--notch) at 0 62%, transparent 98%, #000) left / 51% 100% no-repeat,
+            radial-gradient(circle var(--notch) at 100% 62%, transparent 98%, #000) right / 51% 100% no-repeat;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .ev-ticket:hover { border-color: rgba(255, 61, 139, 0.45); transform: translateY(-2px); }
+    .ev-ticket.is-best { border-color: rgba(61, 220, 151, 0.45); }
+    .ev-ticket-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px; margin-bottom: 4px; }
+    .ev-ticket-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: rgba(255, 61, 139, 0.1);
+      color: var(--magenta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ev-ticket-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: var(--mint);
+      background: rgba(61, 220, 151, 0.12);
+      border: 1px solid rgba(61, 220, 151, 0.35);
+      white-space: nowrap;
+    }
+    .ev-ticket-name { font-size: 15px; font-weight: 600; line-height: 1.3; }
+    .ev-ticket-desc { font-size: 13px; color: var(--muted); }
+    .ev-ticket-price {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(242, 239, 233, 0.16);
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .ev-ticket.is-best .ev-ticket-price { color: var(--mint); }
+
+    /* Locale */
+    .ev-venue-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 22px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+    }
+    @media (max-width: 640px) {
+      .ev-venue-card { grid-template-columns: auto 1fr; }
+      .ev-venue-links { grid-column: 1 / -1; }
+    }
+    .ev-venue-logo {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255, 61, 139, 0.35), rgba(255, 61, 139, 0.08));
+      box-shadow: 0 0 0 2px var(--surface-card), 0 0 0 4px rgba(255, 61, 139, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ev-venue-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .ev-venue-initial { font-size: 28px; font-weight: 700; color: var(--ink); }
+    .ev-venue-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .ev-venue-name { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+    .ev-venue-address { color: var(--muted); font-size: 14px; }
+    .ev-venue-meta { color: var(--dim); font-family: var(--font-mono); font-size: 12px; margin-top: 4px; }
+    .ev-venue-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ev-load-more-wrap { text-align: center; margin-top: 4px; }
+    /* serate oltre la sesta: nell'HTML per Google, nascoste finché non si preme "Mostra tutte" */
+    .events-grid.is-collapsed > .event-card:nth-child(n+7) { display: none; }
+    .ev-section .events-grid { margin: 0 0 20px !important; }
+
+    /* Not found */
+    .ev-notfound { max-width: 520px; margin: 48px auto; text-align: center; display: flex; flex-direction: column; gap: 16px; }
+    .ev-notfound h1 { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; }
+    .ev-notfound p { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <header class="nav nav--centre site-header">
+    <div class="wrap nav__bar">
+      <a class="skip-link" href="#main-content">Vai al contenuto</a>
+      <a class="nav__logo" href="/" aria-label="Seratina Home">
+        <img src="/assets/logo.png" alt="Seratina Logo" width="28" height="28">
+        <span>seratina<span class="dot-accent">.</span></span>
+      </a>
+
+      <nav class="nav__links" aria-label="Principale">
+        <div class="nav__item"><a href="/" class="nav__link">Home</a></div>
+        <div class="nav__item"><a href="/eventi.html" class="nav__link" aria-current="page">Eventi</a></div>
+        <div class="nav__item"><a href="/gestori.html" class="nav__link">Gestori</a></div>
+      </nav>
+
+      <div class="nav__actions">
+        <a class="btn btn--primary" href="/#scarica">Scarica l'app</a>
+      </div>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+          <path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="wrap ev-page" id="main-content">
+    <!--SSR:MAIN-->
+  </main>
+
+  <footer class="footer closing" id="footer" aria-label="Piè di pagina">
+    <div class="wrap">
+      <div class="closing__links">
+        <div class="grid">
+          <div class="span-4 stack-4">
+            <a class="nav__logo" href="/">
+              <img src="/assets/logo.png" alt="Seratina Logo" width="28" height="28" loading="lazy">
+              <span>seratina<span class="dot-accent">.</span></span>
+            </a>
+            <p class="footer__lede">Mappa, calendario e schede serata in Italia.</p>
+          </div>
+
+          <div class="span-3 start-7 footer__col">
+            <h3>Piattaforma</h3>
+            <ul>
+              <li><a href="/eventi.html">Cerca Eventi</a></li>
+              <li><a href="https://apps.apple.com/it/app/seratina/id6830724999" target="_blank" rel="noopener noreferrer">App Store</a></li>
+              <li><a href="https://play.google.com/store/apps/details?id=com.seratinaclub.seratina" target="_blank" rel="noopener noreferrer">Google Play</a></li>
+              <li><a href="/gestori.html">Area Gestori</a></li>
+            </ul>
+          </div>
+
+          <div class="span-3 start-10 footer__col">
+            <h3>Legale</h3>
+            <ul>
+              <li><a href="/privacy.html">Privacy</a></li>
+              <li><a href="/terms.html">Termini</a></li>
+              <li><a href="/delete-account.html">Elimina Account</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__legal">
+          <span>&copy; 2026 Seratina</span>
+          <div class="footer__legal-links" style="display:flex;flex-wrap:wrap;gap:0 16px;align-items:center;">
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Termini</a>
+            <a href="https://www.tiktok.com/@seratina.org" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <a href="mailto:info@seratina.org">info@seratina.org</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // Mobile nav toggle (same behavior as eventi.html)
+      const navEl = document.querySelector('.nav');
+      const navToggle = navEl?.querySelector('.nav__toggle');
+      navToggle?.addEventListener('click', () => {
+        const open = !navEl.classList.contains('is-open');
+        navEl.classList.toggle('is-open', open);
+        document.body.classList.toggle('nav-locked', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+      });
+      navEl?.addEventListener('click', (e) => {
+        if (navEl.classList.contains('is-open') && e.target.closest?.('a[href]')) {
+          navEl.classList.remove('is-open');
+          document.body.classList.remove('nav-locked');
+          navToggle?.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // "Mostra tutte le serate": le card sono già nell'HTML, qui si tolgono solo dal collasso
+      document.querySelectorAll('[data-expand]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.getElementById(btn.dataset.expand)?.classList.remove('is-collapsed');
+          btn.parentElement.remove();
+        });
+      });
+
+      // Share button rendered by SeratinaBE with data-share-url / data-share-title / data-share-text
+      document.querySelectorAll('[data-share-url]').forEach(btn => {
+        const label = btn.querySelector('span');
+        btn.addEventListener('click', async () => {
+          const url = btn.dataset.shareUrl;
+          if (navigator.share) {
+            try { await navigator.share({ title: btn.dataset.shareTitle, text: btn.dataset.shareText, url }); } catch (_) {}
+            return;
+          }
+          try {
+            await navigator.clipboard.writeText(url);
+            if (label) {
+              const original = label.textContent;
+              label.textContent = 'Link copiato!';
+              setTimeout(() => { label.textContent = original; }, 2000);
+            }
+          } catch (_) {
+            alert(url);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

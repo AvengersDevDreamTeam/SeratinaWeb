@@ -16,8 +16,9 @@ Questo documento descrive l'architettura del sito statico **SeratinaWeb** (`http
 
 | File | Scopo | API usate |
 |---|---|---|
-| **`index.html`** | Landing page: Hero triptych (pulsanti `App Store` / `Google Play`, ancora `#scarica`), 4 schermate app (`#anteprima`), sezione "Tutta la vita notturna a portata di mappa" (`#scopri`), newsletter + footer (`#newsletter`). Reindirizza i link legacy `/?event=ID` a `eventi.html?event=ID`. | `POST /newsletter/subscribe` |
-| **`eventi.html`** | Ricerca eventi: elenco paginato con ricerca, filtri (zona, data, categoria), ordinamento GPS e scheda evento su `?event=ID`. | `GET /events`, `GET /events/zones`, `GET /events/{id}` |
+| **`index.html`** | Landing page: Hero triptych (pulsanti `App Store` / `Google Play`, ancora `#scarica`), 4 schermate app (`#anteprima`), sezione "Tutta la vita notturna a portata di mappa" (`#scopri`), newsletter + footer (`#newsletter`). Reindirizza i link legacy `/?event=ID` a `/eventi/ID`. | `POST /newsletter/subscribe` |
+| **`eventi.html`** | Ricerca eventi: elenco paginato con ricerca, filtri (zona, data, categoria) e ordinamento GPS. Le card portano alla pagina evento `/eventi/ID`. | `GET /events`, `GET /events/zones` |
+| **`evento.html`** | Template della pagina evento: header, footer, stili e segnaposto `SSR:HEAD` / `SSR:MAIN`. Lo riempie SeratinaBE per servire `/eventi/{id}`; il file grezzo è `noindex`. | Nessuna (lo scarica il backend) |
 | **`gestori.html`** | Modulo per i titolari dei locali: verifica o correzione dei dati, rivendicazione della scheda o diritto di opposizione (Opt-Out GDPR Art. 21). | `POST /gestori/richiesta` |
 | **`privacy.html`** | Informativa sul trattamento dei dati personali (GDPR, Apple App Store, Google Play Data Safety). | — |
 | **`terms.html`** | Termini di servizio e clausola di non responsabilità sui dati aggregati. | — |
@@ -40,8 +41,8 @@ Tutte le chiamate vanno all'API pubblica di Seratina, il cui indirizzo è defini
 
 - **Elenco**: `GET /events` con parametri `category`, `zone`, `date` (`oggi`, `domani`, `weekend`), `search`, `latitude`/`longitude` (pulsante "Vicino a me"), `page`, `page_size`. "Carica altre serate" richiede la pagina successiva.
 - **Zone**: `GET /events/zones` popola il selettore della città.
-- **Scheda evento**: un click su una card apre la scheda in un modal e aggiorna l'URL in `?event=ID`; aprendo direttamente `eventi.html?event=ID` la pagina chiama `GET /events/{id}`.
-- **Card come link**: ogni card è un `<a href="/eventi/ID">`, così i motori di ricerca seguono i link verso le pagine evento renderizzate lato server. Un click normale apre il modal; Ctrl/Cmd+click apre la pagina `/eventi/ID` in una nuova scheda.
+- **Card come link**: ogni card è un `<a href="/eventi/ID">` verso la pagina evento renderizzata lato server (vedi [deep-linking.md](deep-linking.md)).
+- **Stili condivisi**: token, header, griglia e card evento, pulsante "Carica altre serate" e footer sono in `assets/site.css`, usato da `eventi.html` e dal template `evento.html`. Gli stili propri di ciascuna pagina restano inline.
 - **Prezzo**: se l'evento ha più tariffe diverse, la scheda mostra "A partire da €X" con il prezzo minimo; l'elenco delle tariffe resta sotto.
 - **Menu mobile**: sotto 769px i link della barra sono sostituiti dal pulsante ☰, che apre il menu a schermo intero di `system.css`.
 
@@ -49,7 +50,7 @@ Tutte le chiamate vanno all'API pubblica di Seratina, il cui indirizzo è defini
 
 I dati degli eventi (titoli, locali, città, immagini) provengono da fonti esterne. Le card sono generate da un template HTML, quindi ogni valore passa da `escapeHtml()` prima di essere inserito; nella scheda evento i valori sono assegnati con `textContent`. Qualsiasi nuovo campo mostrato in pagina deve seguire la stessa regola: mai inserire dati dell'API in `innerHTML` senza escape.
 
-Il comportamento SEO della scheda evento è descritto in [seo.md](seo.md).
+Il comportamento SEO della pagina evento è descritto in [seo.md](seo.md).
 
 ---
 

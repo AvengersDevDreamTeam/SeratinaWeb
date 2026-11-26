@@ -1,0 +1,24 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/.*/**",
+      "**/node_modules/**",
+      "docs/**",
+      "README.md",
+      "CNAME"
+    ],
+    "rewrites": [
+      {
+        "source": "/eventi/**",
+        "run": { "serviceId": "seratina-be", "region": "europe-west8" }
+      },
+      {
+        "source": "/sitemap-eventi.xml",
+        "run": { "serviceId": "seratina-be", "region": "europe-west8" }
+      }
+    ]
+  }
+}

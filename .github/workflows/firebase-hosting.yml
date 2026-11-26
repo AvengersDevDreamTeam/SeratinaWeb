@@ -1,0 +1,21 @@
+# Deploy del sito statico su Firebase Hosting a ogni push su main.
+# /eventi/** e /sitemap-eventi.xml sono inoltrati al servizio Cloud Run seratina-be (vedi firebase.json).
+name: Deploy Firebase Hosting
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          # Service account con ruoli "Firebase Hosting Admin" e "Cloud Run Viewer"
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: gen-lang-client-0131025154
+          channelId: live

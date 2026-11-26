@@ -18,7 +18,7 @@ Questo documento descrive l'architettura del sito statico **SeratinaWeb** (`http
 |---|---|---|
 | **`index.html`** | Landing page: Hero triptych (pulsanti `App Store` / `Google Play`, ancora `#scarica`), 4 schermate app (`#anteprima`), sezione "Tutta la vita notturna a portata di mappa" (`#scopri`), newsletter + footer (`#newsletter`). Reindirizza i link legacy `/?event=ID` a `/eventi/ID`. | `POST /newsletter/subscribe` |
 | **`eventi.html`** | Ricerca eventi: elenco paginato con ricerca, filtri (zona, data, categoria) e ordinamento GPS. Le card portano alla pagina evento `/eventi/ID`. | `GET /events`, `GET /events/zones` |
-| **`evento.html`** | Template della pagina evento: header, footer, stili e segnaposto `SSR:HEAD` / `SSR:MAIN`. Lo riempie SeratinaBE per servire `/eventi/{id}`; il file grezzo è `noindex`. | Nessuna (lo scarica il backend) |
+| **`evento.html`** | Template della pagina evento: header, footer, stili e segnaposto `SSR:HEAD` / `SSR:MAIN`. Lo riempie SeratinaBE per servire `/eventi/{id}`; il file grezzo è `noindex`. Usa solo percorsi assoluti (`/assets/...`, `/eventi.html`), perché la pagina vive sotto `/eventi/`. | Nessuna (lo scarica il backend) |
 | **`gestori.html`** | Modulo per i titolari dei locali: verifica o correzione dei dati, rivendicazione della scheda o diritto di opposizione (Opt-Out GDPR Art. 21). | `POST /gestori/richiesta` |
 | **`privacy.html`** | Informativa sul trattamento dei dati personali (GDPR, Apple App Store, Google Play Data Safety). | — |
 | **`terms.html`** | Termini di servizio e clausola di non responsabilità sui dati aggregati. | — |

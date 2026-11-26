@@ -1,13 +1,13 @@
 # Architettura del Portale Web — SeratinaWeb 🌐
 
-Questo documento descrive l'architettura del sito statico **SeratinaWeb** (`https://seratina.org`), ospitato su **GitHub Pages**.
+Questo documento descrive l'architettura del sito statico **SeratinaWeb** (`https://seratina.org`), ospitato su **Firebase Hosting**.
 
 ---
 
 ## 1. Principi Architetturali
 
 1. **Zero Build Step, Zero Dipendenze npm**: Nessun bundler, nessun `package.json`, nessun runtime Node.js. Le pagine HTML5 usano CSS/JS statici in `assets/`, font Google **Outfit** e **DM Mono**, e immagini `.webp` multi-risoluzione (`320w`/`560w`/`760w`).
-2. **Hosting statico**: Il sito è servito da GitHub Pages con HTTPS.
+2. **Hosting**: Il sito è servito da Firebase Hosting con HTTPS. Le pagine evento `/eventi/{id}` sono generate dal backend (vedi sezione 5).
 3. **Pagine sempre disponibili**: Le pagine legali, informative e di opt-out sono statiche e restano consultabili anche se le API non rispondono.
 
 ---
@@ -41,7 +41,7 @@ Tutte le chiamate vanno all'API pubblica di Seratina, il cui indirizzo è defini
 - **Elenco**: `GET /events` con parametri `category`, `zone`, `date` (`oggi`, `domani`, `weekend`), `search`, `latitude`/`longitude` (pulsante "Vicino a me"), `page`, `page_size`. "Carica altre serate" richiede la pagina successiva.
 - **Zone**: `GET /events/zones` popola il selettore della città.
 - **Scheda evento**: un click su una card apre la scheda in un modal e aggiorna l'URL in `?event=ID`; aprendo direttamente `eventi.html?event=ID` la pagina chiama `GET /events/{id}`.
-- **Card come link**: ogni card è un `<a href="eventi.html?event=ID">`, così i motori di ricerca seguono i link verso le singole serate. Ctrl/Cmd+click apre l'evento in una nuova scheda.
+- **Card come link**: ogni card è un `<a href="/eventi/ID">`, così i motori di ricerca seguono i link verso le pagine evento renderizzate lato server. Un click normale apre il modal; Ctrl/Cmd+click apre la pagina `/eventi/ID` in una nuova scheda.
 - **Prezzo**: se l'evento ha più tariffe diverse, la scheda mostra "A partire da €X" con il prezzo minimo; l'elenco delle tariffe resta sotto.
 - **Menu mobile**: sotto 769px i link della barra sono sostituiti dal pulsante ☰, che apre il menu a schermo intero di `system.css`.
 
@@ -55,4 +55,10 @@ Il comportamento SEO della scheda evento è descritto in [seo.md](seo.md).
 
 ## 5. Hosting e Deploy
 
-GitHub Pages pubblica il branch `main` sul dominio indicato nel file `CNAME`, con HTTPS forzato; `www` e `http` sono reindirizzati a `https://seratina.org`. Lo sviluppo avviene su `develop`: le modifiche vanno online solo dopo il merge in `main`.
+Firebase Hosting (progetto `gen-lang-client-0131025154`) serve `https://seratina.org` con HTTPS; `www` e `http` sono reindirizzati a `https://seratina.org`. Il workflow `.github/workflows/firebase-hosting.yml` pubblica a ogni push su `main` con il secret `FIREBASE_SERVICE_ACCOUNT`. Lo sviluppo avviene su `develop`: le modifiche vanno online solo dopo il merge in `main`.
+
+`firebase.json` pubblica la radice del repo (esclusi `docs/`, `README.md` e i file nascosti) e inoltra al servizio Cloud Run `seratina-be` (`europe-west8`), con il path invariato:
+- `/eventi/**`: pagina evento renderizzata lato server.
+- `/sitemap-eventi.xml`: sitemap degli eventi.
+
+I file statici hanno la precedenza sui rewrite, quindi `eventi.html` resta servito come file. Le risposte del backend sono messe in cache dalla CDN di Firebase (`s-maxage=3600`).

@@ -8,7 +8,7 @@ Seratina offre un'esperienza fluida per esplorare la scena notturna italiana:
 - **Mappa Interattiva dal Vivo**: visualizzazione geolocalizzata dei club, festival e locali con filtri per categoria e data.
 - **Feed Eventi e Calendario Mensile**: programmazione delle serate ordinate per distanza chilometrica reale calcolata tramite geolocalizzazione GPS.
 - **Schede Complete di Ogni Serata**: orari ufficiali, tariffe d'ingresso, categoria dell'evento, indicazioni stradali e aggiunta al calendario personale.
-- **Event Spotlight & Deep Linking**: condivisione universale di singoli eventi tramite URL web (`https://seratina.org/eventi.html?event={id}`) con scheda evento e pulsante per aprirlo nell'app nativa (`seratina://event/{id}`).
+- **Event Spotlight & Deep Linking**: condivisione universale di singoli eventi tramite URL web (`https://seratina.org/eventi/{id}`) con scheda evento e pulsante per aprirlo nell'app nativa (`seratina://event/{id}`).
 - **Newsletter Settimanale del Giovedì**: selezione personalizzata dei migliori eventi del fine settimana entro 30 km dall'utente.
 - **Area Gestori**: portale dedicato ai titolari di locali per la verifica o l'aggiornamento della propria scheda o per esercitare il diritto di opposizione (Opt-Out GDPR Art. 21).
 

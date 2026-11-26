@@ -20,4 +20,4 @@ User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://seratina.org/sitemap.xml
-Sitemap: https://seratina-be-265028543407.europe-west8.run.app/events/sitemap.xml
+Sitemap: https://seratina.org/sitemap-eventi.xml

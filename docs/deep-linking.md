@@ -10,32 +10,34 @@ Un evento condiviso dall'app può essere aperto da qualsiasi dispositivo: smartp
 
 ---
 
-## 2. Il Link di Condivisione (`https://seratina.org/eventi.html?event={id}`)
+## 2. Il Link di Condivisione (`https://seratina.org/eventi/{id}`)
 
 ```text
-https://seratina.org/eventi.html?event=C7wKl81_1
+https://seratina.org/eventi/C7wKl81_1
 ```
 
-È il link condiviso dall'app, usato dal pulsante *"Condividi serata"* della scheda web e indicato come URL canonico della serata per i motori di ricerca (vedi [seo.md](seo.md)).
+È il link condiviso dall'app, dal pulsante *"Condividi serata"* della scheda web e dalla newsletter, ed è l'URL canonico della serata per i motori di ricerca (vedi [seo.md](seo.md)). Firebase Hosting lo inoltra al backend, che restituisce una pagina HTML completa: locandina, data, locale, descrizione, meta tag, Open Graph e schema `Event`.
 
 ```mermaid
 sequenceDiagram
     participant User as Destinatario
-    participant Web as seratina.org (eventi.html)
-    participant API as API Seratina (GET /events/{id})
+    participant Hosting as seratina.org (Firebase Hosting)
+    participant BE as SeratinaBE (GET /eventi/{id})
+    participant Web as eventi.html
     participant App as App Seratina (se presente)
 
-    User->>Web: Apre https://seratina.org/eventi.html?event=C7wKl81_1
-    Web->>Web: Rileva il parametro ?event=...
-    Web->>API: GET /events/C7wKl81_1
-    API-->>Web: Titolo, data, locale, prezzi, immagine
-    Web->>Web: Apre la scheda evento e aggiorna canonical, title e schema Event
+    User->>Hosting: Apre https://seratina.org/eventi/C7wKl81_1
+    Hosting->>BE: Rewrite verso Cloud Run (path invariato)
+    BE-->>User: Pagina evento HTML (in cache CDN)
+    opt Continua su Seratina Web
+        User->>Web: eventi.html?event=C7wKl81_1 (scheda in modal)
+    end
     opt L'utente ha l'app
         User->>App: Tocca "Apri nell'app Seratina" (seratina://event/C7wKl81_1)
     end
 ```
 
-`eventi.html` **non** apre l'app automaticamente: l'apertura avviene solo con il pulsante, così la pagina resta leggibile da browser e motori di ricerca.
+La pagina **non** apre l'app automaticamente: l'apertura avviene solo con il pulsante, così resta leggibile da browser e motori di ricerca. Se l'evento non esiste risponde 404 con `noindex`; se è passato resta visibile con il badge "Evento concluso".
 
 ---
 
@@ -51,12 +53,13 @@ sequenceDiagram
 3. **Pulsanti**:
    - *"Apri nell'app Seratina"*: `seratina://event/{id}`.
    - *"Condividi serata"*: Web Share API se disponibile, altrimenti copia del link negli appunti.
-4. **URL e SEO**: all'apertura l'URL diventa `?event=ID` e la pagina aggiorna canonical, `<title>`, description, Open Graph e schema `Event`; alla chiusura tornano quelli della pagina elenco.
+4. **URL e SEO**: all'apertura l'URL diventa `?event=ID` e la pagina aggiorna `<title>`, description, Open Graph e schema `Event`; canonical e `og:url` puntano a `https://seratina.org/eventi/ID`. Alla chiusura tornano i tag della pagina elenco.
+5. **Condivisione**: *"Condividi serata"* condivide `https://seratina.org/eventi/ID`.
 
 ---
 
 ## 4. Link Legacy (`https://seratina.org/?event={id}`)
 
-I link condivisi con le versioni dell'app fino alla v1.5.0 puntano alla home. Uno script in testa a `index.html` li reindirizza subito (`location.replace`) a `eventi.html?event={id}`, che mostra la scheda evento come per i link nuovi. Nessuna apertura automatica dell'app: si apre solo col pulsante *"Apri nell'app Seratina"* (vedi sezione 2).
+I link condivisi con le versioni dell'app fino alla v1.5.0 puntano alla home. Uno script in testa a `index.html` li reindirizza subito (`location.replace`) a `/eventi/{id}`, la pagina evento dei link nuovi. Nessuna apertura automatica dell'app: si apre solo col pulsante *"Apri nell'app Seratina"* (vedi sezione 2).
 
-I nuovi link usano sempre `eventi.html?event={id}`.
+I nuovi link usano sempre `/eventi/{id}`. I link `eventi.html?event={id}` già condivisi continuano a funzionare: aprono la scheda in modal e hanno canonical verso `/eventi/{id}`.

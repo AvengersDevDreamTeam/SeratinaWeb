@@ -6,12 +6,12 @@
   <title>Eventi e Serate nei Club in Italia — Seratina</title>
   <meta name="description" content="Esplora gli eventi serali, i club e i concerti in programma in tutta Italia. Filtra per città, data e categoria e trova la tua serata su Seratina.">
   <script>
-    // Canonical built here, not as static HTML: Google reads the static tag first and would fold every ?event=ID into the list page
+    // Canonical built here, not as static HTML: with ?event=ID it points to the server-rendered page /eventi/ID
     (() => {
       const id = new URLSearchParams(location.search).get('event');
       const link = document.createElement('link');
       link.rel = 'canonical';
-      link.href = 'https://seratina.org/eventi.html' + (id ? '?event=' + encodeURIComponent(id) : '');
+      link.href = id ? 'https://seratina.org/eventi/' + encodeURIComponent(id) : 'https://seratina.org/eventi.html';
       document.head.appendChild(link);
     })();
   </script>
@@ -1713,7 +1713,7 @@
                   </div>`;
 
           return `
-            <a class="event-card" href="eventi.html?event=${encodeURIComponent(ev.id)}" data-event-id="${escapeHtml(ev.id)}">
+            <a class="event-card" href="/eventi/${encodeURIComponent(ev.id)}" data-event-id="${escapeHtml(ev.id)}">
               <div class="event-poster-frame">
                 ${hasImg ? `
                   <img class="event-poster-img"
@@ -1815,7 +1815,7 @@
         fetchEvents();
       }
 
-      // Per-event SEO: ?event=ID gets its own canonical, title, description and Event schema
+      // Per-event SEO: ?event=ID gets canonical /eventi/ID, title, description and Event schema
       // (the list page's tags are restored on close). Mirrors SeratinaBE share_renderer.py.
       const seoTags = {
         canonical: document.querySelector('link[rel="canonical"]'),
@@ -1836,7 +1836,7 @@
       };
 
       function applyEventSeo(ev) {
-        const url = `https://seratina.org/eventi.html?event=${encodeURIComponent(ev.id)}`;
+        const url = `https://seratina.org/eventi/${encodeURIComponent(ev.id)}`;
         const { formatted } = parseDateParts(ev.date);
         const place = ev.city ? `${ev.venue}, ${ev.city}` : ev.venue;
         const title = `${ev.title} @ ${ev.venue} — Seratina`;
@@ -2107,7 +2107,7 @@
 
       modalShareBtn.addEventListener('click', async () => {
         if (!currentModalEvent) return;
-        const shareUrl = `${window.location.origin}/eventi.html?event=${currentModalEvent.id}`;
+        const shareUrl = `https://seratina.org/eventi/${encodeURIComponent(currentModalEvent.id)}`;
         if (navigator.share) {
           try {
             await navigator.share({

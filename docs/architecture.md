@@ -52,6 +52,14 @@ I dati degli eventi (titoli, locali, città, immagini) provengono da fonti ester
 
 Il comportamento SEO della pagina evento è descritto in [seo.md](seo.md).
 
+## 4b. Statistiche (`assets/analytics.js`)
+
+- **PostHog Cloud EU** (`https://eu.i.posthog.com`), caricato con `<script defer src="/assets/analytics.js">` in `index.html`, `eventi.html`, `evento.html` e `gestori.html`. Il percorso è assoluto perché `evento.html` è servito sotto `/eventi/{id}`.
+- **Cookieless**: `cookieless_mode: 'always'`, quindi niente cookie, `localStorage` o `sessionStorage` e nessun banner di consenso. L'id visitatore è un hash calcolato dai server PostHog (IP + user agent + sale giornaliero): stabile nella giornata, nuovo il giorno dopo. Richiede **"Enable cookieless tracking"** attivo in PostHog (Settings → Web analytics), altrimenti gli eventi vengono scartati. Limiti: niente GeoIP né rilevamento bot; utenti sullo stesso IP con lo stesso browser possono essere uniti.
+- **Eventi inviati**: solo `$pageview` e `store_badge_clicked` (proprietà `store`: `ios` / `android`, `page`), da un listener delegato sui link `a[data-track]`. Autocapture, pageleave, session replay, feature flag e survey sono disattivati per restare nel piano gratuito (1M eventi/mese).
+- **Chiave**: la costante `POSTHOG_KEY` in `analytics.js` (Project API key pubblica `phc_...`, la stessa dell'app). Se viene riportata al valore `phc_REPLACE_ME` lo script non fa nulla.
+- Per tracciare un nuovo link basta aggiungere `data-track="nome_evento"` (ed eventualmente `data-store`). Ogni evento nuovo va descritto in `privacy.html` (sezione 3.g).
+
 ---
 
 ## 5. Hosting e Deploy

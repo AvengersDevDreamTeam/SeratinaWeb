@@ -244,7 +244,7 @@
       <img src="assets/logo.png" alt="Seratina" class="logo">
       <div class="badge">Privacy & Termini</div>
       <h1>Informativa sulla Privacy & Termini d'Uso</h1>
-      <p class="subtitle">Ultimo aggiornamento: Novembre 2026 &bull; Versione 1.9</p>
+      <p class="subtitle">Ultimo aggiornamento: Novembre 2026 &bull; Versione 1.10</p>
     </header>
 
     <!-- 1. Titolare -->
@@ -300,7 +300,7 @@
       <p>I suggerimenti di locali da aggiungere e i messaggi di miglioramento inviati dagli utenti autenticati vengono salvati per consentire al nostro team di verificare i dati e migliorare il servizio.</p>
 
       <h3>d. Condivisione Eventi e Anteprima Web (Deep Linking)</h3>
-      <p>Quando un utente condivide una serata tramite il link web ufficiale, l'anteprima web pubblica interroga le nostre API in tempo reale per mostrare la locandina e i dettagli dell'evento. Tale consultazione è interamente anonima: non richiede registrazione, non raccoglie dati personali del visitatore e non installa cookie di profilazione o tracciamento.</p>
+      <p>Quando un utente condivide una serata tramite il link web ufficiale, l'anteprima web pubblica interroga le nostre API in tempo reale per mostrare la locandina e i dettagli dell'evento. Tale consultazione non richiede registrazione e non installa cookie di profilazione o tracciamento. Le sole statistiche raccolte sono quelle descritte al punto g.</p>
 
       <h3>e. Integrazione Calendario del Telefono (Permessi Calendario)</h3>
       <p>L'applicazione offre la funzionalità facoltativa di aggiungere le serate al calendario del dispositivo (Apple Calendar su iOS, Google Calendar su Android):</p>
@@ -319,6 +319,18 @@
         <li><strong>Fornitori terzi e Responsabili del Trattamento (Art. 28 GDPR):</strong> L'infrastruttura di invio email transazionale è affidata alla piattaforma Brevo (Sendinblue SAS, con server conformi al GDPR situati nell'Unione Europea). Brevo riceve unicamente l'indirizzo email e il contenuto HTML da recapitare al momento dell'invio.</li>
         <li><strong>Periodo di conservazione:</strong> I dati dell'iscritto sono conservati fino alla revoca del consenso o alla disattivazione del servizio.</li>
         <li><strong>Revoca e Disiscrizione Immediata (1-Click Unsubscribe):</strong> L'utente può revocare il proprio consenso e disiscriversi in qualsiasi momento con un singolo click tramite il link presente in fondo a ciascuna email oppure direttamente dall'app nella scheda <em>Profilo &gt; Newsletter</em>. A seguito della disiscrizione, l'invio delle comunicazioni viene immediatamente arrestato.</li>
+      </ul>
+      <h3>g. Statistiche di utilizzo</h3>
+      <p>Per capire quali funzioni vengono usate e migliorare il servizio raccogliamo statistiche di utilizzo tramite <strong>PostHog</strong> (cloud UE, Francoforte):</p>
+      <ul>
+        <li><strong>Dati trattati:</strong> eventi d'uso (ad esempio la schermata o la pagina aperta, i pulsanti principali premuti e i contenuti a cui si riferiscono, come l'evento o il locale salvato, condiviso o segnalato e i filtri di zona, data e categoria applicati), il metodo di accesso (Google, Apple, Ospite), modello e sistema operativo del dispositivo, lingua, versione dell'app o del browser.</li>
+        <li><strong>Identificativo pseudonimo:</strong> per gli utenti registrati dell'app gli eventi sono associati a un codice ottenuto dall'impronta crittografica (hash) dell'identificativo dell'account. Non inviamo a PostHog email, nome o altri dati del profilo. In modalità Ospite gli eventi sono associati a un identificativo casuale del dispositivo.</li>
+        <li><strong>Indirizzo IP:</strong> usato solo al momento della ricezione dell'evento (per il sito, anche per calcolare il codice temporaneo descritto sotto), poi scartato e non conservato. Non lo usiamo per ricavare la tua posizione.</li>
+        <li><strong>Sito web:</strong> sul sito <code>seratina.org</code> le statistiche si limitano alle pagine visitate e ai click sui pulsanti App Store / Google Play, senza cookie né altra memoria del browser (<em>local storage</em>, <em>session storage</em>). Per contare le visite, i server di PostHog calcolano un codice temporaneo (hash) a partire da indirizzo IP e tipo di browser, combinati con un valore casuale che cambia ogni giorno: il codice non permette di risalire all'IP, non viene salvato sul tuo dispositivo e dal giorno successivo non è più collegabile alle visite precedenti.</li>
+        <li><strong>Base giuridica:</strong> <em>legittimo interesse</em> al miglioramento del servizio (Art. 6, par. 1, lett. f, GDPR).</li>
+        <li><strong>Cancellazione:</strong> quando elimini l'account, chiediamo automaticamente a PostHog di cancellare l'identificativo pseudonimo e tutti gli eventi associati. Gli eventi raccolti in modalità Ospite non sono collegati a un account e restano solo in forma non riconducibile a te.</li>
+        <li><strong>Opposizione (Opt-Out):</strong> puoi disattivare in qualsiasi momento tutte le statistiche dall'app nella scheda <em>Profilo &gt; Statistiche di utilizzo</em>. Al momento della disattivazione l'app invia un unico evento che registra la scelta (senza altri dati d'uso); da quel momento non invia più alcun evento.</li>
+        <li><strong>Opposizione per il sito web:</strong> poiché il sito non memorizza alcun identificativo sul tuo dispositivo, non è possibile disattivare le statistiche da una singola pagina; puoi opporti scrivendo a <a href="mailto:info@seratina.org">info@seratina.org</a> oppure bloccando gli script di terze parti nel tuo browser.</li>
       </ul>
     </div>
 
@@ -356,6 +368,7 @@
         <li><strong>Feedback e segnalazioni di locali:</strong> esecuzione del servizio richiesto (Art. 6, par. 1, lett. b, GDPR) e legittimo interesse al miglioramento del servizio (Art. 6, par. 1, lett. f, GDPR). Conservati fino all'eliminazione dell'account; le segnalazioni approvate diventano schede pubbliche dei locali, che non contengono i tuoi dati personali.</li>
         <li><strong>Newsletter:</strong> consenso (Art. 6, par. 1, lett. a, GDPR). Conservazione fino alla disiscrizione.</li>
         <li><strong>Dati degli eventi pubblici e nomi di artisti / DJ:</strong> legittimo interesse (Art. 6, par. 1, lett. f, GDPR), come descritto nella sezione 4. I dati sono conservati per il tempo necessario a mostrare gli eventi nel catalogo, salvo richiesta di rimozione.</li>
+        <li><strong>Statistiche di utilizzo:</strong> legittimo interesse al miglioramento del servizio (Art. 6, par. 1, lett. f, GDPR), come descritto nella sezione 3.g. Gli eventi sono conservati per il periodo di retention predefinito del fornitore (PostHog) e puoi opporti in qualsiasi momento dall'app (<em>Profilo &gt; Statistiche di utilizzo</em>).</li>
         <li><strong>Log tecnici dei server:</strong> legittimo interesse alla sicurezza e al funzionamento del servizio (Art. 6, par. 1, lett. f, GDPR). Possono contenere indirizzo IP e dati della richiesta e sono conservati per il periodo di retention predefinito dei fornitori di infrastruttura (Google Cloud), di norma non oltre 30 giorni.</li>
       </ul>
       <p>Il conferimento dei dati per la creazione dell'account è facoltativo: senza di esso puoi comunque usare l'app in modalità Ospite.</p>
@@ -374,13 +387,14 @@
         <li><strong>Brevo (Sendinblue SAS, Francia)</strong> – invio della newsletter, come descritto nella sezione 3.f.</li>
         <li><strong>Google Fonts (Google LLC)</strong> – caratteri tipografici del sito web. Il browser li scarica dai server di Google, che ricevono l'indirizzo IP del visitatore.</li>
         <li><strong>OpenStreetMap Nominatim (OpenStreetMap Foundation, Regno Unito)</strong> – nel modulo di iscrizione alla newsletter sul sito, il testo della città cercata e, solo se acconsenti alla richiesta di posizione del browser, le coordinate GPS approssimative vengono inviati a Nominatim per individuare il comune. Il servizio riceve anche l'indirizzo IP del visitatore.</li>
+        <li><strong>PostHog Inc.</strong> – statistiche di utilizzo dell'app e del sito, come descritto nella sezione 3.g. Dati ospitati nel cloud UE di <strong>Francoforte (Germania)</strong>.</li>
         <li><strong>Telegram (Telegram Messenger Inc.)</strong> – notifiche interne al team sulle bozze dei contenuti social, che riguardano solo eventi pubblici e non dati degli utenti.</li>
       </ul>
       <h3>Trasferimenti fuori dall'Unione Europea</h3>
       <p>Alcuni fornitori possono trattare dati al di fuori dello Spazio Economico Europeo:</p>
       <ul>
         <li><strong>Regno Unito</strong> (Supabase, OpenStreetMap): paese coperto da una decisione di adeguatezza della Commissione Europea (Art. 45 GDPR).</li>
-        <li><strong>Stati Uniti</strong> (Google LLC, Apple Inc., Supabase Inc., Telegram): i trasferimenti avvengono verso società aderenti all'EU-US Data Privacy Framework, ove applicabile, oppure sulla base delle Clausole Contrattuali Standard approvate dalla Commissione Europea (Art. 46 GDPR).</li>
+        <li><strong>Stati Uniti</strong> (Google LLC, Apple Inc., Supabase Inc., PostHog Inc., Telegram): i trasferimenti avvengono verso società aderenti all'EU-US Data Privacy Framework, ove applicabile, oppure sulla base delle Clausole Contrattuali Standard approvate dalla Commissione Europea (Art. 46 GDPR).</li>
       </ul>
       <p>Non vendiamo i tuoi dati e non li condividiamo con inserzionisti o broker pubblicitari.</p>
     </div>
